@@ -128,7 +128,8 @@ export class Series {
             itemSize: this.itemSize,
             count: this.count,
             isShared: this.shared,
-            bytesPerElement: this.BYTES_PER_ELEMENT
+            bytesPerElement: this.BYTES_PER_ELEMENT,
+            array: this.arr_
         }
     }
 

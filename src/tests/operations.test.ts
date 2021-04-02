@@ -1,7 +1,7 @@
 import { DataFrame } from '../lib/dataframe'
-import { exists } from '../lib/info'
+import { exists, info } from '../lib/info'
 import { add, mult } from '../lib/operations'
-import { createSeries } from '../lib/factory'
+import { createSeries, createSharedSeries } from '../lib/factory'
 import { eigenValues } from '../lib/eigen'
 import { trace } from '../lib/trace'
 
@@ -69,12 +69,14 @@ test('dataframe operation mult', () => {
 test('dataframe operation superposition', () => {
     let df = new DataFrame()
         .set('a', createSeries(10, 2).initialize(2) )
-        .set('b', createSeries(10, 3).initialize(3) )
+        .set('b', createSharedSeries(10, 3).initialize(3) )
 
     df = df.set('ab', add(
         mult( df.get('a'), 10),
         mult( df.get('b'), 20)
     ))
+
+    console.log( info(df.get('ab')) )
 })
 
 

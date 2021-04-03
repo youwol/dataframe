@@ -9,7 +9,7 @@
     </a>
 </p>
 
-The library datagrame provides an immutable data structure for javascript and datascience using SharedArrayBuffer and ArrayBuffer, which allows to work on rows and columns using functional programming.
+The library `dataframe` provides an immutable data structure for javascript and datascience using `Array` and `TypedArray` with `ArrayBuffer` or `SharedArrayBuffer`, and which allows to work on rows and columns using functional programming.
 
 ## Example
 ```ts

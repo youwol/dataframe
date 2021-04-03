@@ -1,26 +1,24 @@
-import { DataFrame } from './dataframe'
-import { Series } from './series'
+import { IArray, Serie } from '../serie'
 
 
 /**
  * Get eigen values
- * @category Operations
+ * @category Math
  */
-export const eigenValues = (df: Series): Series => {
-    if (df===undefined) throw new Error ('series is undefined')
+export const eigenValues = (s: Serie<IArray>) => {
+    if (s===undefined)    throw new Error ('series is undefined')
+    if (s.itemSize !== 6) throw new Error('Series does not have itemSize = 6 (symmetric tensor [xx,xy,xz,yy,yz,zz])')
 
-    if (df.itemSize !== 6) throw new Error('Series does not have items of size 6 (symmetric tensor [xx,xy,xz,yy,yz,zz])')
-
-    const count = df.count //ta.length / df.size
-    const r = new Series(3*count)
+    const count = s.count //ta.length / df.size
+    const r = s.array.slice(0, s.count*3).fill(0) // have to use slice
 
     let k = 0
     for (let i=0; i<count; ++i) {
-        let a = df.itemAt(i) as number[]
-        const s = eigen(a)
-        r[k++] = s.values[0]
-        r[k++] = s.values[1]
-        r[k++] = s.values[2]
+        let a = s.itemAt(i) as number[]
+        const e = eigen(a)
+        r[k++] = e.values[0]
+        r[k++] = e.values[1]
+        r[k++] = e.values[2]
     }
 
     return r

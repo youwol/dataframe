@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="6" failures="0" errors="0" time="2.422">
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-02T09:05:52" time="0.51" tests="1">
-    <testcase classname=" dataframe test" name=" dataframe test" time="0.005">
-    </testcase>
-  </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-02T09:05:52" time="1.657" tests="5">
-    <testcase classname=" dataframe operation add" name=" dataframe operation add" time="0.009">
+<testsuites name="jest tests" tests="6" failures="0" errors="0" time="2.13">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-03T18:13:34" time="1.526" tests="5">
+    <testcase classname=" dataframe operation add" name=" dataframe operation add" time="0.012">
     </testcase>
     <testcase classname=" dataframe operation mult" name=" dataframe operation mult" time="0.001">
     </testcase>
-    <testcase classname=" dataframe operation superposition" name=" dataframe operation superposition" time="0.002">
+    <testcase classname=" dataframe operation superposition" name=" dataframe operation superposition" time="0.003">
     </testcase>
-    <testcase classname=" dataframe operation eigen" name=" dataframe operation eigen" time="0.003">
+    <testcase classname=" dataframe operation eigen" name=" dataframe operation eigen" time="0.001">
     </testcase>
     <testcase classname=" dataframe operation trace" name=" dataframe operation trace" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-03T18:13:36" time="0.064" tests="1">
+    <testcase classname=" dataframe test" name=" dataframe test" time="0.002">
     </testcase>
   </testsuite>
 </testsuites>

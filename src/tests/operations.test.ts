@@ -1,16 +1,14 @@
 import { DataFrame } from '../lib/dataframe'
-import { exists, info } from '../lib/info'
-import { add, mult } from '../lib/operations'
-import { createSeries, createSharedSeries } from '../lib/factory'
-import { eigenValues } from '../lib/eigen'
-import { trace } from '../lib/trace'
+import { createSerie } from '../lib/serie'
+import { exists, info } from '../lib/utils'
+import { add, mult, eigenValues, trace } from '../lib/math'
 
 const gen = (n: number, v: number) => new Array(n).fill(0).map( _ => v )
 
 test('dataframe operation add', () => {
     let df = new DataFrame()
-        .set('a', createSeries(10, 2).initialize(2) )
-        .set('b', createSeries(10, 3).initialize(3) )
+        .set('a', createSerie({data: new Array(20).fill(2), itemSize: 2}))
+        .set('b', createSerie({data: new Array(20).fill(3), itemSize: 2}))
 
     expect( exists(df, 'a') ).toBeTruthy()
     expect( exists(df, 'b') ).toBeTruthy()
@@ -18,72 +16,71 @@ test('dataframe operation add', () => {
     // ---------------------------------
 
     df = df.set('sum', add(
-        df.get('a'),
-        df.get('b')
+        df.getSerie('a'),
+        df.getSerie('b')
     ))
-    let sum = df.get('sum')
-    sum.typedArray.forEach( _ => expect(_).toEqual(5) )
+    let sum = df.getSerie('sum')
+    sum.array.forEach( _ => expect(_).toEqual(5) )
 
     // ---------------------------------
 
     df = df.set('sum', add(
-        mult( df.get('a'), 10 ),
-        mult( df.get('b'), 20 )
+        mult( df.getSerie('a'), 10 ),
+        mult( df.getSerie('b'), 20 )
     ))
-    sum = df.get('sum')
-    sum.typedArray.forEach( _ => expect(_).toEqual(80) )
+    sum = df.getSerie('sum')
+    sum.array.forEach( _ => expect(_).toEqual(80) )
 
     // ---------------------------------
 
     df = df.set('sum', add(
-        mult( df.get('a'), 10 ),
-        mult( df.get('b'), 20 ),
-        mult( df.get('a'), 1 )
+        mult( df.getSerie('a'), 10 ),
+        mult( df.getSerie('b'), 20 ),
+        mult( df.getSerie('a'), 1 )
     ))
-    sum = df.get('sum')
-    sum.typedArray.forEach( _ => expect(_).toEqual(82) )
+    sum = df.getSerie('sum')
+    sum.array.forEach( _ => expect(_).toEqual(82) )
 
     // ---------------------------------
 
     df = df.set('sum', add(
-        df.get('a'),
+        df.getSerie('a'),
         100
     ))
-    sum = df.get('sum')
-    sum.typedArray.forEach( _ => expect(_).toEqual(102) )
+    sum = df.getSerie('sum')
+    sum.array.forEach( _ => expect(_).toEqual(102) )
 })
 
 test('dataframe operation mult', () => {
     let df = new DataFrame()
-        .set('a', createSeries(10, 2).initialize(2) )
-        .set('b', createSeries(10, 3).initialize(3) )
+        .set('a', createSerie({data: new Array(20).fill(2), itemSize: 2}))
+        .set('b', createSerie({data: new Array(20).fill(3), itemSize: 2}))
 
     expect( exists(df, 'a') ).toBeTruthy()
     expect( exists(df, 'b') ).toBeTruthy()
 
-    const a = mult( df.get('a'), 100 )
-    a.forEach( _ => expect(_).toEqual(200) )
+    const a = mult( df.getSerie('a'), 100 )
+    a.array.forEach( _ => expect(_).toEqual(200) )
     
 })
 
 test('dataframe operation superposition', () => {
     let df = new DataFrame()
-        .set('a', createSeries(10, 2).initialize(2) )
-        .set('b', createSharedSeries(10, 3).initialize(3) )
+        .set('a', createSerie({data: new Array(20).fill(2), itemSize: 2}))
+        .set('b', createSerie({data: new Array(20).fill(3), itemSize: 2}))
 
     df = df.set('ab', add(
-        mult( df.get('a'), 10),
-        mult( df.get('b'), 20)
+        mult( df.getSerie('a'), 10),
+        mult( df.getSerie('b'), 20)
     ))
 
-    console.log( info(df.get('ab')) )
+    console.log( info(df.getSerie('ab')) )
 })
 
-
 test('dataframe operation eigen', () => {
-    let df = new DataFrame().set('a', createSeries(2, 6).initialize(2))
+    let df = new DataFrame().set('a', createSerie({data: new Array(12).fill(2), itemSize: 6}))
 
-    const ev = eigenValues( df.get('a') )
+    const ev = eigenValues( df.getSerie('a') )
 
     expect( ev[0] ).toEqual(6)
     expect( ev[1] ).toEqual(0)
@@ -94,8 +91,8 @@ test('dataframe operation eigen', () => {
 })
 
 test('dataframe operation trace', () => {
-    let df = new DataFrame().set('a', createSeries(2, 6).initialize([1,2,3,4,5,6, 6,5,4,3,2,1]))
-    const ev = trace(df.get('a'))
-    expect(ev[0]).toEqual(11)
-    expect(ev[1]).toEqual(10)
+    let df = new DataFrame().set('a', createSerie({data:[1,2,3,4,5,6, 6,5,4,3,2,1], itemSize: 6}))
+    const ev = trace( df.getSerie('a') )
+    expect( ev[0] ).toEqual(11)
+    expect( ev[1] ).toEqual(10)
 })

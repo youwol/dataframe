@@ -1,100 +1,107 @@
-import { Series } from './series'
+import { IArray, Serie } from './serie'
 
 /**
- * The DataFrame itself
- * @example
- * ```ts
- * import { DataFrame, createSeries } from '@youwol/dataframe'
- * 
- * const df2 = df1.set('fric'  , createSeries(10).initialize(1.0) )    // 10 values of scalars
- * const df3 = df2.set('stress', createSeries(10, 6).initialize(5.1) ) // 60 values of scalars
- * const df4 = df3.set('displ' , createSeries(10, 3) )                 // 30 values of scalars
- * ```
+ * The dataframe class which contains a list of [[Serie]]
  */
 export class DataFrame {
-    constructor() {
-    }
 
     /**
-     * Add or replace a series in the dataframe
-     * @param name The name of the series
-     * @param series The [[Series]]
-     * @returns The new dataframe
+     * 
+     * @param params Parameters of the form
+     * ```js
+     * {
+     *   index: new Array(10).fill(0).map( (_,i) => i),
+     *   columns: {
+     *     a: createEmptySerie({Type: Float32Array, rowsCount:2, itemSize:3, shared: true }),
+     *     b: createEmptySerie({Type: Float64Array, rowsCount:2, itemSize:3, shared: false}),
+     *     c: createSerie({data: [0,1,2,3,4,5,6,7,8,9], itemSize: 5}),
+     *     d: {
+     *       serie: createSerie({data: [0,1,2,3,4,5,6,7,8,9], itemSize: 5}),
+     *       transfertPolicy: 'transfert',
+     *       userData:{id:'tensor'}
+     *     }
+     *   },
+     *   userData: {
+     *     id: 'dataframe-1'
+     *   }
+     * }
+     * ```
+     * @returns 
      */
-    public readonly set = (name: string, series: Series) => {
-        if (series === undefined) return this.clone()
+    constructor(params?: any) {
+        if (params === undefined) return
 
-        const df = this.clone()
-        const index = this.n_.findIndex( e => e===name )
-        if (index !== -1) {
-            // Replace the typed array by a new one
-            df.a_.splice(index, 1)
-            df.n_.splice(index, 1)
-        }
+        this.index_    = params.index
+        this.userData_ = params.userData
 
-        df.a_.push(series)
-        df.n_.push(name)
-        return df
-    }
-
-    /**
-     * @brief Get an existing series
-     * @param name The name of the [[Series]]
-     * @returns The series or undefined
-     */
-    public readonly get = (name: string): Series => {
-        const i = this.n_.findIndex( e => e===name )
-        if (i === -1) return undefined // throw new Error(`entry "${name}" is not in the dataframe`)
-        return this.a_[i]
-    }
-
-    /**
-     * Get the number of [[Series]]
-     */
-    get length() {
-        return this.n_.length
-    }
-
-    /**
-     * The column labels of the DataFrame (names of the [[Series]])
-     */
-    get entries() {
-        return [...this.n_]
-    }
-
-    /**
-     * @brief Get information about the dataframe
-     */
-    public readonly info = () => {
-        return {
-            length: this.n_.length,
-            series: this.a_.map( (a,i) => {
-                return {
-                    name: this.n_[i],
-                    dtype: a.dtypeName,
-                    length: a.length,
-                    itemSize: a.itemSize,
-                    count: a.count,
-                    isShared: a.shared,
-                    bytesPerElement: a.BYTES_PER_ELEMENT
+        if (params.columns !== undefined) {
+            for (var [k, v] of Object.entries(params.columns)) {
+                if (v instanceof Serie) {
+                    this.series.set(k, {serie: v})
                 }
-            })
+                else {
+                    this.series.set(k, v as SerieInfo)
+                }
+            }
         }
     }
 
-    /**
-     * A new DataFrame, copy of this.
-     * All series point to the same one.
-     */
-    public readonly clone = (): DataFrame => {
-        const df = new DataFrame()
-        df.a_ = [...this.a_]
-        df.n_ = [...this.n_]
-        return df
+    get(name: string) {
+        return this.series.get(name)
+    }
+    getSerie(name: string) {
+        const si = this.series.get(name)
+        if (si) return si.serie
+        return undefined
     }
 
-    // -------------------------------------
+    delete(name: string): DataFrame {
+        const r = this.clone()
+        r.series.delete(name)
+        return r
+    }
 
-    private a_: Array<Series> = []
-    private n_: Array<string> = []
+    set(name: string, serie: SerieInfo|Serie<IArray>|undefined): DataFrame {
+        if (serie === undefined) return this
+        const r = this.clone()
+        if (serie instanceof Serie) {
+            r.series.set(name, {serie})
+        }
+        else {
+            r.series.set(name, serie) // will erase an existing if any
+        }
+        return r
+    }
+
+    get userData() {
+        return this.userData_
+    }
+    get index() {
+        return this.index_
+    }
+
+    get series() {
+        return this.series_
+    }
+
+    clone() {
+        const r = new DataFrame
+        r.userData_ = Object.assign({}, this.userData)
+        this.series.forEach( (v, k) => r.series.set(k,v) )
+        return r
+    }
+
+    // --------------------------
+
+    private userData_: any = undefined
+    private series_  : Series = new Map
+    private index_   : number[] = []
 }
+
+type SerieInfo = {
+    serie: Serie<IArray>|undefined,
+    userData?: any,
+    transfertPolicy?: string
+}
+
+type Series = Map<string, SerieInfo>

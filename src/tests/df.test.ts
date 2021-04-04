@@ -8,9 +8,9 @@ test('dataframe test', () => {
 
     const df1 = new DataFrame()
 
-    const df2 = df1.set('fric'  , createSerie({data:gen(10)}) )    // 10 values
-    const df3 = df2.set('stress', createSerie({data:gen(60), itemSize:6}) ) // 60 values
-    const df4 = df3.set('displ' , createSerie({data:gen(30), itemSize:3}) ) // 30 values
+    const df2 = df1.set('fric'  , createSerie( gen(10) ) )    // 10 values
+    const df3 = df2.set('stress', createSerie( gen(60), 6) ) // 60 values
+    const df4 = df3.set('displ' , createSerie( gen(30), 3) ) // 30 values
 
     console.log( info(df4) )
 

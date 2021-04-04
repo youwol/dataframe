@@ -47,5 +47,5 @@ import { IArray, Serie, createEmptySerie, createSerie } from '../serie'
         })
     }
 
-    return createSerie({data: r, itemSize: s1.itemSize, shared: s1.shared})
+    return createSerie(r, s1.itemSize)
 }

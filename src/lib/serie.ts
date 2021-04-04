@@ -1,3 +1,4 @@
+
 export interface IArray {
     readonly length: number
     [i: number]: number
@@ -38,40 +39,43 @@ export class Serie<T extends IArray> {
         return r
     }
     clone() {
-        return createSerie({data: this.array, itemSize: this.itemSize, shared: this.shared})
+        return createSerie(this.array, this.itemSize)
     }
 }
 
 /**
- * Create a serie given an array (Array or TypedArray with ArrayBuffer or SharedArrayBuffer)
- * @param param The passed parameters `{data, itemSize=1, shared=1}`
+ * Create a serie given an array (Array or TypedArray with ArrayBuffer or SharedArrayBuffer).
+ * @param data The array
+ * @param itemSize The item size. The length of T should be a multiple of itemSize
  * @returns The newly created Serie
  */
-export function createSerie<T extends IArray>({data, itemSize=1, shared=false}:
-    {data: any, itemSize?: number, shared?: boolean})
-{
+export function createSerie<T extends IArray>(data: T, itemSize = 1) {
     if (itemSize<=0)      throw new Error('itemSize must be > 0')
     if (data===undefined) throw new Error('either data or rowCount must be provided')
-
-    const rowsCount = data.length/itemSize
 
     if (Array.isArray( data )) {
         return new Serie(data, itemSize, false)
     }
 
     // Type is either a Int8Array, Uint8Array etc...
-    if (shared) {
-        return new Serie<T>(data, itemSize, true)
-    }
-    return new Serie<T>(data, itemSize, false)
+    return new Serie<T>(data, itemSize, true)
 }
 
 /**
- * Create a serie from scratch given a type (Array or TypedArray) and a rowsCount
- * @param param The passed parameters `{Type, rowsCount, itemSize=1, shared=false}`
+ * Create a serie from scratch given a type (Array or TypedArray) and a rowsCount.
+ * Passed parameters are:
+ * ```ts
+ * {
+ *      Type, // Can be either an Array or a TypedArray.
+ *      rowsCount, // The number of elements in the array
+ *      itemSize, // The size of each items (length of the array will be rowsCount*itemSize)
+ *      shared // If the TypedArray should be a SharedArrayBuffer or an ArrayBuffer
+ * }
+ * ```
  * @returns The newly created Serie
  */
-export function createEmptySerie<T extends IArray>({Type, rowsCount, itemSize=1, shared=false}:
+export function createEmptySerie<T extends IArray>(
+    {Type, rowsCount, itemSize=1, shared=false}:
     {Type?:any, rowsCount: number, itemSize?: number, shared?: boolean})
 {
     if (itemSize<=0)  throw new Error('itemSize must be > 0')

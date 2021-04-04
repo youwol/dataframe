@@ -14,9 +14,9 @@ export class DataFrame {
      *   columns: {
      *     a: createEmptySerie({Type: Float32Array, rowsCount:2, itemSize:3, shared: true }),
      *     b: createEmptySerie({Type: Float64Array, rowsCount:2, itemSize:3, shared: false}),
-     *     c: createSerie({data: [0,1,2,3,4,5,6,7,8,9], itemSize: 5}),
+     *     c: createSerie([0,1,2,3,4,5,6,7,8,9], 5),
      *     d: {
-     *       serie: createSerie({data: [0,1,2,3,4,5,6,7,8,9], itemSize: 5}),
+     *       serie: createSerie([0,1,2,3,4,5,6,7,8,9], 5),
      *       transfertPolicy: 'transfert',
      *       userData:{id:'tensor'}
      *     }
@@ -61,15 +61,22 @@ export class DataFrame {
         return r
     }
 
+    /**
+     * Add or replace a [[Serie]]
+     * @param name 
+     * @param serie 
+     * @returns A new [[DataFrame]]
+     */
     set(name: string, serie: SerieInfo|Serie<IArray>|undefined): DataFrame {
         if (serie === undefined) return this
+
         const r = this.clone()
         if (serie instanceof Serie) {
             r.series.set(name, {serie})
+            return r
         }
-        else {
-            r.series.set(name, serie) // will erase an existing if any
-        }
+
+        r.series.set(name, serie) // will erase an existing if any
         return r
     }
 

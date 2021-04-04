@@ -14,6 +14,7 @@ export interface IArray {
  */
 export class Serie<T extends IArray> {
     constructor(public readonly array: T, public readonly itemSize: number, public readonly shared: boolean) {
+        if (array.length%itemSize !== 0) throw new Error(`array length (${array.length}) is not a multiple of itemSize (${itemSize})`)
     }
     get length() {
         return this.array.length

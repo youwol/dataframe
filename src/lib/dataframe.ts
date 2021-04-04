@@ -46,13 +46,19 @@ export class DataFrame {
         }
     }
 
+    /**
+     * Get a serie by its name
+     * @param name 
+     * @returns 
+     */
     get(name: string) {
-        return this.series.get(name)
-    }
-    getSerie(name: string) {
         const si = this.series.get(name)
         if (si) return si.serie
         return undefined
+    }
+
+    getSerie(name: string) {
+        return this.series.get(name)
     }
 
     delete(name: string): DataFrame {

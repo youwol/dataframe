@@ -19,21 +19,21 @@ let df = new DataFrame({
     }
 })
 
-console.log( trace( df.getSerie('c') ) )
+console.log( trace( df.get('c') ) )
 
 console.log('add =', add(
-    df.getSerie('c'),
+    df.get('c'),
     100
 ))
 
 console.log('mult =', mult(
-    df.getSerie('c'),
+    df.get('c'),
     100
 ))
 
 const a = add(
-    mult( df.getSerie('a'), 0.1 ),
-    mult( df.getSerie('b'), 0.2 )
+    mult( df.get('a'), 0.1 ),
+    mult( df.get('b'), 0.2 )
 )
 console.log(a)
 

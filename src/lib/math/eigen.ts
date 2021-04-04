@@ -7,7 +7,7 @@ import { IArray, Serie } from '../serie'
  */
 export const eigenValues = (s: Serie<IArray>) => {
     if (s===undefined)    throw new Error ('series is undefined')
-    if (s.itemSize !== 6) throw new Error('Series does not have itemSize = 6 (symmetric tensor [xx,xy,xz,yy,yz,zz])')
+    if (s.itemSize !== 6 && s.itemSize!==9) throw new Error('Series does not have itemSize = 6 or 9 (symmetric tensor [xx,xy,xz,yy,yz,zz])')
 
     const count = s.count //ta.length / df.size
     const r = s.array.slice(0, s.count*3).fill(0) // have to use slice

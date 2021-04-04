@@ -1,4 +1,4 @@
-import { IArray, Serie } from '../serie'
+import { createSerie, IArray, Serie } from '../serie'
 
 /**
  * @category Algorithms
@@ -6,7 +6,7 @@ import { IArray, Serie } from '../serie'
 export const map = (s: Serie<IArray>, mapfct: Function) => {
     if (s===undefined) throw new Error ('serie is undefined')
 
-    const r     = s.clone()
+    const r  = s.array.slice(0, s.count)
     const count = s.count
 
     let k = 0
@@ -14,5 +14,5 @@ export const map = (s: Serie<IArray>, mapfct: Function) => {
         r[i] = mapfct( s.itemAt(i) )
     }
 
-    return r
+    return createSerie(r)
 }

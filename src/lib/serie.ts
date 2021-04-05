@@ -1,4 +1,6 @@
 
+export type ASerie = Serie<IArray>
+
 export interface IArray {
     readonly length: number
     [i: number]: number
@@ -41,9 +43,11 @@ export class Serie<T extends IArray> {
     get isArrayBuffer() {
         return !this.isArray
     }
+    
     at(i: number) {
         return this.array[i]
     }
+
     itemAt(i: number) {
         const size = this.itemSize
         if (size===1) return this.at(i)
@@ -52,13 +56,24 @@ export class Serie<T extends IArray> {
         for (let j=0; j<size; ++j) r[j] = this.array[start+j]
         return r
     }
+
+    forEachItem( callback: Function) {
+        for (let i=0; i<this.count; ++i) {
+            callback(this.itemAt(i), i, this)
+        }
+    }
     
     /**
      * Return a new serie similar to this (same type of array and buffer), and with
      * the same values in the array.
+     * @param resetValues True if reset the values to 0, false otherwise (default)
      */
-    clone() {
-        return new Serie(this.array.slice(0, this.count*this.itemSize), this.itemSize, this.shared)
+    clone(resetValues: boolean = false) {
+        const s = new Serie(this.array.slice(0, this.count*this.itemSize), this.itemSize, this.shared)
+        if (resetValues) {
+            s.array.forEach( (_,i) => s.array[i] = 0 ) // reset
+        }
+        return s
     }
 
     /**

@@ -87,6 +87,9 @@ mult = Serie {
 Serie { array: Float32Array(6) [ 0, 0, 0, 0, 0, 0 ], itemSize: 3, shared: true }
 ```
 
+## Refactoring
+See [this description]()
+
 ## Installation, Build & Test 
 
 To install the required dependencies:

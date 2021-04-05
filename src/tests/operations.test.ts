@@ -1,7 +1,7 @@
 import { DataFrame } from '../lib/dataframe'
 import { createSerie } from '../lib/serie'
 import { exists } from '../lib/utils'
-import { add, mult, eigenValues, trace, sub, norm, mean, div } from '../lib/math'
+import { add, mult, eigenValue, trace, sub, norm, mean, div } from '../lib/math'
 
 const gen = (n: number, v: number) => new Array(n).fill(0).map( _ => v )
 
@@ -147,7 +147,7 @@ test('dataframe operation superposition', () => {
 test('dataframe operation eigen', () => {
     {
         let df = new DataFrame().set('a', createSerie(new Array(12).fill(2), 6))
-        const ev = eigenValues( df.get('a') )
+        const ev = eigenValue( df.get('a') )
         expect( ev.array[0] ).toEqual(6)
         expect( ev.array[1] ).toEqual(0)
         expect( ev.array[2] ).toEqual(0)
@@ -158,7 +158,7 @@ test('dataframe operation eigen', () => {
 
     {
         let df = new DataFrame().set('a', createSerie(new Array(18).fill(2), 9))
-        const ev = eigenValues( df.get('a') )
+        const ev = eigenValue( df.get('a') )
         expect( ev.array[0] ).toEqual(6)
         expect( ev.array[1] ).toEqual(0)
         expect( ev.array[2] ).toEqual(0)

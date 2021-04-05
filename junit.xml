@@ -1,37 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="13" failures="0" errors="0" time="4.852">
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-05T09:16:55" time="2.899" tests="1">
-    <testcase classname=" serie test" name=" serie test" time="0.003">
+<testsuites name="jest tests" tests="18" failures="0" errors="0" time="2.852">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-05T10:29:37" time="0.584" tests="1">
+    <testcase classname=" serie test" name=" serie test" time="0.002">
     </testcase>
   </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-05T09:16:55" time="2.909" tests="1">
-    <testcase classname=" dataframe algo map" name=" dataframe algo map" time="0.004">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-05T10:29:37" time="0.593" tests="1">
+    <testcase classname=" dataframe test" name=" dataframe test" time="0.003">
     </testcase>
   </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-05T09:16:55" time="2.916" tests="1">
-    <testcase classname=" dataframe test" name=" dataframe test" time="0.004">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-05T10:29:37" time="0.621" tests="2">
+    <testcase classname=" dataframe test 1" name=" dataframe test 1" time="0.002">
+    </testcase>
+    <testcase classname=" dataframe test 2" name=" dataframe test 2" time="0.005">
     </testcase>
   </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-05T09:16:55" time="3.268" tests="10">
-    <testcase classname=" dataframe operation add" name=" dataframe operation add" time="0.011">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-05T10:29:37" time="0.649" tests="10">
+    <testcase classname=" dataframe operation add" name=" dataframe operation add" time="0.01">
     </testcase>
     <testcase classname=" dataframe operation add multiple" name=" dataframe operation add multiple" time="0.001">
     </testcase>
-    <testcase classname=" dataframe operation mult" name=" dataframe operation mult" time="0.002">
+    <testcase classname=" dataframe operation mult" name=" dataframe operation mult" time="0.004">
     </testcase>
-    <testcase classname=" dataframe operation div" name=" dataframe operation div" time="0.005">
+    <testcase classname=" dataframe operation div" name=" dataframe operation div" time="0.006">
     </testcase>
-    <testcase classname=" dataframe operation sub" name=" dataframe operation sub" time="0.002">
+    <testcase classname=" dataframe operation sub" name=" dataframe operation sub" time="0.003">
     </testcase>
-    <testcase classname=" dataframe operation norm" name=" dataframe operation norm" time="0.001">
+    <testcase classname=" dataframe operation norm" name=" dataframe operation norm" time="0">
     </testcase>
-    <testcase classname=" dataframe operation mean" name=" dataframe operation mean" time="0">
+    <testcase classname=" dataframe operation mean" name=" dataframe operation mean" time="0.001">
     </testcase>
-    <testcase classname=" dataframe operation superposition" name=" dataframe operation superposition" time="0">
+    <testcase classname=" dataframe operation superposition" name=" dataframe operation superposition" time="0.001">
     </testcase>
-    <testcase classname=" dataframe operation eigen" name=" dataframe operation eigen" time="0.002">
+    <testcase classname=" dataframe operation eigen" name=" dataframe operation eigen" time="0.001">
     </testcase>
     <testcase classname=" dataframe operation trace" name=" dataframe operation trace" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-05T10:29:37" time="1.703" tests="4">
+    <testcase classname=" dataframe algo map" name=" dataframe algo map" time="0.004">
+    </testcase>
+    <testcase classname=" dataframe algo forEach" name=" dataframe algo forEach" time="0.002">
+    </testcase>
+    <testcase classname=" dataframe algo filter" name=" dataframe algo filter" time="0">
+    </testcase>
+    <testcase classname=" dataframe algo reduceItem" name=" dataframe algo reduceItem" time="0.002">
     </testcase>
   </testsuite>
 </testsuites>

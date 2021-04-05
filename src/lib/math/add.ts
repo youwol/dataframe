@@ -26,7 +26,7 @@ import { IArray, Serie } from '../serie'
     if (s === undefined) throw new Error('serie s is undefined')
     if (!others) throw new Error('cannot add undefined to s')
 
-    const r = s.clone()
+    const r = s.clone() //image(s.count, s.itemSize)
 
     // rest
     if (others) {

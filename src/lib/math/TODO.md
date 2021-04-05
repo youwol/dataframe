@@ -33,6 +33,8 @@ Change `itemSize` to:
 =>
 ```ts
 
-const M = createSerie()
-const rmat = mult( mat, mult(rot, transpose(mat) )
+const M = createSerie(...) // a rank 2 squared matrix of dim 3
+const R = createSerie(...) // a rotation matrix
+
+const values = eigenValue( mult(R, mult(M, transpose(R) ) )
 ```

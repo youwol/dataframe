@@ -53,19 +53,25 @@ export class Serie<T extends IArray> {
         return r
     }
     
+    /**
+     * Return a new serie similar to this (same type of array and buffer), and with
+     * the same values in the array.
+     */
     clone() {
-        return createSerie(this.array, this.itemSize)
+        return new Serie(this.array.slice(0, this.count*this.itemSize), this.itemSize, this.shared)
     }
 
     /**
      * Return a new serie similar to this (same type of array and buffer), but with
-     * different count and itemSize.
+     * different count and itemSize. All values are initialized to 0.
      * @param count    The number of items 
      * @param itemSize The size of the items
      * @see [[createEmptySerie]]
      */
     image(count: number, itemSize: number) {
-        return new Serie(this.array.slice(0, count*itemSize), itemSize, this.shared)
+        const s = new Serie(this.array.slice(0, count*itemSize), itemSize, this.shared)
+        s.array.forEach( (_,i) => s.array[i] = 0 ) // reset
+        return s
     }
 }
 

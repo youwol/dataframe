@@ -12,35 +12,26 @@ import { IArray, Serie } from '../serie'
  * ```
  * @category Math
  */
- export const sub = (s1: Serie<IArray>|undefined, s2: Serie<IArray> | number |undefined, ...others: (Serie<IArray>)[]) => {
-    if (s1 === undefined) return undefined
-    if (s2 === undefined) return undefined
+ export const sub = (s: Serie<IArray>|undefined, ...others: (Serie<IArray>|number)[]) => {
+    if (s === undefined) throw new Error('serie s is undefined')
+    if (!others) throw new Error('cannot subtract undefined to s')
 
-    const s = s1.image(s1.count, s1.itemSize)
-
-    if (typeof(s2) === 'number') {
-        s1.array.forEach( (v: number, i: number) => {
-            s.array[i] -= s2 as number
-        })
-    } else {
-        s2.array.forEach( (v: number, i: number) => {
-            s.array[i] -= v
-        })
-    }
+    const r = s.clone()
 
     // rest
     if (others) {
         others.forEach (o => {
-            if (o !== undefined) {
-                if (o.length !== s1.length) {
-                    throw new Error(`size mistmatch. Cannot add 2 Series of different sizes (${o.length} != ${s1.length})`)
+            if (typeof(o) === 'number') {
+                r.array.forEach( (_,i) => r.array[i] -= o )
+            }
+            else {
+                if (o.length !== s.length) {
+                    throw new Error(`size mistmatch. Cannot add 2 Series of different sizes (${o.length} != ${s.length})`)
                 }
-                o.array.forEach( (v: number, i: number) => {
-                    s.array[i] -= v
-                })
+                o.array.forEach( (v,i) => r.array[i] -= v )
             }
         })
     }
 
-    return s
+    return r
 }

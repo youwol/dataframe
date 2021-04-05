@@ -1,4 +1,4 @@
-import { createSerie, IArray, Serie } from "../serie"
+import { IArray, Serie } from "../serie"
 
 
 /**

@@ -1,6 +1,6 @@
 import { DataFrame } from '../lib/dataframe'
 import { createSerie } from '../lib/serie'
-import { exists, info } from '../lib/utils'
+import { exists } from '../lib/utils'
 import { add, mult, eigenValues, trace, sub, norm, mean, div } from '../lib/math'
 
 const gen = (n: number, v: number) => new Array(n).fill(0).map( _ => v )
@@ -15,15 +15,21 @@ test('dataframe operation add', () => {
 
     // ---------------------------------
 
-    df = df.set('sum', add(
+    let sum = add(
         df.get('a'),
         df.get('b')
-    ))
-    let sum = df.get('sum')
+    )
     sum.array.forEach( _ => expect(_).toEqual(5) )
 
     // ---------------------------------
 
+    const aa = add(
+        df.get('a'),
+        100
+    )
+    aa.array.forEach( _ => expect(_).toEqual(102) )
+
+    // ---------------------------------
     df = df.set('sum', add(
         mult( df.get('a'), 10 ),
         mult( df.get('b'), 20 )
@@ -41,14 +47,19 @@ test('dataframe operation add', () => {
     sum = df.get('sum')
     sum.array.forEach( _ => expect(_).toEqual(82) )
 
-    // ---------------------------------
+})
 
-    df = df.set('sum', add(
-        df.get('a'),
-        100
-    ))
-    sum = df.get('sum')
-    sum.array.forEach( _ => expect(_).toEqual(102) )
+test('dataframe operation add multiple', () => {
+    let df = new DataFrame()
+        .set('a', createSerie(new Array(20).fill(2), 2))
+        .set('b', createSerie(new Array(20).fill(3), 2))
+        .set('c', createSerie(new Array(20).fill(4), 2))
+        .set('d', createSerie(new Array(20).fill(5), 2))
+        .set('e', createSerie(new Array(20).fill(6), 2))
+
+    const all = [df.get('b'), df.get('c'), df.get('d'), df.get('e')]
+    const a = add( df.get('a'), ...all )
+    a.array.forEach( _ => expect(_).toEqual(20) )
 })
 
 test('dataframe operation mult', () => {
@@ -70,6 +81,7 @@ test('dataframe operation mult', () => {
     c.array.forEach( _ => expect(_).toEqual(24) )
     
 })
+
 test('dataframe operation div', () => {
     let df = new DataFrame()
         .set('a', createSerie(new Array(20).fill(2), 2))
@@ -172,7 +184,6 @@ test('dataframe operation trace', () => {
     {
         let df = new DataFrame().set('a', createSerie([1,2,3,4,5,6], 1))
         const t = trace( df.get('a') )
-        console.log(t)
         expect( t.array[0] ).toEqual(1)
         expect( t.array[1] ).toEqual(2)
         expect( t.array[5] ).toEqual(6)

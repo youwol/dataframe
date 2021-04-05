@@ -21,6 +21,32 @@ import { IArray, Serie } from '../serie'
  * ```
  * @category Math
  */
+
+ export const add = (s: Serie<IArray>|undefined, ...others: (Serie<IArray>|number)[]) => {
+    if (s === undefined) throw new Error('serie s is undefined')
+    if (!others) throw new Error('cannot add undefined to s')
+
+    const r = s.clone()
+
+    // rest
+    if (others) {
+        others.forEach (o => {
+            if (typeof(o) === 'number') {
+                r.array.forEach( (_,i) => r.array[i] += o )
+            }
+            else {
+                if (o.length !== s.length) {
+                    throw new Error(`size mistmatch. Cannot add 2 Series of different sizes (${o.length} != ${s.length})`)
+                }
+                o.array.forEach( (v,i) => r.array[i] += v )
+            }
+        })
+    }
+
+    return r
+}
+
+/*
  export const add = (s1: Serie<IArray>|undefined, s2: Serie<IArray> | number |undefined, ...others: (Serie<IArray>)[]) => {
     if (s1 === undefined) return undefined
     if (s2 === undefined) return undefined
@@ -53,3 +79,5 @@ import { IArray, Serie } from '../serie'
 
     return s
 }
+
+*/

@@ -12,8 +12,8 @@ export class DataFrame {
      * {
      *   index: new Array(10).fill(0).map( (_,i) => i),
      *   columns: {
-     *     a: createEmptySerie({Type: Float32Array, rowsCount:2, itemSize:3, shared: true }),
-     *     b: createEmptySerie({Type: Float64Array, rowsCount:2, itemSize:3, shared: false}),
+     *     a: createEmptySerie({Type: Float32Array, count:2, itemSize:3, shared: true }),
+     *     b: createEmptySerie({Type: Float64Array, count:2, itemSize:3, shared: false}),
      *     c: createSerie([0,1,2,3,4,5,6,7,8,9], 5),
      *     d: {
      *       serie: createSerie([0,1,2,3,4,5,6,7,8,9], 5),

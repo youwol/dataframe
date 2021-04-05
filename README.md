@@ -18,11 +18,21 @@ import { add, mult } from '@youwol/dataframe/math'
 
 let df = new DataFrame({
     columns: {
-        a: createEmptySerie({Type: Float32Array, rowsCount:2, itemSize:3, shared: true }),
-        b: createEmptySerie({Type: Float64Array, rowsCount:2, itemSize:3, shared: false}),
-        c: createSerie([0,1,2,3,4,5,6,7,8,9], 5),
+        a: createEmptySerie({ // length = 2*3
+            Type     : Float32Array, 
+            count    : 2, 
+            itemSize : 3, 
+            shared   : true
+            }), 
+        b: createEmptySerie({ // length = 2*3
+            Type     : Float64Array, 
+            count    : 2,
+            itemSize : 3, 
+            shared   : false
+            }),
+        c: createSerie([0,1,2,3,4,5,6,7,8,9], 5), // length = 10
         d: {
-            serie: createSerie([0,1,2,3,4,5,6,7,8,9], 5),
+            serie: createSerie([0,1,2,3,4,5,6,7,8,9], 5), // length = 10
             transfertPolicy: 'transfert',
             userData:{id:'tensor'}
         }

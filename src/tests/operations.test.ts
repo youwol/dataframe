@@ -116,6 +116,7 @@ test('dataframe operation norm', () => {
 test('dataframe operation mean', () => {
     let df = new DataFrame().set('a', createSerie(new Array(9).fill(0).map ( (_,i) => i), 3 ) )
     const a = mean( df.get('a') )
+    //console.log(a)
     const sol = [1, 4, 7]
     a.array.forEach( (_,i) => expect(_).toEqual(sol[i]) )
 })
@@ -129,57 +130,51 @@ test('dataframe operation superposition', () => {
         mult( df.get('a'), 10),
         mult( df.get('b'), 20)
     ))
-
-    console.log( info(df.get('ab')) )
 })
 
 test('dataframe operation eigen', () => {
     {
         let df = new DataFrame().set('a', createSerie(new Array(12).fill(2), 6))
         const ev = eigenValues( df.get('a') )
-        expect( ev[0] ).toEqual(6)
-        expect( ev[1] ).toEqual(0)
-        expect( ev[2] ).toEqual(0)
-        expect( ev[3] ).toEqual(6)
-        expect( ev[4] ).toEqual(0)
-        expect( ev[5] ).toEqual(0)
+        expect( ev.array[0] ).toEqual(6)
+        expect( ev.array[1] ).toEqual(0)
+        expect( ev.array[2] ).toEqual(0)
+        expect( ev.array[3] ).toEqual(6)
+        expect( ev.array[4] ).toEqual(0)
+        expect( ev.array[5] ).toEqual(0)
     }
 
     {
         let df = new DataFrame().set('a', createSerie(new Array(18).fill(2), 9))
         const ev = eigenValues( df.get('a') )
-        console.log(ev)
-        expect( ev[0] ).toEqual(6)
-        expect( ev[1] ).toEqual(0)
-        expect( ev[2] ).toEqual(0)
-        expect( ev[3] ).toEqual(6)
-        expect( ev[4] ).toEqual(0)
-        expect( ev[5] ).toEqual(0)
+        expect( ev.array[0] ).toEqual(6)
+        expect( ev.array[1] ).toEqual(0)
+        expect( ev.array[2] ).toEqual(0)
+        expect( ev.array[3] ).toEqual(6)
+        expect( ev.array[4] ).toEqual(0)
+        expect( ev.array[5] ).toEqual(0)
     }
 })
 
 test('dataframe operation trace', () => {
     {
         let df = new DataFrame().set('a', createSerie([1,2,3,4,5,6, 6,5,4,3,2,1], 6))
-        const ev = trace( df.get('a') )
-        expect( ev[0] ).toEqual(11)
-        expect( ev[1] ).toEqual(10)
+        const t = trace( df.get('a') )
+        expect( t.array[0] ).toEqual(11)
+        expect( t.array[1] ).toEqual(10)
     }
     {
         let df = new DataFrame().set('a', createSerie([1,2,3,4,5,6,7,8,9, 9,8,7,6,5,4,3,2,1], 9))
-        const ev = trace( df.get('a') )
-        expect( ev[0] ).toEqual(15)
-        expect( ev[1] ).toEqual(15)
+        const t = trace( df.get('a') )
+        expect( t.array[0] ).toEqual(15)
+        expect( t.array[1] ).toEqual(15)
     }
     {
         let df = new DataFrame().set('a', createSerie([1,2,3,4,5,6], 1))
-        const ev = trace( df.get('a') )
-        expect( ev[0] ).toEqual(1)
-        expect( ev[1] ).toEqual(2)
-        expect( ev[5] ).toEqual(6)
-    }
-    {
-        const ev = trace( undefined )
-        expect( ev.length ).toEqual(0)
+        const t = trace( df.get('a') )
+        console.log(t)
+        expect( t.array[0] ).toEqual(1)
+        expect( t.array[1] ).toEqual(2)
+        expect( t.array[5] ).toEqual(6)
     }
 })

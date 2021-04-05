@@ -1,4 +1,4 @@
-import { IArray, Serie, createEmptySerie, createSerie } from '../serie'
+import { IArray, Serie } from '../serie'
 
 /**
  * Add several Series to generate a new one
@@ -25,16 +25,15 @@ import { IArray, Serie, createEmptySerie, createSerie } from '../serie'
     if (s1 === undefined) return undefined
     if (s2 === undefined) return undefined
 
-    const r  = s1.array.slice(0, s1.length)
-    const size = s1.length
+    const s = s1.image(s1.count, s1.itemSize)
 
     if (typeof(s2) === 'number') {
         s1.array.forEach( (v: number, i: number) => {
-            r[i] += s2 as number
+            s.array[i] += s2 as number
         })
     } else {
         s2.array.forEach( (v: number, i: number) => {
-            r[i] += v
+            s.array[i] += v
         })
     }
 
@@ -42,15 +41,15 @@ import { IArray, Serie, createEmptySerie, createSerie } from '../serie'
     if (others) {
         others.forEach (o => {
             if (o !== undefined) {
-                if (o.length !== size) {
-                    throw new Error(`size mistmatch. Cannot add 2 Series of different sizes (${o.length} != ${size})`)
+                if (o.length !== s1.length) {
+                    throw new Error(`size mistmatch. Cannot add 2 Series of different sizes (${o.length} != ${s1.length})`)
                 }
                 o.array.forEach( (v: number, i: number) => {
-                    r[i] += v
+                    s.array[i] += v
                 })
             }
         })
     }
 
-    return createSerie(r, s1.itemSize)
+    return s
 }

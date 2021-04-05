@@ -1,4 +1,4 @@
-import { IArray, Serie } from "../serie"
+import { createSerie, IArray, Serie } from "../serie"
 
 
 /**
@@ -10,21 +10,22 @@ import { IArray, Serie } from "../serie"
  * @category Math
  */
  export function trace(s: Serie<IArray>|undefined) {
-    if (s === undefined) {
-        return []
-    }
-    if (s && s.itemSize===1 ) {
-        return s.array.map( (_:number) => _)
+    if (s === undefined) throw new Error ('series is undefined')
+    if (s.itemSize!==1 && s.itemSize!==6 && s.itemSize!==9) throw new Error ('item size should be 1, 6 or 9')
+
+    if (s.itemSize === 1) {
+        return s.clone()
     }
 
-    const r = s.array.slice(0, s.count)
+    const itemSize = s.itemSize
+    const r = s.image(s.count, 1)
     for (let i=0; i<s.count; ++i) {
         let a = s.itemAt(i) as number[]
-        if (s.itemSize === 6) {
-            r[i] = a[0]+a[3]+a[5]
+        if (itemSize === 6) {
+            r.array[i] = a[0]+a[3]+a[5]
         }
         else {
-            r[i] = a[0]+a[4]+a[8]
+            r.array[i] = a[0]+a[4]+a[8]
         }
     }
     return r

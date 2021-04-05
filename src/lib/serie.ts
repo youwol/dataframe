@@ -13,12 +13,25 @@ export interface IArray {
  * ArrayBuffer or SharedArrayBuffer
  */
 export class Serie<T extends IArray> {
+    /**
+     * @ignore
+     * @param array The array of values. Can be either an instance of Array or a TypedArray.
+     * For TypeArray, the underlaying buffer can be either of type ArrayBuffer or
+     * SharedArrayBuffer
+     * @param itemSize The size of each item. [[count]] will be array.length / [[itemSize]]
+     */
     constructor(public readonly array: T, public readonly itemSize: number, public readonly shared: boolean) {
         if (array.length%itemSize !== 0) throw new Error(`array length (${array.length}) is not a multiple of itemSize (${itemSize})`)
     }
+    /**
+     * Get the size of this serie, i.e., being [[count]] * [[itemSize]]
+     */
     get length() {
         return this.array.length
     }
+    /**
+     * Get the number of items (an item being of size [[itemCount]])
+     */
     get count() {
         return this.array.length / this.itemSize
     }
@@ -39,8 +52,20 @@ export class Serie<T extends IArray> {
         for (let j=0; j<size; ++j) r[j] = this.array[start+j]
         return r
     }
+    
     clone() {
         return createSerie(this.array, this.itemSize)
+    }
+
+    /**
+     * Return a new serie similar to this (same type of array and buffer), but with
+     * different count and itemSize.
+     * @param count    The number of items 
+     * @param itemSize The size of the items
+     * @see [[createEmptySerie]]
+     */
+    image(count: number, itemSize: number) {
+        return new Serie(this.array.slice(0, count*itemSize), itemSize, this.shared)
     }
 }
 
@@ -68,7 +93,7 @@ export function createSerie<T extends IArray>(data: T, itemSize = 1) {
  * ```ts
  * {
  *      Type, // Can be either an Array or a TypedArray.
- *      rowsCount, // The number of elements in the array
+ *      count, // The number of elements in the array
  *      itemSize, // The size of each items (length of the array will be rowsCount*itemSize)
  *      shared // If the TypedArray should be a SharedArrayBuffer or an ArrayBuffer
  * }
@@ -76,20 +101,20 @@ export function createSerie<T extends IArray>(data: T, itemSize = 1) {
  * @returns The newly created Serie
  */
 export function createEmptySerie<T extends IArray>(
-    {Type, rowsCount, itemSize=1, shared=false}:
-    {Type?:any, rowsCount: number, itemSize?: number, shared?: boolean})
+    {Type, count, itemSize=1, shared=false}:
+    {Type?:any, count: number, itemSize?: number, shared?: boolean})
 {
     if (itemSize<=0)  throw new Error('itemSize must be > 0')
-    if (rowsCount<=0) throw new Error('rowCount must be > 0')
+    if (count<=0) throw new Error('count must be > 0')
 
     if (Type===undefined || Array.isArray( new Type(1) )) {
-        return new Serie(new Array(rowsCount*itemSize).fill(0), itemSize, false)
+        return new Serie(new Array(count*itemSize).fill(0), itemSize, false)
     }
 
     // Type is either a Int8Array, Uint8Array etc...
-    const count = rowsCount*itemSize*Type.BYTES_PER_ELEMENT
+    const length = count*itemSize*Type.BYTES_PER_ELEMENT
     if (shared) {
-        return new Serie<T>(new Type(new SharedArrayBuffer(count)), itemSize, true)
+        return new Serie<T>(new Type(new SharedArrayBuffer(length)), itemSize, true)
     }
-    return new Serie<T>(new Type(new ArrayBuffer(count)), itemSize, false)
+    return new Serie<T>(new Type(new ArrayBuffer(length)), itemSize, false)
 }

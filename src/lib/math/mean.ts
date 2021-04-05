@@ -1,4 +1,4 @@
-import { createSerie, IArray, Serie } from '../serie'
+import { IArray, Serie } from '../serie'
 
 /**
  * @category Math
@@ -6,16 +6,17 @@ import { createSerie, IArray, Serie } from '../serie'
 export const mean = (s: Serie<IArray>) => {
     if (s===undefined) throw new Error ('series is undefined')
 
-    const r  = s.array.slice(0, s.count)
-
     if (s.itemSize === 1) {
-        return r
+        return s.clone()
     }
+
+    //const r  = s.array.slice(0, s.count)
+    const r = s.image(s.count, 1)
 
     for (let i=0; i<s.count; ++i) {
         let v = s.itemAt(i) as number[]
-        r[i] = v.reduce( (acc,v) => acc + v/s.itemSize, 0)
+        r.array[i] = v.reduce( (acc,v) => acc + v/s.itemSize, 0)
     }
 
-    return createSerie(r,1)
+    return r
 }

@@ -32,5 +32,7 @@ Change `itemSize` to:
 
 =>
 ```ts
+
+const M = createSerie()
 const rmat = mult( mat, mult(rot, transpose(mat) )
 ```

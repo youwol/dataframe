@@ -88,7 +88,7 @@ Serie { array: Float32Array(6) [ 0, 0, 0, 0, 0, 0 ], itemSize: 3, shared: true }
 ```
 
 ## Refactoring
-See [this description]()
+See [this description](https://github.com/youwol/dataframe/blob/main/src/lib/math/TODO.md)
 
 ## Installation, Build & Test 
 

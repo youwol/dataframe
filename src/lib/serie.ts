@@ -1,18 +1,29 @@
 
+/**
+ * @category DataFrame
+ */
 export type ASerie = Serie<IArray>
 
+/**
+ * @category DataFrame
+ */
 export interface IArray {
     readonly length: number
     [i: number]: number
-    map(cb: Function): number[]
+    map(cb: Function): IArray
     forEach(cb: Function): void
     slice(start: number, end: number): IArray
-    fill(n: number)
+    fill(n: number): IArray
+    reduce<U>(
+        callback: (state: U, element: number, index: number, array: number[]) => U,
+        firstState?: U
+    ): U
 }
 
 /**
  * T is either an Array, or a TypedArray (Float32Array etc...) supported by an
  * ArrayBuffer or SharedArrayBuffer
+ * @category DataFrame
  */
 export class Serie<T extends IArray> {
     /**
@@ -95,6 +106,7 @@ export class Serie<T extends IArray> {
  * @param data The array
  * @param itemSize The item size. The length of T should be a multiple of itemSize
  * @returns The newly created Serie
+ * @category DataFrame
  */
 export function createSerie<T extends IArray>(data: T, itemSize = 1) {
     if (itemSize<=0)      throw new Error('itemSize must be > 0')
@@ -120,6 +132,7 @@ export function createSerie<T extends IArray>(data: T, itemSize = 1) {
  * }
  * ```
  * @returns The newly created Serie
+ * @category DataFrame
  */
 export function createEmptySerie<T extends IArray>(
     {Type, count, itemSize=1, shared=false}:

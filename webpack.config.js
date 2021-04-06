@@ -3,12 +3,16 @@ const webpack = require('webpack');
 const pkg = require('./package.json');
 const ROOT = path.resolve(__dirname, 'src');
 const DESTINATION = path.resolve(__dirname, 'dist');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     context: ROOT,
     entry: {
         'main': './index.ts'
     },
+    plugins: [
+        new BundleAnalyzerPlugin()
+    ],
     output: {
         path: DESTINATION,
         libraryTarget: 'umd',

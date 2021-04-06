@@ -41,6 +41,4 @@ test('dataframe test 2', () => {
     expect(i.series[0].serie.shared).toBeFalsy()
     expect(i.series[0].serie.length).toEqual(21)
     expect(i.series[0].serie.count).toEqual(7)
-
-    console.log(df)
 })

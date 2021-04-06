@@ -2,6 +2,7 @@ import { IArray, Serie } from './serie'
 
 /**
  * The dataframe class which contains a list of [[Serie]]
+ * @category DataFrame
  */
 export class DataFrame {
 

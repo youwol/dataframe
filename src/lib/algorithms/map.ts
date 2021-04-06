@@ -14,7 +14,7 @@ export const map = (s: Serie<IArray>, callback: Function) => {
     let k = 0
     for (let i=0; i<count; ++i) {
         r[i] = callback( s.itemAt(i) )
-        console.log(s.itemSize, r[i], s.itemAt(i))
+        //console.log(s.itemSize, r[i], s.itemAt(i))
     }
 
     return createSerie(r, s.itemSize)

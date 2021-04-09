@@ -1,3 +1,4 @@
+import { createTyped } from "./utils/create"
 
 /**
  * @category DataFrame
@@ -95,60 +96,29 @@ export class Serie<T extends IArray> {
      * @see [[createEmptySerie]]
      */
     image(count: number, itemSize: number) {
-        const s = new Serie(this.array.slice(0, count*itemSize), itemSize, this.shared)
-        s.array.forEach( (_,i) => s.array[i] = 0 ) // reset
-        return s
+        return new Serie( createFrom(this.array, count, itemSize), itemSize, this.shared )
     }
 }
 
-/**
- * Create a serie given an array (Array or TypedArray with ArrayBuffer or SharedArrayBuffer).
- * @param data The array
- * @param itemSize The item size. The length of T should be a multiple of itemSize
- * @returns The newly created Serie
- * @category DataFrame
- */
-export function createSerie<T extends IArray>(data: T, itemSize = 1) {
-    if (itemSize<=0)      throw new Error('itemSize must be > 0')
-    if (data===undefined) throw new Error('either data or rowCount must be provided')
+// --------------------------------------------------
+// !!! private
 
-    if (Array.isArray( data )) {
-        return new Serie(data, itemSize, false)
+function createFrom<T extends IArray>(array: T, count: number, itemSize: number) {
+    if (array instanceof Array) {
+        return new Array(count*itemSize)
     }
 
-    // Type is either a Int8Array, Uint8Array etc...
-    return new Serie<T>(data, itemSize, true)
-}
-
-/**
- * Create a serie from scratch given a type (Array or TypedArray) and a rowsCount.
- * Passed parameters are:
- * ```ts
- * {
- *      Type, // Can be either an Array or a TypedArray.
- *      count, // The number of elements in the array
- *      itemSize, // The size of each items (length of the array will be rowsCount*itemSize)
- *      shared // If the TypedArray should be a SharedArrayBuffer or an ArrayBuffer
- * }
- * ```
- * @returns The newly created Serie
- * @category DataFrame
- */
-export function createEmptySerie<T extends IArray>(
-    {Type, count, itemSize=1, shared=false}:
-    {Type?:any, count: number, itemSize?: number, shared?: boolean})
-{
-    if (itemSize<=0)  throw new Error('itemSize must be > 0')
-    if (count<=0) throw new Error('count must be > 0')
-
-    if (Type===undefined || Array.isArray( new Type(1) )) {
-        return new Serie(new Array(count*itemSize).fill(0), itemSize, false)
-    }
-
-    // Type is either a Int8Array, Uint8Array etc...
-    const length = count*itemSize*Type.BYTES_PER_ELEMENT
-    if (shared) {
-        return new Serie<T>(new Type(new SharedArrayBuffer(length)), itemSize, true)
-    }
-    return new Serie<T>(new Type(new ArrayBuffer(length)), itemSize, false)
+    const isShared = (array as any).buffer instanceof SharedArrayBuffer
+    const length = count*itemSize
+    if (array instanceof Int8Array)         return createTyped(Int8Array,         length, isShared)
+    if (array instanceof Uint8Array)        return createTyped(Uint8Array,        length, isShared)
+    if (array instanceof Uint8ClampedArray) return createTyped(Uint8ClampedArray, length, isShared)
+    if (array instanceof Int16Array)        return createTyped(Int16Array,        length, isShared)
+    if (array instanceof Uint16Array)       return createTyped(Uint16Array,       length, isShared)
+    if (array instanceof Int32Array)        return createTyped(Int32Array,        length, isShared)
+    if (array instanceof Uint32Array)       return createTyped(Uint32Array,       length, isShared)
+    if (array instanceof Float32Array)      return createTyped(Float32Array,      length, isShared)
+    if (array instanceof Float64Array)      return createTyped(Float64Array,      length, isShared)
+    if (array instanceof BigInt64Array)     return createTyped(BigInt64Array,     length, isShared)
+    if (array instanceof BigUint64Array)    return createTyped(BigUint64Array,    length, isShared)
 }

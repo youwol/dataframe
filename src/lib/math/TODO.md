@@ -18,10 +18,13 @@
 ### 2. Refactorize items accordingly
 Change `itemSize` to:
 ```ts
-{
-    dim: number[] = [],
+type shape = {
+    size: number,
+    dim : number[] = [],
     prop: string = 'sym'
 }
+
+itemSize: number => shape: number | Shape
 ```
 
 ### 3. And now allows linear algebra

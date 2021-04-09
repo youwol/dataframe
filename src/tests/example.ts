@@ -1,15 +1,15 @@
 import { DataFrame } from '../lib/dataframe'
 import { add, mult, trace } from '../lib/math'
-import { createEmptySerie, createSerie } from '../lib/serie'
+import { createArray, createEmptySerie, createSerie } from '../lib/utils'
 
 let df = new DataFrame({
     index: new Array(10).fill(0).map( (_,i) => i),
     columns: {
         a: createEmptySerie({Type: Float32Array, count:2, itemSize:3, shared: true }),
         b: createEmptySerie({Type: Float64Array, count:2, itemSize:3, shared: false}),
-        c: createSerie([0,1,2,3,4,5,6,7,8,9], 5),
+        c: createSerie( createArray(10, i=>i), 5),
         d: {
-            serie: createSerie([0,1,2,3,4,5,6,7,8,9], 5),
+            serie: createSerie( createArray(10, i=>i), 5),
             transfertPolicy: 'transfert',
             userData:{id:'tensor'}
         }

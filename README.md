@@ -4,7 +4,7 @@
     <a href="https://github.com/kefranabg/readme-md-generator/graphs/commit-activity" target="_blank">
         <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
     </a>
-    <a href="https://github.com/kefranabg/readme-md-generator/blob/master/LICENSE" target="_blank">
+    <a href="https://github.com/youwol/dataframe/blob/main/LICENSE.md" target="_blank">
         <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
     </a>
 </p>
@@ -19,19 +19,25 @@ This library provides an immutable data structure for javascript and datascience
 1. [Installation](#install)
 1. [License](#license)
 
-## Example 1<a name="example1"></a>
+## Example 1: createSerie and reduce<a name="example1"></a>
 ```ts
-const df = new DataFrame().set( 'a', createSerie([1,2,3, 4,5,6, 7,8,9], 3))
-const sol = reduce( [df.get('a')], ([v]) => v[0]+v[1]+v[2])
+import { createSeries, createArray } from '@youwol/dataframe/utils'
+import { reduce } from '@youwol/dataframe/algorithms'
+
+const a   = createSerie( createArray(9, i=>i+1), 3)
+const sol = reduce( a, v => v[0]+v[1]+v[2])
 // sol.array = [6, 15, 24]
 ```
 
-## Example 2<a name="example2"></a>
+## Example 2: createSerie, map and reduce<a name="example2"></a>
 ```ts
+import { createSeries, createArray } from '@youwol/dataframe/utils'
+import { reduce } from '@youwol/dataframe/algorithms'
+
 // perform reduced = alpha[0]*S1 + alpha[1]*S2 + alpha[2]*S3
-const S1 = createSerie(new Array(18).fill(0).map( (_,i)=>i   ), 6)
-const S2 = createSerie(new Array(18).fill(0).map( (_,i)=>i+1 ), 6)
-const S3 = createSerie(new Array(18).fill(0).map( (_,i)=>i+2 ), 6)
+const S1 = createSerie( createArray(18, i => i  ), 6)
+const S2 = createSerie( createArray(18, i => i+1), 6)
+const S3 = createSerie( createArray(18, i => i+2), 6)
 const alpha = [1, 2, 3]
 
 const reduced = reduce( [S1, S2, S3], (stresses) =>
@@ -46,15 +52,19 @@ const reduced = reduce( [S1, S2, S3], (stresses) =>
 // ]
 ```
 
-## Example 3<a name="example3"></a>
+## Example 3: createSerie and views<a name="example3"></a>
 ```ts
-const M = createSerie(new Array(27).fill(0).map( (_,i)=>i ), 9) // [0,1,2...17]
-const V = createSerie(new Array( 9).fill(0).map( (_,i)=>i ), 3) // [0,1,2...8]
+import { createSeries, createArray } from '@youwol/dataframe/utils'
+import { reduce } from '@youwol/dataframe/algorithms'
+import { matrix, vector } from '@youwol/dataframe/views'
+
+const M = createSerie( createArray(27, i=>i), 9) // [0,1,2...17]
+const V = createSerie( createArray(9 , i=>i), 3) // [0,1,2...8]
 
 const reduced = reduce([M, V], ([m, v]) => {
-    const A = squaredMatrix(m, 3)
+    const A = matrix(m)
     const x = vector(v).normalize()
-    return A.transpose().multVec(x).array
+    return A.transpose().multVec(x)
 })
 
 // reduced.array = [
@@ -66,8 +76,9 @@ const reduced = reduce([M, V], ([m, v]) => {
 
 ## Example 4<a name="example4"></a>
 ```ts
-import { DataFrame, createSeries } from '@youwol/dataframe'
-import { add, mult } from '@youwol/dataframe/math'
+import { DataFrame } from '@youwol/dataframe'
+import { createEmptySeries, createSerie, createArray } from '@youwol/dataframe/utils'
+import { trace, add, mult } from '@youwol/dataframe/math'
 
 let df = new DataFrame({
     columns: {
@@ -83,9 +94,9 @@ let df = new DataFrame({
             itemSize : 3, 
             shared   : false
             }),
-        c: createSerie([0,1,2,3,4,5,6,7,8,9], 5), // length = 10
+        c: createSerie( createArray(10, i => i), 5), // length = 10
         d: {
-            serie: createSerie([0,1,2,3,4,5,6,7,8,9], 5), // length = 10
+            serie: createSerie( createArray(10, i => i), 5), // length = 10
             transfertPolicy: 'transfert',
             userData:{id:'tensor'}
         }

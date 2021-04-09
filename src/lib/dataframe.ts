@@ -48,8 +48,8 @@ export class DataFrame {
     }
 
     /**
-     * Get a serie by its name
-     * @param name 
+     * Get a [[Serie]] by its name
+     * @param name The name of the serie
      * @returns 
      */
     get(name: string) {
@@ -58,7 +58,12 @@ export class DataFrame {
         return undefined
     }
 
-    getSerie(name: string) {
+    /**
+     * Get a [[SerieInfo]] according to its name
+     * @param name The name of the serie
+     * @returns [[SerieInfo]]
+     */
+    getSerieInfo(name: string) {
         return this.series.get(name)
     }
 
@@ -74,7 +79,7 @@ export class DataFrame {
      * @param serie 
      * @returns A new [[DataFrame]]
      */
-    set(name: string, serie: SerieInfo|Serie<IArray>|undefined): DataFrame {
+    set(name: string, serie: SerieInfo|Serie<IArray>): DataFrame {
         if (serie === undefined) return this
 
         const r = this.clone()
@@ -112,7 +117,10 @@ export class DataFrame {
     private index_   : number[] = []
 }
 
-type SerieInfo = {
+/**
+ * @category DataFrame
+ */
+export type SerieInfo = {
     serie: Serie<IArray>|undefined,
     userData?: any,
     transfertPolicy?: string

@@ -1,4 +1,5 @@
-import { createSerie, IArray, Serie } from '../serie'
+import { IArray, Serie } from '../serie'
+import { createSerie } from '../utils'
 
 /**
  * filter a [[Serie]] using a callback function.

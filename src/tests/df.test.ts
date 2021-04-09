@@ -30,15 +30,21 @@ test('dataframe test 2', () => {
     expect(df.index.length).toEqual(0)
 
     const i = info(df)
-
     expect(i.series.length).toEqual(1)
     expect(i.series[0].name).toEqual('a')
     expect(i.series[0].userData).toBeUndefined()
     expect(i.series[0].transfertPolicy).toBeUndefined()
-
     expect(i.series[0].serie).toBeDefined()
     expect(i.series[0].serie.itemSize).toEqual(3)
     expect(i.series[0].serie.shared).toBeFalsy()
     expect(i.series[0].serie.length).toEqual(21)
     expect(i.series[0].serie.count).toEqual(7)
+
+    const ii = info(df.get('a'))
+    expect(ii.isArray).toBeTruthy()
+    expect(ii.isBuffer).toBeFalsy()
+    expect(ii.isShared).toBeFalsy()
+    expect(ii.length).toEqual(21)
+    expect(ii.count).toEqual(7)
+    expect(ii.itemSize).toEqual(3)
 })

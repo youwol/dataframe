@@ -1,4 +1,6 @@
-import { createSerie, IArray, Serie } from '../serie'
+import { IArray, Serie } from '../serie'
+import { createSerie } from '../utils'
+
 
 /**
  * map a [[Serie]] onto another one using a map function.

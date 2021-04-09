@@ -1,6 +1,5 @@
 import { DataFrame }    from '../lib/dataframe'
-import { createSerie } from '../lib/serie'
-import { info, exists } from '../lib/utils'
+import { info, exists, createSerie } from '../lib/utils'
 
 const gen = (n: number) => new Array(n).fill(0).map( (v,i)=>i+1 )
 

@@ -4,7 +4,7 @@ import { IArray, Serie } from '../serie'
 /**
  * @category Utils
  */
-export const info = (df: DataFrame | Serie<IArray>) => {
+export const info = (df: DataFrame | Serie<IArray>): any => {
     if (df instanceof Serie) {
         const s = df as Serie<IArray>
         return {

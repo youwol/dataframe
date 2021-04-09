@@ -49,7 +49,7 @@ export class Vector {
     }
 
     dot(v: Vector) {
-        return this.array.reduce( (acc, a, i) => acc + a*v.array[i] )
+        return this.array.reduce( (acc, a, i) => acc + a*v.array[i], 0 )
     }
 
     toString() {

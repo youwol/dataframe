@@ -1,4 +1,6 @@
-import { ASerie, createEmptySerie, Serie } from '../serie'
+import { ASerie, Serie } from '../serie'
+import { createEmptySerie } from '../utils'
+
 
 /**
  * @returns a new [[ASerie]]

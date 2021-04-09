@@ -1,5 +1,5 @@
-import { DataFrame }    from '../lib/dataframe'
-import { createEmptySerie, createSerie } from '../lib/serie'
+import { DataFrame } from "../lib"
+import { createEmptySerie, createSerie } from '../lib/utils'
 
 test('serie test', () => {
 

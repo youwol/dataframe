@@ -1,5 +1,5 @@
 import { DataFrame } from '../lib/dataframe'
-import { createSerie } from '../lib/serie'
+import { createSerie } from '../lib/utils'
 import { filter, forEach, map, reduce } from '../lib/algorithms'
 
 test('dataframe algo map', () => {
@@ -32,12 +32,14 @@ test('dataframe algo filter', () => {
 
 test('dataframe algo reduce', () => {
     const df = new DataFrame().set( 'a', createSerie([1,2,3,4,5,6,7,8,9], 3))
-    const traces = reduce( [df.get('a')], ([v]) => v[0]+v[1]+v[2])
 
+    const traces = reduce( [df.get('a')], ([v]) => v[0]+v[1]+v[2])
     expect(traces.array[0]).toEqual(6)
     expect(traces.array[1]).toEqual(15)
     expect(traces.array[2]).toEqual(24)
+
+    const trace = reduce( df.get('a'), (v) => v[0]+v[1]+v[2])
+    expect(trace.array[0]).toEqual(6)
+    expect(trace.array[1]).toEqual(15)
+    expect(trace.array[2]).toEqual(24)
 })
-
-
- 

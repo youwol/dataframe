@@ -1,7 +1,7 @@
 import { DataFrame } from '../lib/dataframe'
-import { createEmptySerie, createSerie } from '../lib/serie'
+import { createEmptySerie, createSerie } from '../lib/utils'
 import { exists } from '../lib/utils'
-import { add, mult, eigenValue, trace, sub, norm, mean, div, transpose } from '../lib/math'
+import { add, mult, eigenValue, trace, sub, norm, mean, div, transpose, eigenVector } from '../lib/math'
 import { map } from '../lib'
 
 test('dataframe operation add', () => {
@@ -145,14 +145,27 @@ test('dataframe operation superposition', () => {
 
 test('dataframe operation eigen', () => {
     {
-        let df = new DataFrame().set('a', createSerie(new Array(12).fill(2), 6))
-        const ev = eigenValue( df.get('a') )
+        const a = createSerie(new Array(12).fill(2), 6)
+        const ev = eigenValue( a )
         expect( ev.array[0] ).toEqual(6)
         expect( ev.array[1] ).toEqual(0)
         expect( ev.array[2] ).toEqual(0)
         expect( ev.array[3] ).toEqual(6)
         expect( ev.array[4] ).toEqual(0)
         expect( ev.array[5] ).toEqual(0)
+
+        const vec = eigenVector( a )
+        //console.log(vec.array)
+        const sol = [
+            0.5773502691896257,   0.5773502691896258, 0.5773502691896257,
+            0.7071067811865476,  -0.7071067811865475, 0,
+           -0.40824829046386296, -0.408248290463863,  0.816496580927726,
+
+            0.5773502691896257,   0.5773502691896258, 0.5773502691896257,
+            0.7071067811865476,  -0.7071067811865475, 0,
+            -0.40824829046386296,-0.408248290463863,  0.816496580927726
+        ]
+        vec.array.forEach( (v,i) => expect(v).toBeCloseTo(sol[i]))
     }
 
     {
@@ -218,6 +231,7 @@ test('dataframe operation composition', () => {
         mult( stress3, -3.2 )
     ) )
 
+    //console.log(values)
     expect(values.count).toEqual(3)
     expect(values.itemSize).toEqual(3)
     expect(values.length).toEqual(9)

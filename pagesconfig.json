@@ -1,0 +1,42 @@
+{
+    "groups": [
+        {
+            "title": "Info",
+            "pages": [
+                {
+                    "title": "Description",
+                    "source": "./documentation/description.md"
+                },
+                {
+                    "title": "Installation",
+                    "source": "./documentation/install.md"
+                },
+                {
+                    "title": "License",
+                    "source": "./documentation/license.md"
+                }
+            ]
+        },
+        {
+            "title": "Examples",
+            "pages": [
+                {
+                    "title": "Using createSerie and reduce",
+                    "source": "./documentation/ex1.md"
+                },
+                {
+                    "title": "Using createSerie, map and reduce",
+                    "source": "./documentation/ex2.md"
+                },
+                {
+                    "title": "Using createSerie and views",
+                    "source": "./documentation/ex3.md"
+                },
+                {
+                    "title": "Using DataFrame",
+                    "source": "./documentation/ex4.md"
+                }
+            ]
+        }
+    ]
+}

@@ -19,6 +19,7 @@ export interface IArray {
         callback: (state: U, element: number, index: number, array: number[]) => U,
         firstState?: U
     ): U
+    filter(cb: Function): IArray
 }
 
 /**

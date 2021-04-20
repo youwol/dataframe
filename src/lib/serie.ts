@@ -28,6 +28,8 @@ export interface IArray {
  * @category DataFrame
  */
 export class Serie<T extends IArray> {
+    name_: string = ''
+
     /**
      * @ignore
      * @param array The array of values. Can be either an instance of Array or a TypedArray.
@@ -44,6 +46,10 @@ export class Serie<T extends IArray> {
     get length() {
         return this.array.length
     }
+
+    set name(n: string) {this.name_ = n}
+    get name() {return this.name_}
+    
     /**
      * Get the number of items (an item being of size [[itemCount]])
      */

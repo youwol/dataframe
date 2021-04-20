@@ -1,47 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="30" failures="1" errors="0" time="5.364">
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-20T13:51:58" time="3.881" tests="1">
+<testsuites name="jest tests" tests="30" failures="0" errors="0" time="2.96">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-20T14:06:12" time="0.74" tests="1">
     <testcase classname=" dataframe test" name=" dataframe test" time="0.003">
     </testcase>
   </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-20T13:51:58" time="3.887" tests="4">
-    <testcase classname=" dataframe algo map" name=" dataframe algo map" time="0.003">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-20T14:06:12" time="0.769" tests="4">
+    <testcase classname=" dataframe algo map" name=" dataframe algo map" time="0.004">
     </testcase>
-    <testcase classname=" dataframe algo forEach" name=" dataframe algo forEach" time="0.011">
+    <testcase classname=" dataframe algo forEach" name=" dataframe algo forEach" time="0.002">
     </testcase>
-    <testcase classname=" dataframe algo filter" name=" dataframe algo filter" time="0">
+    <testcase classname=" dataframe algo filter" name=" dataframe algo filter" time="0.001">
     </testcase>
     <testcase classname=" dataframe algo reduce" name=" dataframe algo reduce" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-20T13:51:58" time="3.879" tests="1">
-    <testcase classname=" serie test" name=" serie test" time="0.002">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-20T14:06:12" time="0.787" tests="1">
+    <testcase classname=" serie test" name=" serie test" time="0.003">
     </testcase>
   </testsuite>
-  <testsuite name="undefined" errors="0" failures="1" skipped="0" timestamp="2021-04-20T13:51:58" time="3.942" tests="2">
-    <testcase classname=" dataframe test 1" name=" dataframe test 1" time="0.011">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-20T14:06:12" time="0.804" tests="8">
+    <testcase classname=" views test vector" name=" views test vector" time="0.008">
     </testcase>
-    <testcase classname=" dataframe test 2" name=" dataframe test 2" time="0.005">
-      <failure>Error: expect(received).toBeDefined()
-
-Received: undefined
-    at Object.&lt;anonymous&gt; (/Users/fmaerten/projects/youwol/workspace/packages/dataframe/src/tests/df.test.ts:39:31)
-    at Object.asyncJestTest (/Users/fmaerten/projects/youwol/workspace/packages/dataframe/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:106:37)
-    at /Users/fmaerten/projects/youwol/workspace/packages/dataframe/node_modules/jest-jasmine2/build/queueRunner.js:45:12
-    at new Promise (&lt;anonymous&gt;)
-    at mapper (/Users/fmaerten/projects/youwol/workspace/packages/dataframe/node_modules/jest-jasmine2/build/queueRunner.js:28:19)
-    at /Users/fmaerten/projects/youwol/workspace/packages/dataframe/node_modules/jest-jasmine2/build/queueRunner.js:75:41
-    at processTicksAndRejections (node:internal/process/task_queues:93:5)</failure>
+    <testcase classname=" views test isSymmetric" name=" views test isSymmetric" time="0.009">
     </testcase>
-  </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-20T13:51:58" time="3.955" tests="8">
-    <testcase classname=" views test vector" name=" views test vector" time="0.019">
+    <testcase classname=" views test squared matrix" name=" views test squared matrix" time="0.014">
     </testcase>
-    <testcase classname=" views test isSymmetric" name=" views test isSymmetric" time="0.001">
-    </testcase>
-    <testcase classname=" views test squared matrix" name=" views test squared matrix" time="0.018">
-    </testcase>
-    <testcase classname=" views test symmetric squared matrix" name=" views test symmetric squared matrix" time="0.003">
+    <testcase classname=" views test symmetric squared matrix" name=" views test symmetric squared matrix" time="0.004">
     </testcase>
     <testcase classname=" views squared matrix * vector" name=" views squared matrix * vector" time="0.001">
     </testcase>
@@ -49,19 +33,25 @@ Received: undefined
     </testcase>
     <testcase classname=" views complex operation" name=" views complex operation" time="0.001">
     </testcase>
-    <testcase classname=" views superposition" name=" views superposition" time="0.003">
+    <testcase classname=" views superposition" name=" views superposition" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-20T13:51:58" time="3.951" tests="12">
-    <testcase classname=" dataframe operation add" name=" dataframe operation add" time="0.025">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-20T14:06:12" time="0.791" tests="2">
+    <testcase classname=" test create array" name=" test create array" time="0.025">
     </testcase>
-    <testcase classname=" dataframe operation add multiple" name=" dataframe operation add multiple" time="0.003">
+    <testcase classname=" test create shared array" name=" test create shared array" time="0.004">
     </testcase>
-    <testcase classname=" dataframe operation mult" name=" dataframe operation mult" time="0.006">
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-20T14:06:12" time="0.804" tests="12">
+    <testcase classname=" dataframe operation add" name=" dataframe operation add" time="0.015">
     </testcase>
-    <testcase classname=" dataframe operation div" name=" dataframe operation div" time="0.008">
+    <testcase classname=" dataframe operation add multiple" name=" dataframe operation add multiple" time="0.002">
     </testcase>
-    <testcase classname=" dataframe operation sub" name=" dataframe operation sub" time="0.004">
+    <testcase classname=" dataframe operation mult" name=" dataframe operation mult" time="0.004">
+    </testcase>
+    <testcase classname=" dataframe operation div" name=" dataframe operation div" time="0.01">
+    </testcase>
+    <testcase classname=" dataframe operation sub" name=" dataframe operation sub" time="0.003">
     </testcase>
     <testcase classname=" dataframe operation norm" name=" dataframe operation norm" time="0.001">
     </testcase>
@@ -73,15 +63,15 @@ Received: undefined
     </testcase>
     <testcase classname=" dataframe operation trace" name=" dataframe operation trace" time="0.001">
     </testcase>
-    <testcase classname=" dataframe operation transpose" name=" dataframe operation transpose" time="0.001">
+    <testcase classname=" dataframe operation transpose" name=" dataframe operation transpose" time="0">
     </testcase>
     <testcase classname=" dataframe operation composition" name=" dataframe operation composition" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-20T13:51:58" time="3.923" tests="2">
-    <testcase classname=" test create array" name=" test create array" time="0.034">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-04-20T14:06:12" time="1.907" tests="2">
+    <testcase classname=" dataframe test 1" name=" dataframe test 1" time="0.002">
     </testcase>
-    <testcase classname=" test create shared array" name=" test create shared array" time="0.006">
+    <testcase classname=" dataframe test 2" name=" dataframe test 2" time="0.004">
     </testcase>
   </testsuite>
 </testsuites>

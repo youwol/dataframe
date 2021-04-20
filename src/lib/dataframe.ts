@@ -39,9 +39,11 @@ export class DataFrame {
             for (var [k, v] of Object.entries(params.columns)) {
                 if (v instanceof Serie) {
                     this.series.set(k, {serie: v})
+                    this.series.get(k).serie.name = k
                 }
                 else {
                     this.series.set(k, v as SerieInfo)
+                    this.series.get(k).serie.name = k
                 }
             }
         }
@@ -85,10 +87,12 @@ export class DataFrame {
         const r = this.clone()
         if (serie instanceof Serie) {
             r.series.set(name, {serie})
+            r.series.get(name).serie.name = name
             return r
         }
 
-        r.series.set(name, serie) // will erase an existing if any
+        r.series.set(name, serie) // will erase an existing one if any
+        r.series.get(name).serie.name = name
         return r
     }
 
@@ -106,7 +110,10 @@ export class DataFrame {
     clone() {
         const r = new DataFrame
         r.userData_ = Object.assign({}, this.userData)
-        this.series.forEach( (v, k) => r.series.set(k,v) )
+        this.series.forEach( (v, k) => {
+            r.series.set(k,v)
+            r.series.get(k).serie.name = k
+        })
         return r
     }
 

@@ -11,6 +11,8 @@
 
 This library provides an immutable data structure for javascript and datascience using `Array` and `TypedArray` with `ArrayBuffer` or `SharedArrayBuffer`, and which allows to work on rows and columns using functional programming.
 
+See the [online documentation](https://youwol.github.io/dataframe/dist/docs/index.html).
+
 ## Installation, Build & Test<a name="install"></a>
 
 To install the required dependencies:

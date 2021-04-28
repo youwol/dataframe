@@ -6,7 +6,7 @@ test('dataframe test 1', () => {
         columns: {
             a: createEmptySerie({Type: Float32Array, count:2, itemSize:3, shared: true }),
             b: createEmptySerie({Type: Float64Array, count:2, itemSize:3, shared: false}),
-            c: createSerie([0,1,2,3,4,5,6,7,8,9], 5),
+            c: createSerie({data: [0,1,2,3,4,5,6,7,8,9], itemSize: 5})
         }
     })
 
@@ -22,7 +22,7 @@ test('dataframe test 1', () => {
 test('dataframe test 2', () => {
 
     const df = new DataFrame()
-        .set('a', createSerie(new Array(21).fill(2), 3))
+        .set('a', createSerie( {data: new Array(21).fill(2), itemSize: 3} ) )
 
     console.log( info(df) )
 

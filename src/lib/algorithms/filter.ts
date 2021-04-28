@@ -19,5 +19,5 @@ export const filter = (s: Serie<IArray>, callback: Function) => {
 
     const rr  = s.array.slice(0, r.length)
     r.forEach( (v,i) => rr[i] = v )
-    return createSerie(rr, s.itemSize)
+    return createSerie({data: rr, itemSize: s.itemSize})
 }

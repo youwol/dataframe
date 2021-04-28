@@ -5,9 +5,9 @@ import { createSeries, createArray } from '@youwol/dataframe/utils'
 import { reduce } from '@youwol/dataframe/algorithms'
 
 // perform reduced = alpha[0]*S1 + alpha[1]*S2 + alpha[2]*S3
-const S1 = createSerie( createArray(18, i => i  ), 6)
-const S2 = createSerie( createArray(18, i => i+1), 6)
-const S3 = createSerie( createArray(18, i => i+2), 6)
+const S1 = createSerie( {data: createArray(18, i => i  ), itemSize: 6})
+const S2 = createSerie( {data: createArray(18, i => i+1), itemSize: 6})
+const S3 = createSerie( {data: createArray(18, i => i+2), itemSize: 6})
 const alpha = [1, 2, 3]
 
 const reduced = reduce( [S1, S2, S3], (stresses) =>

@@ -7,9 +7,9 @@ let df = new DataFrame({
     columns: {
         a: createEmptySerie({Type: Float32Array, count:2, itemSize:3, shared: true }),
         b: createEmptySerie({Type: Float64Array, count:2, itemSize:3, shared: false}),
-        c: createSerie( createArray(10, i=>i), 5),
+        c: createSerie( {data: createArray(10, i=>i), itemSize: 5}),
         d: {
-            serie: createSerie( createArray(10, i=>i), 5),
+            serie: createSerie( {data: createArray(10, i=>i), itemSize: 5}),
             transfertPolicy: 'transfert',
             userData:{id:'tensor'}
         }

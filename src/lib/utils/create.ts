@@ -90,7 +90,7 @@ export function createTyped(Type: any, data: number|number[], shared: boolean) {
  * ```
  * @category Creation
  */
- export function createSerie<T extends IArray>(data: T, itemSize = 1) {
+ export function createSerie<T extends IArray>({data, itemSize=1}:{data: T, itemSize?: number}) {
     if (itemSize<=0)      throw new Error('itemSize must be > 0')
     if (data===undefined) throw new Error('either data or rowCount must be provided')
 

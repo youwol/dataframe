@@ -19,5 +19,5 @@ export const map = (s: Serie<IArray>, callback: Function) => {
         //console.log(s.itemSize, r[i], s.itemAt(i))
     }
 
-    return createSerie(r, s.itemSize)
+    return createSerie({data: r, itemSize: s.itemSize})
 }

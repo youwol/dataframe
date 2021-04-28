@@ -6,8 +6,8 @@ import { map } from '../lib'
 
 test('dataframe operation add', () => {
     let df = new DataFrame()
-        .set('a', createSerie(new Array(20).fill(2), 2))
-        .set('b', createSerie(new Array(20).fill(3), 2))
+        .set('a', createSerie({data: new Array(20).fill(2), itemSize: 2}))
+        .set('b', createSerie({data: new Array(20).fill(3), itemSize: 2}))
 
     expect( exists(df, 'a') ).toBeTruthy()
     expect( exists(df, 'b') ).toBeTruthy()
@@ -50,11 +50,11 @@ test('dataframe operation add', () => {
 
 test('dataframe operation add multiple', () => {
     let df = new DataFrame()
-        .set('a', createSerie(new Array(20).fill(2), 2))
-        .set('b', createSerie(new Array(20).fill(3), 2))
-        .set('c', createSerie(new Array(20).fill(4), 2))
-        .set('d', createSerie(new Array(20).fill(5), 2))
-        .set('e', createSerie(new Array(20).fill(6), 2))
+        .set('a', createSerie({data: new Array(20).fill(2), itemSize: 2}))
+        .set('b', createSerie({data: new Array(20).fill(3), itemSize: 2}))
+        .set('c', createSerie({data: new Array(20).fill(4), itemSize: 2}))
+        .set('d', createSerie({data: new Array(20).fill(5), itemSize: 2}))
+        .set('e', createSerie({data: new Array(20).fill(6), itemSize: 2}))
 
     const all = [df.get('b'), df.get('c'), df.get('d'), df.get('e')]
     const a = add( df.get('a'), ...all )
@@ -63,9 +63,9 @@ test('dataframe operation add multiple', () => {
 
 test('dataframe operation mult', () => {
     let df = new DataFrame()
-        .set('a', createSerie(new Array(20).fill(2), 2))
-        .set('b', createSerie(new Array(20).fill(3), 2))
-        .set('c', createSerie(new Array(20).fill(4), 2))
+        .set('a', createSerie({data: new Array(20).fill(2), itemSize: 2}))
+        .set('b', createSerie({data: new Array(20).fill(3), itemSize: 2}))
+        .set('c', createSerie({data: new Array(20).fill(4), itemSize: 2}))
 
     expect( exists(df, 'a') ).toBeTruthy()
     expect( exists(df, 'b') ).toBeTruthy()
@@ -83,9 +83,9 @@ test('dataframe operation mult', () => {
 
 test('dataframe operation div', () => {
     let df = new DataFrame()
-        .set('a', createSerie(new Array(20).fill(2), 2))
-        .set('b', createSerie(new Array(20).fill(3), 2))
-        .set('c', createSerie(new Array(20).fill(2), 2))
+        .set('a', createSerie({data: new Array(20).fill(2), itemSize: 2}))
+        .set('b', createSerie({data: new Array(20).fill(3), itemSize: 2}))
+        .set('c', createSerie({data: new Array(20).fill(2), itemSize: 2}))
 
     const a = div( df.get('b'), df.get('a') )
     a.array.forEach( _ => expect(_).toEqual(1.5) )
@@ -100,9 +100,9 @@ test('dataframe operation div', () => {
 
 test('dataframe operation sub', () => {
     let df = new DataFrame()
-        .set('a', createSerie(new Array(20).fill(2), 1))
-        .set('b', createSerie(new Array(20).fill(3), 1))
-        .set('c', createSerie(new Array(20).fill(2), 2))
+        .set('a', createSerie({data: new Array(20).fill(2), itemSize: 1}))
+        .set('b', createSerie({data: new Array(20).fill(3), itemSize: 1}))
+        .set('c', createSerie({data: new Array(20).fill(2), itemSize: 2}))
 
     {
         const a = sub( df.get('b'), df.get('a') )
@@ -119,13 +119,13 @@ test('dataframe operation sub', () => {
 })
 
 test('dataframe operation norm', () => {
-    let df = new DataFrame().set('a', createSerie(new Array(9).fill(2), 3))
+    let df = new DataFrame().set('a', createSerie({data: new Array(9).fill(2), itemSize: 3}))
     const a = norm( df.get('a') )
     a.array.forEach( _ => expect(_).toEqual(Math.sqrt(12)) )
 })
 
 test('dataframe operation mean', () => {
-    let df = new DataFrame().set('a', createSerie(new Array(9).fill(0).map ( (_,i) => i), 3 ) )
+    let df = new DataFrame().set('a', createSerie({data: new Array(9).fill(0).map ( (_,i) => i), itemSize: 3}) )
     const a = mean( df.get('a') )
     //console.log(a)
     const sol = [1, 4, 7]
@@ -134,8 +134,8 @@ test('dataframe operation mean', () => {
 
 test('dataframe operation superposition', () => {
     let df = new DataFrame()
-        .set('a', createSerie(new Array(20).fill(2), 2))
-        .set('b', createSerie(new Array(20).fill(3), 2))
+        .set('a', createSerie({data: new Array(20).fill(2), itemSize: 2}))
+        .set('b', createSerie({data: new Array(20).fill(3), itemSize: 2}))
 
     df = df.set('ab', add(
         mult( df.get('a'), 10),
@@ -145,7 +145,7 @@ test('dataframe operation superposition', () => {
 
 test('dataframe operation eigen', () => {
     {
-        const a = createSerie(new Array(12).fill(2), 6)
+        const a = createSerie({data: new Array(12).fill(2), itemSize: 6})
         const ev = eigenValue( a )
         expect( ev.array[0] ).toEqual(6)
         expect( ev.array[1] ).toEqual(0)
@@ -169,7 +169,7 @@ test('dataframe operation eigen', () => {
     }
 
     {
-        let df = new DataFrame().set('a', createSerie(new Array(18).fill(2), 9))
+        let df = new DataFrame().set('a', createSerie({data: new Array(18).fill(2), itemSize: 9}))
         const ev = eigenValue( df.get('a') )
         expect( ev.array[0] ).toEqual(6)
         expect( ev.array[1] ).toEqual(0)
@@ -182,19 +182,19 @@ test('dataframe operation eigen', () => {
 
 test('dataframe operation trace', () => {
     {
-        let df = new DataFrame().set('a', createSerie([1,2,3,4,5,6, 6,5,4,3,2,1], 6))
+        let df = new DataFrame().set('a', createSerie({data: [1,2,3,4,5,6, 6,5,4,3,2,1], itemSize: 6}))
         const t = trace( df.get('a') )
         expect( t.array[0] ).toEqual(11)
         expect( t.array[1] ).toEqual(10)
     }
     {
-        let df = new DataFrame().set('a', createSerie([1,2,3,4,5,6,7,8,9, 9,8,7,6,5,4,3,2,1], 9))
+        let df = new DataFrame().set('a', createSerie({data: [1,2,3,4,5,6,7,8,9, 9,8,7,6,5,4,3,2,1], itemSize: 9}))
         const t = trace( df.get('a') )
         expect( t.array[0] ).toEqual(15)
         expect( t.array[1] ).toEqual(15)
     }
     {
-        let df = new DataFrame().set('a', createSerie([1,2,3,4,5,6], 1))
+        let df = new DataFrame().set('a', createSerie({data: [1,2,3,4,5,6]}))
         const t = trace( df.get('a') )
         expect( t.array[0] ).toEqual(1)
         expect( t.array[1] ).toEqual(2)
@@ -203,7 +203,7 @@ test('dataframe operation trace', () => {
 })
 
 test('dataframe operation transpose', () => {
-    let df = new DataFrame().set('a', createSerie([1,2,3,4,5,6,7,8,9, 9,8,7,6,5,4,3,2,1], 9))
+    let df = new DataFrame().set('a', createSerie({data: [1,2,3,4,5,6,7,8,9, 9,8,7,6,5,4,3,2,1], itemSize: 9}))
     const t = transpose( df.get('a') )
     expect( t.itemAt(0) ).toEqual([1,4,7,2,5,8,3,6,9])
     expect( t.itemAt(1) ).toEqual([9,6,3,8,5,2,7,4,1])

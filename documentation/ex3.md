@@ -5,8 +5,8 @@ import { createSeries, createArray } from '@youwol/dataframe/utils'
 import { reduce } from '@youwol/dataframe/algorithms'
 import { matrix, vector } from '@youwol/dataframe/views'
 
-const M = createSerie( createArray(27, i=>i), 9) // [0,1,2...17]
-const V = createSerie( createArray(9 , i=>i), 3) // [0,1,2...8]
+const M = createSerie( {data: createArray(27, i=>i), itemSize: 9}) // [0,1,2...17]
+const V = createSerie( {data: createArray(9 , i=>i), itemSize: 3}) // [0,1,2...8]
 
 const reduced = reduce([M, V], ([m, v]) => {
     const A = matrix(m)

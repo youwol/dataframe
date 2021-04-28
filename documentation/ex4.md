@@ -19,9 +19,9 @@ let df = new DataFrame({
             itemSize : 3, 
             shared   : false
             }),
-        c: createSerie( createArray(10, i => i), 5), // length = 10
+        c: createSerie( {data: createArray(10, i => i), itemSize: 5}), // length = 10
         d: {
-            serie: createSerie( createArray(10, i => i), 5), // length = 10
+            serie: createSerie( {data: createArray(10, i => i), itemSize: 5}), // length = 10
             transfertPolicy: 'transfert',
             userData:{id:'tensor'}
         }

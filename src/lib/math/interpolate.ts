@@ -1,5 +1,5 @@
 import { IArray } from "../serie"
-import { minMaxArray, scaleArray } from "../utils"
+import { array } from "../utils"
 
 export enum InterpolateDirection {
     INCREASING,
@@ -55,6 +55,8 @@ export function meshInterpolate(
         topo = topology
     }
 
+    throw new Error('TODO')
+    
     switch(direction) {
         //case InterpolateDirection.INCREASING: return interpolateIncreasingCombels({from: attribute, topology: topo})
         //case InterpolateDirection.DECREASING: return interpolateDecreasingCombels({from: attribute, topology: topo})
@@ -72,7 +74,7 @@ export function meshInterpolate(
 function getMinMax(topology: Array<Array<number>>) {
     const minMax = [Infinity, -Infinity]
     topology.forEach( combel => {
-        const m = minMaxArray(combel)
+        const m = array.minMax(combel)
         minMax[0] = Math.min(minMax[0], m[0])
         minMax[1] = Math.max(minMax[1], m[1])
     })
@@ -112,7 +114,7 @@ function interpolateIncreasingCombels(
                 const b = from[index]
                 sum = sum.map( (num:number, idx: number) => num + b[idx] )
             })
-            to[index] = scaleArray(sum, 1/combel.length)
+            to[index] = array.scale(sum, 1/combel.length)
         })
     }
 

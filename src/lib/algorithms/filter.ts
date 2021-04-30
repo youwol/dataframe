@@ -1,4 +1,4 @@
-import { IArray, Serie } from '../serie'
+import { ASerie } from '../serie'
 import { createSerie } from '../utils'
 
 /**
@@ -6,7 +6,7 @@ import { createSerie } from '../utils'
  * @note Operations are done using the items
  * @category Algorithms
  */
-export const filter = (s: Serie<IArray>, callback: Function) => {
+export const filter = (s: ASerie, callback: Function) => {
     if (s===undefined) throw new Error ('serie is undefined')
 
     const count = s.count

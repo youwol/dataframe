@@ -1,9 +1,9 @@
-import { IArray, Serie } from '../serie'
+import { ASerie } from '../serie'
 
 /**
  * @category Math
  */
-export const norm = (s: Serie<IArray>) => {
+ export const norm = (s: ASerie) => {
     if (s===undefined) throw new Error ('series is undefined')
 
     const r = s.image(s.count, 1)

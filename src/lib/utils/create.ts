@@ -72,21 +72,29 @@ export function createTyped(Type: any, data: number|number[], shared: boolean) {
 
 /**
  * Create a serie given an array (Array or TypedArray with ArrayBuffer or SharedArrayBuffer).
- * @param data The array
- * @param itemSize The item size. The length of T should be a multiple of itemSize
+ * @param param0 An object with data and itemSize: `{data: T, itemSize: number = 1}`
  * @returns The newly created Serie
  * @example
  * ```ts
  * const coordinates = [0,3,2,7,4,8,6,5,2]
  * 
  * // s1 is a serie supporting a SharedArrayBuffer
- * const s1 = createSerie(createTyped(Float32Array, coordinates, true), 3)
+ * const s1 = createSerie({
+ *      data    : createTyped(Float32Array, coordinates, true),
+ *      itemSize: 3
+ * })
  * 
  * // s2 is a serie supporting an ArrayBuffer
- * const s2 = createSerie(createTyped(Float64Array, coordinates, false), 3)
+ * const s2 = createSerie({
+ *      data    : createTyped(Float64Array, coordinates, false),
+ *      itemSize: 3
+ * })
  * 
  * // s3 is an Array
- * const s3 = createSerie(coordinates, 3)
+ * const s3 = createSerie({
+ *      data    : coordinates,
+ *      itemSize: 3
+ * })
  * ```
  * @category Creation
  */
@@ -102,39 +110,6 @@ export function createTyped(Type: any, data: number|number[], shared: boolean) {
     const shared = (data as any).buffer instanceof SharedArrayBuffer
     return new Serie<T>(data, itemSize, shared)
 }
-
-/**
- * Create a typed serie (i.e., from a TypedArray) given a classic JavaScript Array
- * @param Type The type of the array (i.e., Uint8Array, Int16Array, Uint16Array, ...)
- * @param data The Array
- * @param itemSize
- * @param shared If the underlaying array-buffer miust be shared or not 
- * @example
- * ```ts
- * const coordinates = [0,3,2,7,4,8,6,5,2]
- * const position = createTypedSerie(Float32Array, coordinates, 3, true)
- * ```
- * @category Creation
- */
-// export function createTypedSerie(Type: any, data: number[], itemSize = 1, shared: boolean = true) {
-//     if (itemSize<=0)      throw new Error('itemSize must be > 0')
-//     if (data===undefined) throw new Error('either data or rowCount must be provided')
-
-//     // Type is either a Int8Array, Uint8Array etc...
-//     //const shared = (data as any).buffer instanceof SharedArrayBuffer
-//     //return new Serie<T>(data, itemSize, shared)
-
-//     const length = data.length*Type.BYTES_PER_ELEMENT
-//     let ta = undefined
-//     if (shared) {
-//         ta = new Type(new SharedArrayBuffer(length))
-//     }
-//     else {
-//         ta = new Type(new ArrayBuffer(length))
-//     }
-//     ta.set(data)
-//     return new Serie(ta, itemSize, true)
-// }
 
 /**
  * Create a serie from scratch given a type (Array or TypedArray) and a rowsCount.

@@ -17,8 +17,6 @@ import { createEmptySerie } from '../utils'
  * @category Algorithms
  */
 export const reduce = (series: ASerie | ASerie[], callback: Function) => {
-    const n = series.length
-
     if (series instanceof Serie) {
         const count = series.count
         const r = series.image(count, 1)
@@ -32,7 +30,9 @@ export const reduce = (series: ASerie | ASerie[], callback: Function) => {
     }
 
     // Assert all series have the same nbr of element (count)
+    const n     = series.length
     const count = series[0].count
+
     series.forEach( s => {
         if (s.count !== count) throw new Error('All series must have the same nbr of elements (count)')
     })
@@ -49,9 +49,10 @@ export const reduce = (series: ASerie | ASerie[], callback: Function) => {
         const r = callback(args)
         
         if (R === undefined) {
-            // TODO: deal with Float32Array, count and itemSize by default !!!
-            R = createEmptySerie({Type: Float32Array, count, itemSize: r.length})
             isArray = Array.isArray(r)
+            // TODO: deal with Float32Array, count and itemSize by default !!!
+            //R = createEmptySerie({Type: Float32Array, count, itemSize: r.length})
+            R = series[0].image( count, (isArray?r.length:1) )
         }
         if (isArray) {
             r.forEach( v => R.array[id++] = v)

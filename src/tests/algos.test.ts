@@ -9,8 +9,11 @@ test('dataframe algo map', () => {
         })
     )
 
-    const a = map(df.get('a'), v => v**3)
-    a.array.forEach( (_,i) => expect(_).toEqual(8) )
+    const a1 = df.get('a').map( v => v**3)
+    a1.array.forEach( (v,i) => expect(v).toEqual(8) )
+
+    const a2 = map(df.get('a'), v => v**3)
+    a2.array.forEach( (v,i) => expect(v).toEqual(8) )
 })
 
 test('dataframe algo forEach', () => {

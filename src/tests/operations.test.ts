@@ -1,8 +1,8 @@
 import { DataFrame } from '../lib/dataframe'
-import { createEmptySerie, createSerie } from '../lib/utils'
+import { createArray, createEmptySerie, createSerie } from '../lib/utils'
 import { exists } from '../lib/utils'
-import { add, mult, eigenValue, trace, sub, norm, mean, div, transpose, eigenVector } from '../lib/math'
-import { map } from '../lib'
+import { dot, add, mult, eigenValue, trace, sub, norm, mean, div, transpose, eigenVector, square, abs } from '../lib/math'
+import { map, reduce } from '../lib'
 
 test('dataframe operation add', () => {
     let df = new DataFrame()
@@ -209,6 +209,37 @@ test('dataframe operation transpose', () => {
     expect( t.itemAt(1) ).toEqual([9,6,3,8,5,2,7,4,1])
 })
 
+test('dataframe operation square', () => {
+    let s = createSerie({data: [2,3], itemSize: 1})
+    let t = square( s )
+    expect( t.itemAt(0) ).toEqual(4)
+    expect( t.itemAt(1) ).toEqual(9)
+
+    s = createSerie({data: [2,3,4,5], itemSize: 2})
+    t = square( s )
+    expect( t.itemAt(0) ).toEqual([4,9])
+    expect( t.itemAt(1) ).toEqual([16,25])
+})
+
+test('dataframe operation abs', () => {
+    let s = createSerie({data: [-2,-3], itemSize: 1})
+    let t = abs( s )
+    expect( t.itemAt(0) ).toEqual(2)
+    expect( t.itemAt(1) ).toEqual(3)
+
+    s = createSerie({data: [-2,-3,-4,-5], itemSize: 2})
+    t = abs( s )
+    expect( t.itemAt(0) ).toEqual([2,3])
+    expect( t.itemAt(1) ).toEqual([4,5])
+})
+
+test('dataframe operation dot', () => {
+    let s1 = createSerie({data: [1,2,3,4,5,6], itemSize: 3})
+    const t = dot(s1, s1)
+    expect( t.itemAt(0) ).toEqual(1+4+9)
+    expect( t.itemAt(1) ).toEqual(16+25+36)
+})
+
 test('dataframe operation composition', () => {
     let df = new DataFrame()
         .set('stress1', createEmptySerie({Type: Float32Array, count: 3, itemSize: 6, shared: true}) )
@@ -236,9 +267,31 @@ test('dataframe operation composition', () => {
     expect(values.itemSize).toEqual(3)
     expect(values.length).toEqual(9)
 
-    // values.forEachItem( item => {
+    // values.forEach( item => {
     //     expect(item[0]).toEqual(0)
     //     expect(item[1]).toEqual(0)
     //     expect(item[2]).toBeCloseTo(-7.8)
     // })
+})
+
+test('dataframe superposition', () => {
+    const alpha = [1, 2, 3]
+
+    const S1 = createSerie( {data: createArray(18, i => i  ), itemSize: 6})
+    const S2 = createSerie( {data: createArray(18, i => i+1), itemSize: 6})
+    const S3 = createSerie( {data: createArray(18, i => i+2), itemSize: 6})
+
+    const sol1 = reduce( [S1, S2, S3], (stresses) =>
+        stresses
+            .map( (s, i) => s.map( v => v*alpha[i] ) )
+            .reduce( (acc, stress) => stress.map( (v,j) => v+acc[j] ), [0,0,0,0,0,0])
+    )
+
+    const sol2 = add(
+        mult( S1, alpha[0] ),
+        mult( S2, alpha[1] ),
+        mult( S3, alpha[2] )
+    )
+
+    sol1.array.forEach( (v,i) => expect(v).toEqual(sol2.array[i]) )
 })

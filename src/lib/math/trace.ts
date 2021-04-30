@@ -1,4 +1,4 @@
-import { IArray, Serie } from "../serie"
+import { ASerie } from "../serie"
 
 
 /**
@@ -9,7 +9,7 @@ import { IArray, Serie } from "../serie"
  * </ul>
  * @category Math
  */
- export function trace(s: Serie<IArray>|undefined) {
+ export function trace(s: ASerie) {
     if (s === undefined) throw new Error ('series is undefined')
     if (s.itemSize!==1 && s.itemSize!==6 && s.itemSize!==9) throw new Error ('item size should be 1, 6 or 9')
 

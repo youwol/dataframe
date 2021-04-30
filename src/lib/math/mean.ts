@@ -1,9 +1,9 @@
-import { IArray, Serie } from '../serie'
+import { ASerie } from '../serie'
 
 /**
  * @category Math
  */
-export const mean = (s: Serie<IArray>) => {
+export const mean = (s: ASerie) => {
     if (s===undefined) throw new Error ('series is undefined')
 
     if (s.itemSize === 1) {

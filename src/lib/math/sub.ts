@@ -1,4 +1,4 @@
-import { IArray, Serie } from '../serie'
+import { ASerie } from '../serie'
 
 /**
  * Subtract several Series to generate a new one
@@ -12,7 +12,7 @@ import { IArray, Serie } from '../serie'
  * ```
  * @category Math
  */
- export const sub = (s: Serie<IArray>|undefined, ...others: (Serie<IArray>|number)[]) => {
+ export const sub = (s: ASerie, ...others: (ASerie|number)[]) => {
     if (s === undefined) throw new Error('serie s is undefined')
     if (!others) throw new Error('cannot subtract undefined to s')
 

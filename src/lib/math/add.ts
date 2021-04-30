@@ -1,4 +1,4 @@
-import { IArray, Serie } from '../serie'
+import { ASerie } from '../serie'
 
 /**
  * Add several Series to generate a new one
@@ -22,7 +22,7 @@ import { IArray, Serie } from '../serie'
  * @category Math
  */
 
-export const add = (s: Serie<IArray>|undefined, ...others: (Serie<IArray>|number)[]) => {
+export const add = (s: ASerie, ...others: (ASerie|number)[]) => {
     if (s === undefined) throw new Error('serie s is undefined')
     if (!others) throw new Error('cannot add undefined to s')
 

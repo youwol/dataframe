@@ -1,4 +1,4 @@
-import { IArray, Serie } from '../serie'
+import { ASerie } from '../serie'
 
 /**
  * @example
@@ -8,7 +8,7 @@ import { IArray, Serie } from '../serie'
  * ```
  * @category Math
  */
- export const div = (s: Serie<IArray>|undefined, ...others: (Serie<IArray>|number)[]) => {
+ export const div = (s: ASerie, ...others: (ASerie|number)[]) => {
     if (s === undefined) return undefined
     if (!others) throw new Error('cannot divide undefined to s')
 

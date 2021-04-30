@@ -145,7 +145,7 @@ test('views squared matrix * vector', () => {
         [401, 464, 527]
     ]
 
-    reduced.forEachItem( (v,i) => {
+    reduced.forEach( (v,i) => {
         expect(v).toEqual(sol[i])
     })
 })
@@ -169,7 +169,7 @@ test('views symmetric squared smatrix * vector', () => {
         [275, 311, 332]
     ]
 
-    reduced.forEachItem( (v,i) => {
+    reduced.forEach( (v,i) => {
         expect(v).toEqual(sol[i])
     })
 })

@@ -587,13 +587,22 @@
 									<dd><pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">coordinates</span><span style="color: #000000"> = [</span><span style="color: #098658">0</span><span style="color: #000000">,</span><span style="color: #098658">3</span><span style="color: #000000">,</span><span style="color: #098658">2</span><span style="color: #000000">,</span><span style="color: #098658">7</span><span style="color: #000000">,</span><span style="color: #098658">4</span><span style="color: #000000">,</span><span style="color: #098658">8</span><span style="color: #000000">,</span><span style="color: #098658">6</span><span style="color: #000000">,</span><span style="color: #098658">5</span><span style="color: #000000">,</span><span style="color: #098658">2</span><span style="color: #000000">]</span>
 
 <span style="color: #008000">// s1 is a serie supporting a SharedArrayBuffer</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">s1</span><span style="color: #000000"> = </span><span style="color: #795E26">createSerie</span><span style="color: #000000">(</span><span style="color: #795E26">createTyped</span><span style="color: #000000">(</span><span style="color: #267F99">Float32Array</span><span style="color: #000000">, </span><span style="color: #001080">coordinates</span><span style="color: #000000">, </span><span style="color: #0000FF">true</span><span style="color: #000000">), </span><span style="color: #098658">3</span><span style="color: #000000">)</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">s1</span><span style="color: #000000"> = </span><span style="color: #795E26">createSerie</span><span style="color: #000000">({</span>
+<span style="color: #000000">     </span><span style="color: #001080">data    :</span><span style="color: #000000"> </span><span style="color: #795E26">createTyped</span><span style="color: #000000">(</span><span style="color: #267F99">Float32Array</span><span style="color: #000000">, </span><span style="color: #001080">coordinates</span><span style="color: #000000">, </span><span style="color: #0000FF">true</span><span style="color: #000000">),</span>
+<span style="color: #000000">     </span><span style="color: #001080">itemSize:</span><span style="color: #000000"> </span><span style="color: #098658">3</span>
+<span style="color: #000000">})</span>
 
 <span style="color: #008000">// s2 is a serie supporting an ArrayBuffer</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">s2</span><span style="color: #000000"> = </span><span style="color: #795E26">createSerie</span><span style="color: #000000">(</span><span style="color: #795E26">createTyped</span><span style="color: #000000">(</span><span style="color: #267F99">Float64Array</span><span style="color: #000000">, </span><span style="color: #001080">coordinates</span><span style="color: #000000">, </span><span style="color: #0000FF">false</span><span style="color: #000000">), </span><span style="color: #098658">3</span><span style="color: #000000">)</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">s2</span><span style="color: #000000"> = </span><span style="color: #795E26">createSerie</span><span style="color: #000000">({</span>
+<span style="color: #000000">     </span><span style="color: #001080">data    :</span><span style="color: #000000"> </span><span style="color: #795E26">createTyped</span><span style="color: #000000">(</span><span style="color: #267F99">Float64Array</span><span style="color: #000000">, </span><span style="color: #001080">coordinates</span><span style="color: #000000">, </span><span style="color: #0000FF">false</span><span style="color: #000000">),</span>
+<span style="color: #000000">     </span><span style="color: #001080">itemSize:</span><span style="color: #000000"> </span><span style="color: #098658">3</span>
+<span style="color: #000000">})</span>
 
 <span style="color: #008000">// s3 is an Array</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">s3</span><span style="color: #000000"> = </span><span style="color: #795E26">createSerie</span><span style="color: #000000">(</span><span style="color: #001080">coordinates</span><span style="color: #000000">, </span><span style="color: #098658">3</span><span style="color: #000000">)</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">s3</span><span style="color: #000000"> = </span><span style="color: #795E26">createSerie</span><span style="color: #000000">({</span>
+<span style="color: #000000">     </span><span style="color: #001080">data    :</span><span style="color: #000000"> </span><span style="color: #001080">coordinates</span><span style="color: #000000">,</span>
+<span style="color: #000000">     </span><span style="color: #001080">itemSize:</span><span style="color: #000000"> </span><span style="color: #098658">3</span>
+<span style="color: #000000">})</span>
 </code></pre>
 									</dd>
 								</dl>
@@ -611,15 +620,9 @@
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter">
 											<h5>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></h5>
-											<div class="tsd-comment tsd-typography">
-												<p>The array</p>
-											</div>
 										</li>
 										<li class="tsd-parameter">
 											<h5><span class="tsd-flag ts-flagOptional">Optional</span> item<wbr>Size<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
-											<div class="tsd-comment tsd-typography">
-												<p>The item size. The length of T should be a multiple of itemSize</p>
-											</div>
 										</li>
 									</ul>
 								</li>

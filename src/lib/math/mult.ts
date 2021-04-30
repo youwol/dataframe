@@ -1,4 +1,4 @@
-import { IArray, ASerie, Serie } from '../serie'
+import { ASerie } from '../serie'
 
 // See https://stackoverflow.com/questions/54328275/math-js-is-slow-to-multiply-2-big-matrices ?
 // See https://github.com/josdejong/mathjs
@@ -29,7 +29,7 @@ import { IArray, ASerie, Serie } from '../serie'
 
 /**
  * @example
- * Perform: `a = b + b + d` where b, c and d are vectors of size 3
+ * Perform: `a = b + c + d` where b, c and d are vectors of size 3
  * ```ts
  * let df = new DataFrame()
  *      .set('b', createSerie(new Array(20).fill(2), 3))
@@ -54,7 +54,7 @@ import { IArray, ASerie, Serie } from '../serie'
  * ```
  * @category Math
  */
- export const mult = (s: Serie<IArray>|undefined, ...args: (Serie<IArray>|number)[]) => {
+ export const mult = (s: ASerie, ...args: (ASerie|number)[]) => {
     if (s === undefined) return undefined
     if (!args) throw new Error('cannot multiply undefined to s')
 

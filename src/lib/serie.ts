@@ -1,4 +1,4 @@
-import { createTyped } from "./utils/create"
+import { createEmptySerie, createTyped } from "./utils/create"
 
 /**
  * @category DataFrame
@@ -76,11 +76,62 @@ export class Serie<T extends IArray> {
         return r
     }
 
-    forEachItem( callback: Function) {
+    /**
+     * Iterate over all items
+     * @param callback The callback that will called for each item
+     */
+    forEach( callback: Function) {
         for (let i=0; i<this.count; ++i) {
             callback(this.itemAt(i), i, this)
         }
     }
+
+    /**
+     * Map the items
+     */
+    map(callback: Function) {
+        const tmp = callback(this.itemAt(0), 0, this)
+        
+        const itemSize = (Array.isArray(tmp) ? tmp.length : 1)
+        const R = this.image(this.count, itemSize)
+        //console.log(this.count, itemSize)
+        let id = 0
+        for (let i=0; i<this.count; ++i) {
+            const r = callback(this.itemAt(i), i, this)
+            if (itemSize===1) {
+                R.array[id++] = r
+            }
+            else {
+                for (let j=0; j<itemSize; ++j) {
+                    R.array[id++] = r[j]
+                }
+            }
+        }
+        return R
+    }
+
+    /**
+     * Reduce each item
+     */
+    // reduce(callback: Function, accumulator: number|number[]) {
+    //     if (this.itemSize === 1) {
+    //         return this.array.reduce(callback as any, accumulator)
+    //     }
+    //     // for (let i of iterable) {
+    //     //     accumulator = reduceFn(accumulator, i)
+    //     // }
+    //     // return accumulator
+        
+    //     const R = this.image(this.count, this.itemSize)
+    //     let id = 0
+    //     for (let i=0; i<this.count; ++i) {
+    //         const r = callback(this.itemAt(i), i, this)
+    //         for (let j=0; j<this.itemSize; ++j) {
+    //             R.array[id++] = r[j]
+    //         }
+    //     }
+    //     return R
+    // }
     
     /**
      * Return a new serie similar to this (same type of array and buffer), and with
@@ -111,7 +162,7 @@ export class Serie<T extends IArray> {
 // !!! private
 
 function createFrom<T extends IArray>(array: T, count: number, itemSize: number) {
-    if (array instanceof Array) {
+    if (Array.isArray(array)) {
         return new Array(count*itemSize)
     }
 

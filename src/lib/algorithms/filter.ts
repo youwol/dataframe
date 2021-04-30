@@ -17,7 +17,9 @@ export const filter = (s: ASerie, callback: Function) => {
         if (callback( v, i, s )) r.push(v)
     }
 
+    // const rr = createFrom(s.array, r.length/s.itemSize, s.itemSize)
     const rr  = s.array.slice(0, r.length)
     r.forEach( (v,i) => rr[i] = v )
+    
     return createSerie({data: rr, itemSize: s.itemSize})
 }

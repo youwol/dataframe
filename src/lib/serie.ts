@@ -159,9 +159,11 @@ export class Serie<T extends IArray> {
 }
 
 // --------------------------------------------------
-// !!! private
 
-function createFrom<T extends IArray>(array: T, count: number, itemSize: number) {
+/**
+ * @category Creation
+ */
+export function createFrom<T extends IArray>(array: T, count: number, itemSize: number) {
     if (Array.isArray(array)) {
         return new Array(count*itemSize)
     }

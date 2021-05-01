@@ -1,23 +1,17 @@
 import { map } from '../algorithms'
-import { ASerie } from '../serie'
+import { ASerie, Serie } from '../serie'
 import { vector } from '../views'
+import { IVector } from '../../../../math/src/lib'
 
 /**
  * @category Math
  */
-export const dot = (a: ASerie, b: ASerie) => map([a, b], ([v1, v2]) => vector(v1).dot( vector(v2) ) )
+export const dot = (a: ASerie, b: ASerie | IVector) => {
+    if (a===undefined) throw new Error ('serie a is undefined')
+    if (b===undefined) throw new Error ('serie or Vector b is undefined')
 
-//  export const dot = (a: ASerie, b: ASerie) => {
-//     if (a===undefined) throw new Error ('serie a is undefined')
-//     if (b===undefined) throw new Error ('serie b is undefined')
-
-//     a.forEach( (i1: number[], i: number) => {
-//         const i2 = b.itemAt(i)
-
-//     })
-
-//     // We want to do someting like:
-//     // map([a,b], ([x,y], i) => {
-
-//     // })
-// }
+    if (b instanceof Serie) {
+        return map( [a, b], ([v1, v2]) => vector(v1).dot( vector(v2) ) )
+    }
+    return map( a, v1 => vector(v1).dot( vector(b as number[]) ) )
+}

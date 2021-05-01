@@ -1,6 +1,6 @@
 {
   "name": "@youwol/dataframe",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "license": "MIT",
   "description": "A Panda like dataframe in TypeScript",
   "author": "fmaerten@youwol.com",
@@ -18,9 +18,12 @@
     "test-coverage": "jest -c ./jest.config.js --rootDir . --collect-coverage --collectCoverageFrom=./src/lib/**/*.ts ",
     "doc": "rm -fr  dist/docs && typedoc src/ --exclude src/lib --exclude src/tests --disableSources --out dist/docs --includeVersion --hideGenerator --theme pages-plugin --media ./media"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "@youwol/math": "0.x"
+  },
   "devDependencies": {
     "@types/node": "14.14.16",
+    "@youwol/math": "0.x",
     "awesome-typescript-loader": "5.2.1",
     "eslint": "7.16.0",
     "eslint-loader": "4.0.2",

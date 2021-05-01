@@ -32,7 +32,8 @@ module.exports = {
             root:['rxjs','operators']
         },
         '@youwol/flux-lib-core': "@youwol/flux-lib-core",
-        '@youwol/flux-view': "@youwol/flux-view"
+        '@youwol/flux-view': "@youwol/flux-view",
+        '@youwol/math': "@youwol/math",
     }],
     module: {
         rules: [

@@ -25,8 +25,6 @@ test('views test vector', () => {
     expect(v.at(1)).toBeCloseTo(2/n)
     expect(v.at(2)).toBeCloseTo(3/n)
     expect(v.norm()).toBeCloseTo(1)
-
-    console.log( v.toString() )
 })
 
 test('views test isSymmetric', () => {
@@ -86,8 +84,6 @@ test('views test squared matrix', () => {
     m1.scale(2)
     expect(m1.array).toEqual([20,20,20,20,20,20]) // because symmetric
 
-    console.log( m1.toString( ))
-
     expect( () => squaredMatrix([1,2,3,4,5,6,7,8,9]) ).not.toThrow(Error)
     expect( () => squaredMatrix([1,2,3,4,5,6,7,8]) ).toThrow(Error)
     expect( () => squaredMatrix([1,2,3,4,5,6,7]) ).toThrow(Error)
@@ -107,7 +103,7 @@ test('views test squared matrix', () => {
 
 test('views test symmetric squared matrix', () => {
     const m = symSquaredMatrix([1,2,3,4,5,6])
-    console.log(m)
+
     expect(m.at(0,0)).toEqual(1)
     expect(m.at(0,1)).toEqual(2)
     expect(m.at(0,2)).toEqual(3)

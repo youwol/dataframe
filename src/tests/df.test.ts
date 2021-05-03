@@ -24,8 +24,6 @@ test('dataframe test 2', () => {
     const df = new DataFrame()
         .set('a', createSerie( {data: new Array(21).fill(2), itemSize: 3} ) )
 
-    console.log( info(df) )
-
     expect( exists(df, 'a') ).toBeTruthy()
     expect(df.userData).toBeDefined()
     expect(df.index).toBeDefined()

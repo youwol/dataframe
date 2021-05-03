@@ -36,10 +36,10 @@ test('test test', () => {
     const s1 = createSerie( {data: createArray(12, i => i+1), itemSize: 3} )
     const s2 = createSerie( {data: createArray(12, i => i+2), itemSize: 3} )
     
-    console.log( map([s1, s2], ([i1, i2]) => i1.map( (i,j)=>i+i2[j] ) ) )
-    console.log( map(s1, i1 => i1.map( i => i**2) ) )
+    // console.log( map([s1, s2], ([i1, i2]) => i1.map( (i,j)=>i+i2[j] ) ) )
+    // console.log( map(s1, i1 => i1.map( i => i**2) ) )
 
-    forEach([s1,s2], ([i1, i2]) => console.log(i1, i2) )
+    // forEach([s1,s2], ([i1, i2]) => console.log(i1, i2) )
 
-    console.log( dot(s1, s2) )
+    // console.log( dot(s1, s2) )
 })

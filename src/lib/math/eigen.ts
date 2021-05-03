@@ -1,5 +1,5 @@
 import { ASerie } from '../serie'
-
+import { eigen } from '@youwol/math'
 
 /**
  * Get eigen values
@@ -40,9 +40,7 @@ export const eigenValue = (s: ASerie) => {
     for (let i=0; i<count; ++i) {
         let a = s.itemAt(i) as number[]
         const e = eigen(a)
-        r.array[k++] = e.v1[0]; r.array[k++] = e.v1[1]; r.array[k++] = e.v1[2]
-        r.array[k++] = e.v2[0]; r.array[k++] = e.v2[1]; r.array[k++] = e.v2[2]
-        r.array[k++] = e.v3[0]; r.array[k++] = e.v3[1]; r.array[k++] = e.v3[2]
+        e.vectors.forEach( v => r.array[k++] = v)
     }
 
     return r
@@ -50,6 +48,7 @@ export const eigenValue = (s: ASerie) => {
 
 // ---------------------------------------------------------
 
+/*
 type EigenSolution = {
     values: [number, number, number], 
     v1: [number, number, number], 
@@ -236,3 +235,4 @@ const eigen = (mat: number[]): EigenSolution => {
         values: [values[0], values[1], values[2]]
     }
 }
+*/

@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@youwol/dataframe - v0.0.7</title>
-	<meta name="description" content="Documentation for @youwol/dataframe - v0.0.7">
+	<title>@youwol/dataframe - v0.0.9</title>
+	<meta name="description" content="Documentation for @youwol/dataframe - v0.0.9">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 	<link rel="stylesheet" href="assets/css/pages.css">
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">@youwol/dataframe - v0.0.7</a>
+					<a href="index.html" class="title">@youwol/dataframe - v0.0.9</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -57,7 +57,7 @@
 					<a href="modules.html">Globals</a>
 				</li>
 			</ul>
-			<h1>Project @youwol/dataframe - v0.0.7</h1>
+			<h1>Project @youwol/dataframe - v0.0.9</h1>
 		</div>
 	</div>
 </header>
@@ -125,7 +125,6 @@
 								<li class="tsd-kind-function"><a href="modules.html#eigenvalue" class="tsd-kind-icon">eigen<wbr>Value</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#eigenvector" class="tsd-kind-icon">eigen<wbr>Vector</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#invert" class="tsd-kind-icon">invert</a></li>
-								<li class="tsd-kind-function"><a href="modules.html#mean" class="tsd-kind-icon">mean</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#mult" class="tsd-kind-icon">mult</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#negate" class="tsd-kind-icon">negate</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#norm" class="tsd-kind-icon">norm</a></li>
@@ -134,6 +133,17 @@
 								<li class="tsd-kind-function"><a href="modules.html#sub" class="tsd-kind-icon">sub</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#trace" class="tsd-kind-icon">trace</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#transpose" class="tsd-kind-icon">transpose</a></li>
+								<li class="tsd-kind-function"><a href="modules.html#weight" class="tsd-kind-icon">weight</a></li>
+							</ul>
+							<h3>Other Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function"><a href="modules.html#addnumber" class="tsd-kind-icon">add<wbr>Number</a></li>
+							</ul>
+							<h3>Stats Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function"><a href="modules.html#covariance" class="tsd-kind-icon">covariance</a></li>
+								<li class="tsd-kind-function"><a href="modules.html#mean" class="tsd-kind-icon">mean</a></li>
+								<li class="tsd-kind-function"><a href="modules.html#variance" class="tsd-kind-icon">variance</a></li>
 							</ul>
 							<h3>Utils Functions</h3>
 							<ul class="tsd-index-list">
@@ -621,7 +631,7 @@
 					<a name="add" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> add</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">add<span class="tsd-signature-symbol">(</span>s<span class="tsd-signature-symbol">: </span><a href="modules.html#aserie" class="tsd-signature-type">ASerie</a>, <span class="tsd-signature-symbol">...</span>others<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ASerie</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="classes/serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">add<span class="tsd-signature-symbol">(</span>series<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ASerie</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="classes/serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -654,10 +664,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>s: <a href="modules.html#aserie" class="tsd-signature-type">ASerie</a></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>others: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ASerie</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>series: <span class="tsd-signature-type">ASerie</span><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="classes/serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -815,26 +822,6 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="modules.html#aserie" class="tsd-signature-type">ASerie</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function">
-					<a name="mean" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> mean</h3>
-					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">mean<span class="tsd-signature-symbol">(</span>s<span class="tsd-signature-symbol">: </span><a href="modules.html#aserie" class="tsd-signature-type">ASerie</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="classes/serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>s: <a href="modules.html#aserie" class="tsd-signature-type">ASerie</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="classes/serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -1064,6 +1051,167 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="classes/serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="weight" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> weight</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">weight<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ASerie</span><span class="tsd-signature-symbol">[]</span>, alpha<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="modules.html#aserie" class="tsd-signature-type">ASerie</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Weights an array of <a href="modules.html#aserie">ASerie</a> with numbers and return the resulting <a href="modules.html#aserie">ASerie</a></p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">S</span><span style="color: #000000"> = [</span>
+<span style="color: #000000">    </span><span style="color: #795E26">createSerie</span><span style="color: #000000">( {</span><span style="color: #001080">data:</span><span style="color: #000000"> </span><span style="color: #795E26">createArray</span><span style="color: #000000">(</span><span style="color: #098658">18</span><span style="color: #000000">, </span><span style="color: #001080">i</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">i</span><span style="color: #000000">  ), </span><span style="color: #001080">itemSize:</span><span style="color: #000000"> </span><span style="color: #098658">6</span><span style="color: #000000">}),</span>
+<span style="color: #000000">    </span><span style="color: #795E26">createSerie</span><span style="color: #000000">( {</span><span style="color: #001080">data:</span><span style="color: #000000"> </span><span style="color: #795E26">createArray</span><span style="color: #000000">(</span><span style="color: #098658">18</span><span style="color: #000000">, </span><span style="color: #001080">i</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">i</span><span style="color: #000000">+</span><span style="color: #098658">1</span><span style="color: #000000">), </span><span style="color: #001080">itemSize:</span><span style="color: #000000"> </span><span style="color: #098658">6</span><span style="color: #000000">}),</span>
+<span style="color: #000000">    </span><span style="color: #795E26">createSerie</span><span style="color: #000000">( {</span><span style="color: #001080">data:</span><span style="color: #000000"> </span><span style="color: #795E26">createArray</span><span style="color: #000000">(</span><span style="color: #098658">18</span><span style="color: #000000">, </span><span style="color: #001080">i</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">i</span><span style="color: #000000">+</span><span style="color: #098658">2</span><span style="color: #000000">), </span><span style="color: #001080">itemSize:</span><span style="color: #000000"> </span><span style="color: #098658">6</span><span style="color: #000000">})</span>
+<span style="color: #000000">]</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">r</span><span style="color: #000000"> = </span><span style="color: #795E26">weight</span><span style="color: #000000">(</span><span style="color: #0070C1">S</span><span style="color: #000000">, [</span><span style="color: #098658">1</span><span style="color: #000000">,</span><span style="color: #098658">2</span><span style="color: #000000">,</span><span style="color: #098658">3</span><span style="color: #000000">])</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">r</span><span style="color: #000000">.</span><span style="color: #001080">array</span><span style="color: #000000">)</span>
+
+<span style="color: #008000">// [ 8, 14, 20, 26,  32,  38,</span>
+<span style="color: #008000">//  44, 50, 56, 62,  68,  74,</span>
+<span style="color: #008000">//  80, 86, 92, 98, 104, 110 ]</span>
+</code></pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>data: <span class="tsd-signature-type">ASerie</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>alpha: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="modules.html#aserie" class="tsd-signature-type">ASerie</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Other Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="addnumber" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> add<wbr>Number</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Number<span class="tsd-signature-symbol">(</span>serie<span class="tsd-signature-symbol">: </span><a href="modules.html#aserie" class="tsd-signature-type">ASerie</a>, a<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="classes/serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>serie: <a href="modules.html#aserie" class="tsd-signature-type">ASerie</a></h5>
+								</li>
+								<li>
+									<h5>a: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="classes/serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Stats Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="covariance" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> covariance</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">covariance<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><a href="modules.html#aserie" class="tsd-signature-type">ASerie</a>, y<span class="tsd-signature-symbol">: </span><a href="modules.html#aserie" class="tsd-signature-type">ASerie</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Compute covariance with Series.</p>
+								</div>
+								<p>Except from Wikipedia:</p>
+								<blockquote>
+									<p>In probability theory and statistics, covariance is a measure of the joint variability
+										of two random variables. If the greater values of one variable mainly correspond with
+										the greater values of the other variable, and the same holds for the lesser values
+										(that is, the variables tend to show similar behavior), the covariance is positive.
+										In the opposite case, when the greater values of one variable mainly correspond to
+										the lesser values of the other, (that is, the variables tend to show opposite behavior),
+										the covariance is negative. The sign of the covariance therefore shows the tendency in the
+										linear relationship between the variables. The magnitude of the covariance is not easy to
+										interpret because it is not normalized and hence depends on the magnitudes of the variables.
+										The normalized version of the covariance, the correlation coefficient, however, shows
+									by its magnitude the strength of the linear relation.</p>
+								</blockquote>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <a href="modules.html#aserie" class="tsd-signature-type">ASerie</a></h5>
+								</li>
+								<li>
+									<h5>y: <a href="modules.html#aserie" class="tsd-signature-type">ASerie</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="mean" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> mean</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">mean<span class="tsd-signature-symbol">(</span>s<span class="tsd-signature-symbol">: </span><a href="modules.html#aserie" class="tsd-signature-type">ASerie</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>s: <a href="modules.html#aserie" class="tsd-signature-type">ASerie</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="variance" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> variance</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">variance<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><a href="modules.html#aserie" class="tsd-signature-type">ASerie</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Compute variance of a Serie</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <a href="modules.html#aserie" class="tsd-signature-type">ASerie</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -1300,6 +1448,12 @@
 						<a href="modules.html#add" class="tsd-kind-icon">add</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="modules.html#addnumber" class="tsd-kind-icon">add<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#covariance" class="tsd-kind-icon">covariance</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="modules.html#createarray" class="tsd-kind-icon">create<wbr>Array</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
@@ -1387,7 +1541,13 @@
 						<a href="modules.html#transpose" class="tsd-kind-icon">transpose</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="modules.html#variance" class="tsd-kind-icon">variance</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="modules.html#vector" class="tsd-kind-icon">vector</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#weight" class="tsd-kind-icon">weight</a>
 					</li>
 				</ul>
 			</nav>

@@ -3,7 +3,6 @@ import { createArray, createTyped } from "../lib/utils/create"
 
 test('test min array', () => {
     let a = createArray(10, i => i+2)
-    console.log(a)
     expect(array.min(a)).toEqual(2)
 })
 

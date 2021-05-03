@@ -1,7 +1,7 @@
 import { DataFrame } from '../lib/dataframe'
 import { createArray, createEmptySerie, createSerie } from '../lib/utils'
 import { exists } from '../lib/utils'
-import { dot, add, mult, eigenValue, trace, sub, norm, mean, div, transpose, eigenVector, square, abs, normalize, cross } from '../lib/math'
+import { dot, add, mult, eigenValue, trace, sub, norm, div, transpose, eigenVector, square, abs, normalize, cross, addNumber, weight } from '../lib/math'
 import { map, reduce } from '../lib'
 
 test('operation add', () => {
@@ -14,35 +14,29 @@ test('operation add', () => {
 
     // ---------------------------------
 
-    let sum = add(
-        df.get('a'),
-        df.get('b')
-    )
+    let sum = add( [df.get('a'), df.get('b')] )
     sum.array.forEach( _ => expect(_).toEqual(5) )
 
     // ---------------------------------
 
-    const aa = add(
-        df.get('a'),
-        100
-    )
+    const aa = addNumber( df.get('a'), 100 )
     aa.array.forEach( _ => expect(_).toEqual(102) )
 
     // ---------------------------------
-    df = df.set('sum', add(
+    df = df.set('sum', add([
         mult( df.get('a'), 10 ),
         mult( df.get('b'), 20 )
-    ))
+    ] ))
     sum = df.get('sum')
     sum.array.forEach( _ => expect(_).toEqual(80) )
 
     // ---------------------------------
 
-    df = df.set('sum', add(
+    df = df.set('sum', add([
         mult( df.get('a'), 10 ),
         mult( df.get('b'), 20 ),
         mult( df.get('a'), 1 )
-    ))
+    ] ))
     sum = df.get('sum')
     sum.array.forEach( _ => expect(_).toEqual(82) )
 
@@ -56,8 +50,8 @@ test('operation add multiple', () => {
         .set('d', createSerie({data: new Array(20).fill(5), itemSize: 2}))
         .set('e', createSerie({data: new Array(20).fill(6), itemSize: 2}))
 
-    const all = [df.get('b'), df.get('c'), df.get('d'), df.get('e')]
-    const a = add( df.get('a'), ...all )
+    const all = [df.get('a'), df.get('b'), df.get('c'), df.get('d'), df.get('e')]
+    const a = add( all )
     a.array.forEach( _ => expect(_).toEqual(20) )
 })
 
@@ -124,23 +118,15 @@ test('operation norm', () => {
     a.array.forEach( _ => expect(_).toEqual(Math.sqrt(12)) )
 })
 
-test('operation mean', () => {
-    let df = new DataFrame().set('a', createSerie({data: new Array(9).fill(0).map ( (_,i) => i), itemSize: 3}) )
-    const a = mean( df.get('a') )
-    //console.log(a)
-    const sol = [1, 4, 7]
-    a.array.forEach( (_,i) => expect(_).toEqual(sol[i]) )
-})
-
 test('operation superposition', () => {
     let df = new DataFrame()
         .set('a', createSerie({data: new Array(20).fill(2), itemSize: 2}))
         .set('b', createSerie({data: new Array(20).fill(3), itemSize: 2}))
 
-    df = df.set('ab', add(
+    df = df.set('ab', add([
         mult( df.get('a'), 10),
         mult( df.get('b'), 20)
-    ))
+    ] ))
 })
 
 test('operation eigen', () => {
@@ -253,7 +239,6 @@ test('operation normalize', () => {
 
     s = createSerie({data: [1, 2, 3], itemSize: 1})
     t = normalize( s )
-    console.log(t)
     expect( t.itemAt(0) ).toEqual(0)
     expect( t.itemAt(1) ).toEqual(1/2)
     expect( t.itemAt(2) ).toEqual(1)
@@ -305,11 +290,11 @@ test('operation composition', () => {
     expect(stress1.itemSize).toEqual(6)
     expect(stress1.length).toEqual(18)
 
-    const values = eigenValue( add(
+    const values = eigenValue( add([
         mult( stress1, 0.1 ),
         mult( stress2, 1.2 ),
         mult( stress3, -3.2 )
-    ) )
+    ] ))
 
     //console.log(values)
     expect(values.count).toEqual(3)
@@ -330,17 +315,41 @@ test('superposition', () => {
     const S2 = createSerie( {data: createArray(18, i => i+1), itemSize: 6})
     const S3 = createSerie( {data: createArray(18, i => i+2), itemSize: 6})
 
-    const sol1 = reduce( [S1, S2, S3], (stresses) =>
-        stresses
-            .map( (s, i) => s.map( v => v*alpha[i] ) )
-            .reduce( (acc, stress) => stress.map( (v,j) => v+acc[j] ), [0,0,0,0,0,0])
-    )
+    const sol = [
+        8 , 14, 20, 26,  32,  38,
+        44, 50, 56, 62,  68,  74,
+        80, 86, 92, 98, 104, 110
+    ]
 
-    const sol2 = add(
+    const r1 = reduce( [S1, S2, S3], (stresses) => stresses
+        .map( (s, i) => s.map( v => v*alpha[i] ) )
+        .reduce( (acc, stress) => stress.map( (v,j) => v+acc[j] ), [0,0,0,0,0,0])
+    )
+    r1.array.forEach( (v,i) => expect(v).toEqual(sol[i]) )
+
+    const r2 = add([
         mult( S1, alpha[0] ),
         mult( S2, alpha[1] ),
         mult( S3, alpha[2] )
-    )
+    ] )
+    // Note the r.array.forEach and not the r.forEach as below
+    r2.array.forEach( (v,i) => expect(v).toEqual(sol[i]) )
+})
 
-    sol1.array.forEach( (v,i) => expect(v).toEqual(sol2.array[i]) )
+test('weight', () => {
+    const S = [
+        createSerie( {data: createArray(18, i => i  ), itemSize: 6}),
+        createSerie( {data: createArray(18, i => i+1), itemSize: 6}),
+        createSerie( {data: createArray(18, i => i+2), itemSize: 6})
+    ]
+
+    const sol = [
+        [8 , 14, 20, 26,  32,  38],
+        [44, 50, 56, 62,  68,  74],
+        [80, 86, 92, 98, 104, 110]
+    ]
+
+    const r = weight(S, [1,2,3])
+    // Note the r.forEach and not the r.array.forEach as above
+    r.forEach( (v,i) => expect(v).toEqual(sol[i]) )
 })

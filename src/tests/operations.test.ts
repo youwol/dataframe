@@ -1,7 +1,11 @@
 import { DataFrame } from '../lib/dataframe'
 import { createArray, createEmptySerie, createSerie } from '../lib/utils'
 import { exists } from '../lib/utils'
-import { dot, add, mult, eigenValue, trace, sub, norm, div, transpose, eigenVector, square, abs, normalize, cross, addNumber, weight } from '../lib/math'
+import {
+    dot, add, mult, eigenValue, trace, sub, norm, div, transpose, 
+    eigenVector, square, abs, normalize, cross, addNumber, weight,
+    sum
+} from '../lib/math'
 import { map, reduce } from '../lib'
 
 test('operation add', () => {
@@ -255,6 +259,15 @@ test('operation cross', () => {
     t = cross(a,b)
     expect( t.itemAt(0) ).toEqual([-3, 6, -3] )
     expect( t.itemAt(1) ).toEqual([-16, -17, 26] )
+})
+
+test('operation sum', () => {
+    let a = createSerie({data: [2,3,4,5], itemSize: 1})
+    let b = createSerie({data: [2,3,4,5], itemSize: 2})
+
+    expect( sum(a) ).toEqual(2+3+4+5)
+    expect( sum(b) ).toEqual([2+4, 3+5])
+
 })
 
 test('operation abs', () => {

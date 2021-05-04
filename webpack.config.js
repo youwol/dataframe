@@ -38,14 +38,9 @@ module.exports = {
     module: {
         rules: [
             {
-                enforce: 'pre',
-                test: /\.js$/,
-                use: 'source-map-loader'
-            },
-            {
                 test: /\.ts$/,
                 use: [
-                    { loader: 'awesome-typescript-loader' },
+                    { loader: 'ts-loader' },
                   ],
                   exclude: /node_modules/,
             }

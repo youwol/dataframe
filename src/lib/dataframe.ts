@@ -85,9 +85,9 @@ export class DataFrame {
      * @returns 
      */
     constructor(params?: any, userData: any = undefined) {
-        if (params === undefined) return
-
         this.userData_ = userData
+        
+        if (params === undefined) return
 
         for (var [k, v] of Object.entries(params)) {
             if (v instanceof Serie) {

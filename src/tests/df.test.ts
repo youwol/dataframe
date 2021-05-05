@@ -1,20 +1,23 @@
-import { DataFrame, createSerie, createEmptySerie, exists, info }    from '../lib'
+import { DataFrame, createSerie, createEmptySerie, exists, info, createTyped }    from '../lib'
 
 test('dataframe test 1', () => {
 
     const df = new DataFrame({
         a: createEmptySerie({Type: Float32Array, count:2, itemSize:3, shared: true }),
         b: createEmptySerie({Type: Float64Array, count:2, itemSize:3, shared: false}),
-        c: createSerie({data: [0,1,2,3,4,5,6,7,8,9], itemSize: 5})
+        c: createSerie({data: [0,1,2,3,4,5,6,7,8,9], itemSize: 5}),
+        d: createSerie({data: createTyped(Float32Array, [1, 2, 3, 4, 5, 6], true), itemSize: 3})
     })
 
     expect( exists(df, 'a') ).toBeTruthy()
     expect( exists(df, 'b') ).toBeTruthy()
     expect( exists(df, 'c') ).toBeTruthy()
+    expect( exists(df, 'd') ).toBeTruthy()
 
     expect( df.get('a').isArray ).toBeFalsy()
     expect( df.get('b').isArray ).toBeFalsy()
     expect( df.get('c').isArray ).toBeTruthy()
+    expect( df.get('d').isArray ).toBeFalsy()
 })
 
 test('dataframe test 2', () => {

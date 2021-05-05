@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@youwol/dataframe - v0.0.12</title>
-	<meta name="description" content="Documentation for @youwol/dataframe - v0.0.12">
+	<title>@youwol/dataframe - v0.0.13</title>
+	<meta name="description" content="Documentation for @youwol/dataframe - v0.0.13">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 	<link rel="stylesheet" href="assets/css/pages.css">
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">@youwol/dataframe - v0.0.12</a>
+					<a href="index.html" class="title">@youwol/dataframe - v0.0.13</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -57,7 +57,7 @@
 					<a href="modules.html">Globals</a>
 				</li>
 			</ul>
-			<h1>Project @youwol/dataframe - v0.0.12</h1>
+			<h1>Project @youwol/dataframe - v0.0.13</h1>
 		</div>
 	</div>
 </header>
@@ -102,6 +102,7 @@
 						<section class="tsd-index-section ">
 							<h3>Algorithms Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function"><a href="modules.html#apply" class="tsd-kind-icon">apply</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#filter" class="tsd-kind-icon">filter</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#foreach" class="tsd-kind-icon">for<wbr>Each</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#map" class="tsd-kind-icon">map</a></li>
@@ -199,6 +200,56 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Algorithms Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="apply" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> apply</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">apply<span class="tsd-signature-symbol">(</span>serie<span class="tsd-signature-symbol">: </span><a href="modules.html#aserie" class="tsd-signature-type">ASerie</a>, fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="modules.html#aserie" class="tsd-signature-type">ASerie</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Apply a function to a serie. The function signature is
+									<code>fn(item: number|number[], index: number, serie: ASerie)</code></p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>note</dt>
+									<dd><p>Operations are done using the items</p>
+									</dd>
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">s1</span><span style="color: #000000"> = </span><span style="color: #795E26">createSerie</span><span style="color: #000000">( {</span><span style="color: #001080">data:</span><span style="color: #000000"> [</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #098658">4</span><span style="color: #000000">, </span><span style="color: #098658">5</span><span style="color: #000000">, </span><span style="color: #098658">6</span><span style="color: #000000">]} ) </span><span style="color: #008000">// itemSize=1</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">s2</span><span style="color: #000000"> = </span><span style="color: #795E26">apply</span><span style="color: #000000">(</span><span style="color: #001080">s1</span><span style="color: #000000">, </span><span style="color: #001080">item</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">item</span><span style="color: #000000">**</span><span style="color: #098658">2</span><span style="color: #000000"> )</span>
+
+<span style="color: #008000">// s1.array: [1, 2, 3,  4,  5,  6]</span>
+<span style="color: #008000">// s2.array: [1, 4, 9, 16, 25, 36]</span>
+</code></pre>
+									</dd>
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">s1</span><span style="color: #000000"> = </span><span style="color: #795E26">createSerie</span><span style="color: #000000">( {</span><span style="color: #001080">data:</span><span style="color: #000000"> [</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #098658">4</span><span style="color: #000000">, </span><span style="color: #098658">5</span><span style="color: #000000">, </span><span style="color: #098658">6</span><span style="color: #000000">]}, </span><span style="color: #001080">itemSize</span><span style="color: #000000">: </span><span style="color: #098658">3</span><span style="color: #000000"> )</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">s2</span><span style="color: #000000"> = </span><span style="color: #795E26">apply</span><span style="color: #000000">(</span><span style="color: #001080">s1</span><span style="color: #000000">, </span><span style="color: #001080">item</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">item</span><span style="color: #000000">.</span><span style="color: #795E26">map</span><span style="color: #000000">( </span><span style="color: #001080">v</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">v</span><span style="color: #000000">**</span><span style="color: #098658">2</span><span style="color: #000000">) )</span>
+
+<span style="color: #008000">// s1.array: [1, 2, 3,  4,  5,  6]</span>
+<span style="color: #008000">// s2.array: [1, 4, 9, 16, 25, 36]</span>
+</code></pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>serie: <a href="modules.html#aserie" class="tsd-signature-type">ASerie</a></h5>
+								</li>
+								<li>
+									<h5>fn: <span class="tsd-signature-type">Function</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="modules.html#aserie" class="tsd-signature-type">ASerie</a></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="filter" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> filter</h3>
@@ -1609,6 +1660,9 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#append" class="tsd-kind-icon">append</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#apply" class="tsd-kind-icon">apply</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#copy" class="tsd-kind-icon">copy</a>

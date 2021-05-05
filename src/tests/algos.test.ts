@@ -3,11 +3,9 @@ import { createSerie } from '../lib/utils'
 import { filter, forEach, map, reduce } from '../lib/algorithms'
 
 test('dataframe algo map', () => {
-    let df = new DataFrame()
-        .set('a', createSerie({
-            data: new Array(20).fill(2)
-        })
-    )
+    let df = new DataFrame({
+        'a': createSerie( {data: new Array(20).fill(2)} )
+    })
 
     const a1 = df.get('a').map( v => v**3)
     a1.array.forEach( (v,i) => expect(v).toEqual(8) )
@@ -17,20 +15,17 @@ test('dataframe algo map', () => {
 })
 
 test('dataframe algo forEach', () => {
-    let df = new DataFrame()
-        .set('a', createSerie({
-            data: new Array(20).fill(2)
-        })
-    )
+    let df = new DataFrame({
+        'a': createSerie( {data: new Array(20).fill(2)} )
+    })
 
     forEach(df.get('a'), v => expect(v).toEqual(2) )
 })
 
 test('dataframe algo filter', () => {
-    let df = new DataFrame()
-        .set('a', createSerie({
-            data: new Array(20).fill(0).map( (v,i) => i*i )
-        }) )
+    let df = new DataFrame({
+        'a': createSerie( {data: new Array(20).fill(0).map( (v,i) => i*i ) })
+    })
 
     const a = filter(df.get('a'), v => v<10 )
     // 0, 1, 2, 3 => 4 values
@@ -42,11 +37,9 @@ test('dataframe algo filter', () => {
 })
 
 test('dataframe algo reduce', () => {
-    const df = new DataFrame().set('a', createSerie({
-            data: [1,2,3,4,5,6,7,8,9],
-            itemSize: 3
-        })
-    )
+    const df = new DataFrame({
+        'a': createSerie( {data: [1,2,3,4,5,6,7,8,9], itemSize: 3} )
+    })
 
     const traces = reduce( [df.get('a')], ([v]) => v[0]+v[1]+v[2])
     expect(traces.array[0]).toEqual(6)

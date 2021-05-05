@@ -1,6 +1,6 @@
 {
   "name": "@youwol/dataframe",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "license": "MIT",
   "description": "A Panda like dataframe in TypeScript",
   "author": "fmaerten@youwol.com",

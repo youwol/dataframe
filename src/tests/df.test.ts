@@ -3,11 +3,9 @@ import { DataFrame, createSerie, createEmptySerie, exists, info }    from '../li
 test('dataframe test 1', () => {
 
     const df = new DataFrame({
-        columns: {
-            a: createEmptySerie({Type: Float32Array, count:2, itemSize:3, shared: true }),
-            b: createEmptySerie({Type: Float64Array, count:2, itemSize:3, shared: false}),
-            c: createSerie({data: [0,1,2,3,4,5,6,7,8,9], itemSize: 5})
-        }
+        a: createEmptySerie({Type: Float32Array, count:2, itemSize:3, shared: true }),
+        b: createEmptySerie({Type: Float64Array, count:2, itemSize:3, shared: false}),
+        c: createSerie({data: [0,1,2,3,4,5,6,7,8,9], itemSize: 5})
     })
 
     expect( exists(df, 'a') ).toBeTruthy()
@@ -21,13 +19,17 @@ test('dataframe test 1', () => {
 
 test('dataframe test 2', () => {
 
-    const df = new DataFrame()
-        .set('a', createSerie( {data: new Array(21).fill(2), itemSize: 3} ) )
+    const df = new DataFrame(
+        {
+            'a': createSerie( {data: new Array(21).fill(2), itemSize: 3} )
+        },
+        {
+            info: "some info"
+        })
 
     expect( exists(df, 'a') ).toBeTruthy()
     expect(df.userData).toBeDefined()
-    expect(df.index).toBeDefined()
-    expect(df.index.length).toEqual(0)
+    expect(df.userData).toStrictEqual({'info': 'some info'})
 
     const i = info(df)
     expect(i.series.length).toEqual(1)

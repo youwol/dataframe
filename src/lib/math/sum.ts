@@ -1,5 +1,9 @@
 import { ASerie } from "../serie"
 
+/**
+ * Perform the sum of items of a Serie
+ * @category Math
+ */
 export const sum = (a: ASerie): number | number[] => {
     if (a.itemSize === 1) {
         let r = 0

@@ -1,13 +1,7 @@
 import { createEmptySerie, createTyped } from "./utils/create"
 
-/**
- * @category DataFrame
- */
 export type ASerie = Serie<IArray>
 
-/**
- * @category DataFrame
- */
 export interface IArray {
     readonly length: number
     [i: number]: number

@@ -6,27 +6,25 @@ import { createEmptySeries, createSerie, createArray } from '@youwol/dataframe/u
 import { trace, add, mult } from '@youwol/dataframe/math'
 
 let df = new DataFrame({
-    columns: {
-        a: createEmptySerie({ // length = 2*3
-            Type     : Float32Array, 
-            count    : 2, 
-            itemSize : 3, 
-            shared   : true
-            }), 
-        b: createEmptySerie({ // length = 2*3
-            Type     : Float64Array, 
-            count    : 2,
-            itemSize : 3, 
-            shared   : false
-            }),
-        c: createSerie( {data: createArray(10, i => i), itemSize: 5}), // length = 10
-        d: {
-            serie: createSerie( {data: createArray(10, i => i), itemSize: 5}), // length = 10
-            transfertPolicy: 'transfert',
-            userData:{id:'tensor'}
-        }
+    a: createEmptySerie({ // length = 2*3
+        Type     : Float32Array, 
+        count    : 2, 
+        itemSize : 3, 
+        shared   : true
+        }), 
+    b: createEmptySerie({ // length = 2*3
+        Type     : Float64Array, 
+        count    : 2,
+        itemSize : 3, 
+        shared   : false
+        }),
+    c: createSerie( {data: createArray(10, i => i), itemSize: 5}), // length = 10
+    d: {
+        serie: createSerie( {data: createArray(10, i => i), itemSize: 5}), // length = 10
+        transfertPolicy: 'transfert',
+        userData:{id:'tensor'}
     },
-    userData: {
+    { // user-data
         id: 'dataframe-1'
     }
 })
@@ -50,7 +48,7 @@ const a = add(
 )
 console.log(a)
 
-df = df.set('d', a)
+df = append(df, {'d': a})
 ```
 will display
 ```sh

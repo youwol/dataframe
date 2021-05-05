@@ -21,8 +21,7 @@ import { ASerie } from '../serie'
  * ```
  * @category Math
  */
-
- export const add = (series: ASerie[]) => {
+export const add = (series: ASerie[]) => {
     if (series.length <= 1) throw new Error('nb series should be greater than 1')
 
     const r = series[0].clone(true)
@@ -37,6 +36,14 @@ import { ASerie } from '../serie'
     return r
 }
 
+/**
+ * Add a number to each value of the array
+ * @example
+ * ```ts
+ * const a = addNumber( df.get('a'), 10 )
+ * ```
+ * @category Math
+ */
 export const addNumber = (serie: ASerie, a: number) => {
     const r = serie.clone(false)
     if (a===0) return r
@@ -44,27 +51,3 @@ export const addNumber = (serie: ASerie, a: number) => {
     r.array.forEach( (v,i) => r.array[i] += a )
     return r
 }
-
-// export const add = (s: ASerie, ...others: (ASerie|number)[]) => {
-//     if (s === undefined) throw new Error('serie s is undefined')
-//     if (!others) throw new Error('cannot add undefined to s')
-
-//     const r = s.clone() //image(s.count, s.itemSize)
-
-//     // rest
-//     if (others) {
-//         others.forEach (o => {
-//             if (typeof(o) === 'number') {
-//                 r.array.forEach( (_,i) => r.array[i] += o )
-//             }
-//             else {
-//                 if (o.length !== s.length) {
-//                     throw new Error(`size mistmatch. Cannot add 2 Series of different sizes (${o.length} != ${s.length})`)
-//                 }
-//                 o.array.forEach( (v,i) => r.array[i] += v )
-//             }
-//         })
-//     }
-
-//     return r
-// }

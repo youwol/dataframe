@@ -93,6 +93,7 @@ export class DataFrame {
             if (v instanceof Serie) {
                 this.series.set(k, {serie: v})
                 this.series.get(k).serie.name = k
+                //console.log( this.series.get(k) )
             }
             else {
                 this.series.set(k, v as SerieInfo)
@@ -150,6 +151,9 @@ export class DataFrame {
 
     get userData() {
         return this.userData_
+    }
+    set userData(data: any) {
+        this.userData_ = data
     }
 
     get series() {

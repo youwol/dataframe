@@ -1,4 +1,4 @@
-import { ASerie, covariance, mean } from '../lib'
+import { ASerie, covariance, mean, weightedMean } from '../lib'
 import { createSerie } from '../lib/utils'
 
 test('operation mean itemSize=3', () => {
@@ -12,6 +12,23 @@ test('operation mean itemSize=1', () => {
     const serie = createSerie({data: new Array(9).fill(0).map ( (_,i) => i), itemSize: 1})
     const a = mean(serie) as number
     const sol = ( 9*(9-1)/2 )/9
+    expect(a).toEqual(sol)
+})
+
+test('operation weoghtedMean itemSize=1', () => {
+    const serie = createSerie({data: [1, 2, 3], itemSize: 1})
+    const w     = createSerie({data: [7, 1, 11], itemSize: 1})
+    
+    const a = weightedMean(serie, w)
+
+    let W   = 0
+    let sol = 0
+    for (let i=0; i<w.array.length; ++i) {
+        sol += serie.array[i] * w.array[i]
+        W += w.array[i]
+    }
+    sol /= W
+
     expect(a).toEqual(sol)
 })
 

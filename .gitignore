@@ -8,3 +8,4 @@ dist/index.d.ts
 dist/src
 dist/dataframe
 dist/math
+dist/tests

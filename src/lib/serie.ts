@@ -43,6 +43,11 @@ export class Serie<T extends IArray> {
 
     set name(n: string) {this.name_ = n}
     get name() {return this.name_}
+
+    setName(name: string): ASerie {
+        this.name_ = name
+        return this
+    }
     
     /**
      * Get the number of items (an item being of size [[itemCount]])

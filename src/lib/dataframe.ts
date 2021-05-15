@@ -91,13 +91,12 @@ export class DataFrame {
 
         for (var [k, v] of Object.entries(params)) {
             if (v instanceof Serie) {
+                v.setName(k)
                 this.series.set(k, {serie: v})
-                this.series.get(k).serie.name = k
-                //console.log( this.series.get(k) )
             }
             else {
+                (v as SerieInfo).serie.setName(k)
                 this.series.set(k, v as SerieInfo)
-                this.series.get(k).serie.name = k
             }
         }
     }
@@ -111,6 +110,13 @@ export class DataFrame {
         const si = this.series.get(name)
         if (si) return si.serie
         return undefined
+    }
+
+    /**
+     * Check if a [[Serie]] given by its name is in the dataframe
+     */
+    constains(name: string): boolean {
+        return this.series.get(name)!==undefined
     }
 
     /**

@@ -1,4 +1,4 @@
-import { DataFrame, createSerie, createEmptySerie, exists, info, createTyped }    from '../lib'
+import { DataFrame, createSerie, createEmptySerie, exists, info, createTyped, append }    from '../lib'
 
 test('dataframe test 1', () => {
 
@@ -52,4 +52,19 @@ test('dataframe test 2', () => {
     expect(ii.length).toEqual(21)
     expect(ii.count).toEqual(7)
     expect(ii.itemSize).toEqual(3)
+})
+
+test('dataframe test append', () => {
+
+    let df = new DataFrame({
+        'a': createSerie( {data: new Array(21).fill(2), itemSize: 3} )
+    })
+    expect(df.constains('a')).toBeTruthy()
+    expect(df.constains('b')).toBeFalsy()
+
+    df = append( df, {
+        b: createSerie({data: [1,2,3], itemSize: 1})
+    })
+    expect(df.constains('a')).toBeTruthy()
+    expect(df.constains('b')).toBeTruthy()
 })

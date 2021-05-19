@@ -2,6 +2,11 @@ import { createEmptySerie, createTyped } from "./utils/create"
 
 export type ASerie = Serie<IArray>
 
+export interface ArrayLike<T> {
+    length: number
+    [n: number]: T
+}
+
 export interface IArray {
     readonly length: number
     [i: number]: number

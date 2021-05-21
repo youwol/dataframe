@@ -55,13 +55,13 @@ export class DataFrame {
      * 
      * Mutable dictionary to store consumer data (context information of the usage)
      */
-    public userData: {[key:string]: any}
+    public userData: {[key:string]: any} = {}
 
     /**
      * 
      * Dictionary to store metadata (context information of the dataframe's creation)
      */
-    public readonly metaData: {[key:string]: any}
+    public readonly metaData: {[key:string]: any} = {}
 
     private constructor(
         series: {[key:string]: Serie},

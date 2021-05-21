@@ -1,10 +1,10 @@
-import { ASerie, IArray, Serie } from "../serie";
+import { IArray, Serie } from "../serie";
 
 /**
  * @return the same serie
  * @category Utils
  */
-export const copy = (array: ASerie| IArray, serie: ASerie) => {
+export const copy = (array: Serie| IArray, serie: Serie) => {
     if (array instanceof Serie) {
         if (serie.array.length !== array.array.length) throw new Error('length mismatch for both series')
         array.array.forEach( (v,i) => serie.array[i] = v )

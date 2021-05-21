@@ -20,18 +20,18 @@ export const info = (df: DataFrame | Serie<IArray>): any => {
     
     return {
         userData: df.userData,
-        series: [...df.series].map( ([name, value]) =>  {
+        series: Object.entries(df.series).map( ([name, value]) =>  {
             return {
                 name,
                 userData: value.userData,
-                transfertPolicy: value.transfertPolicy,
-                isArray: value.serie.isArray,
-                isBuffer: value.serie.isArrayBuffer,
-                isShared: value.serie.shared,
-                length: value.serie.length,
-                count: value.serie.count,
-                itemSize: value.serie.itemSize,
-                array: value.serie.array
+                transfertPolicy: value.transferPolicy,
+                isArray: value.isArray,
+                isBuffer: value.isArrayBuffer,
+                isShared: value.shared,
+                length: value.length,
+                count: value.count,
+                itemSize: value.itemSize,
+                array: value.array
             }
         })
     }

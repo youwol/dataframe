@@ -98,17 +98,25 @@ export function createTyped(Type: any, data: number|number[], shared: boolean) {
  * ```
  * @category Creation
  */
- export function createSerie<T extends IArray>({data, itemSize=1}:{data: T, itemSize?: number}) {
+ export function createSerie<T extends IArray>({
+     data, 
+     itemSize=1,
+     userData
+    }:{
+        data: T, 
+        itemSize?: number, 
+        userData?: {[key:string]: any}}) {
+
     if (itemSize<=0)      throw new Error('itemSize must be > 0')
     if (data===undefined) throw new Error('either data or rowCount must be provided')
-
+    
     if (Array.isArray( data )) {
-        return new Serie(data, itemSize, false)
+        return Serie.create({array:data, itemSize, shared:false, userData})
     }
 
     // Type is either a Int8Array, Uint8Array etc...
     const shared = (data as any).buffer instanceof SharedArrayBuffer
-    return new Serie<T>(data, itemSize, shared)
+    return Serie.create({array:data, itemSize, shared, userData})
 }
 
 /**
@@ -125,21 +133,27 @@ export function createTyped(Type: any, data: number|number[], shared: boolean) {
  * @returns The newly created Serie
  * @category Creation
  */
-export function createEmptySerie<T extends IArray>(
-    {Type, count, itemSize=1, shared=false}:
-    {Type?:any, count: number, itemSize?: number, shared?: boolean})
+export function createEmptySerie(
+    {Type, count, itemSize=1, shared=false, userData}:
+    {Type?:any, count: number, itemSize?: number, shared?: boolean, userData?:{[key:string]: any}}
+    ) : Serie
 {
     if (itemSize<=0)  throw new Error('itemSize must be > 0')
     if (count<=0) throw new Error('count must be > 0')
 
     if (Type===undefined || Array.isArray( new Type(1) )) {
-        return new Serie(new Array(count*itemSize).fill(0), itemSize, false)
+        return Serie.create({
+            array: new Array(count*itemSize).fill(0), 
+            itemSize, 
+            shared:false
+        })
     }
 
     // Type is either a Int8Array, Uint8Array etc...
     const length = count*itemSize*Type.BYTES_PER_ELEMENT
     if (shared) {
-        return new Serie<T>(new Type(new SharedArrayBuffer(length)), itemSize, true)
+        return Serie.create({
+            array: new Type(new SharedArrayBuffer(length)), itemSize, shared:true, userData})
     }
-    return new Serie<T>(new Type(new ArrayBuffer(length)), itemSize, false)
+    return Serie.create({ array:new Type(new ArrayBuffer(length)), itemSize, shared:false,userData})
 }

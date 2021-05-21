@@ -1,9 +1,9 @@
-import { ASerie } from "../serie"
+import { Serie } from "../serie"
 
 /**
  * @category Conditional
  */
-export const isNaN = (a: ASerie) => {
+export const isNaN = (a: Serie) => {
     if (a.itemSize===1) {
         return a.map( v => Number.isNaN(v) )
     }

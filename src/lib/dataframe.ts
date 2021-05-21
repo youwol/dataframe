@@ -11,14 +11,14 @@ import { IArray, Serie } from './serie'
  * ```
  * @category DataFrame
  */
-export const merge = (dfs: DataFrame[]): DataFrame => {
-    if (dfs.length === 1) throw new Error ('trying to merge only one dataframe or one serie')
-    const df = dfs[0].clone()
-    dfs.forEach( d => d.series.forEach( (serie, name) =>  {
-        df.series.set(name, serie)
-        df.series.get(name).serie.name = name
-    }) )
-    return df
+export const merge = (dfs: DataFrame[], index?:string): DataFrame => {
+    // What if multiple column with same name
+    // What about userData, metaData
+    let series = dfs.reduce( (acc, e) => ({...acc, ...e.series}) , {})
+    let userData =  dfs.reduce( (acc, e) => ({...acc, ...e.userData}) , {})
+    let metaData =  dfs.reduce( (acc, e) => ({...acc, ...e.metaData}) , {})
+    
+    return createDataframe({series, userData, metaData, index})
 }
 
 /**
@@ -33,19 +33,9 @@ export const merge = (dfs: DataFrame[]): DataFrame => {
  * ```
  * @category DataFrame
  */
-export const append = (df: DataFrame, series: any): DataFrame => {
-    const d = df.clone()
-    for (var [k, v] of Object.entries(series)) {
-        if (v instanceof Serie) {
-            d.series.set(k, {serie: v})
-            d.series.get(k).serie.name = k
-        }
-        else {
-            d.series.set(k, v as SerieInfo)
-            d.series.get(k).serie.name = k
-        }
-    }
-    return d
+export const append = ({series,index,metaData,userData}: DataFrame, news: {[key:string]: Serie}): DataFrame => {
+    //! need to check that rows count are compatible
+    return createDataframe({ series: {...series, ...news}, index, metaData, userData})
 }
 
 /**

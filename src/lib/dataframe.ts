@@ -1,4 +1,4 @@
-import { ASerie, IArray, Serie } from './serie'
+import { IArray, Serie } from './serie'
 
 /**
  * Merge two dataframe into one
@@ -49,6 +49,32 @@ export const append = (df: DataFrame, series: any): DataFrame => {
 }
 
 /**
+ * 
+ * @param params Parameters of the form
+ * ```js
+ * {
+ *     "a": createEmptySerie({Type: Float32Array, count:2, itemSize:3, shared: true }),
+ *     "b": createEmptySerie({Type: Float64Array, count:2, itemSize:3, shared: false}),
+ *     "c": createSerie([0,1,2,3,4,5,6,7,8,9], 5),
+ *     "d": {
+ *         serie: createSerie([0,1,2,3,4,5,6,7,8,9], 5),
+ *         transfertPolicy: 'transfert',
+ *         userData:{id:'tensor'}
+ *     }
+ * }
+ * ```
+ * @returns 
+ */
+export function createDataframe(
+    {series, userData, metaData, index}:{
+        series: {[key:string]:Serie<IArray>},
+        index?:string,
+        userData?: {[key:string]:any},
+        metaData?: {[key:string]:any}
+    }){
+    return new DataFrame(series,index,userData,metaData)
+}
+/**
  * The dataframe class which contains a list of [[Serie]]
  * @example
  * ```ts
@@ -67,40 +93,6 @@ export const append = (df: DataFrame, series: any): DataFrame => {
  */
 export class DataFrame {
 
-    /**
-     * 
-     * @param params Parameters of the form
-     * ```js
-     * {
-     *     "a": createEmptySerie({Type: Float32Array, count:2, itemSize:3, shared: true }),
-     *     "b": createEmptySerie({Type: Float64Array, count:2, itemSize:3, shared: false}),
-     *     "c": createSerie([0,1,2,3,4,5,6,7,8,9], 5),
-     *     "d": {
-     *         serie: createSerie([0,1,2,3,4,5,6,7,8,9], 5),
-     *         transfertPolicy: 'transfert',
-     *         userData:{id:'tensor'}
-     *     }
-     * }
-     * ```
-     * @returns 
-     */
-    constructor(params?: any, userData: any = undefined) {
-        this.userData_ = userData
-        
-        if (params === undefined) return
-
-        for (var [k, v] of Object.entries(params)) {
-            if (v instanceof Serie) {
-                this.series.set(k, {serie: v})
-                this.series.get(k).serie.name = k
-                //console.log( this.series.get(k) )
-            }
-            else {
-                this.series.set(k, v as SerieInfo)
-                this.series.get(k).serie.name = k
-            }
-        }
-    }
 
     /**
      * Get a [[Serie]] by its name
@@ -159,6 +151,12 @@ export class DataFrame {
     get series() {
         return this.series_
     }
+    private constructor(
+        public readonly series: {[key:string]: Serie},
+        public readonly index: string,
+        public readonly userData: any,
+        public readonly metaData: any
+    ) {}
 
     clone() {
         const r = new DataFrame

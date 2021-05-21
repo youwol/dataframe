@@ -12,7 +12,7 @@ export interface IArray {
     slice(start: number, end: number): IArray
     fill(n: number): IArray
     reduce<U>(
-        callback: (state: U, element: number, index: number, array: number[]) => U,
+        callback: (previousValue: number, currentValue: number, currentIndex: number, array: IArray) => number,
         firstState?: U
     ): U
     filter(cb: Function): IArray

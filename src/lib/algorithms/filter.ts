@@ -1,5 +1,4 @@
 import { Serie } from '../serie'
-import { createSerie } from '../utils'
 
 /**
  * filter a [[Serie]] using a callback function.
@@ -21,5 +20,5 @@ export const filter = (s: Serie, callback: Function) => {
     const rr  = s.array.slice(0, r.length)
     r.forEach( (v,i) => rr[i] = v )
     
-    return createSerie({data: rr, itemSize: s.itemSize})
+    return Serie.create({array: rr, itemSize: s.itemSize})
 }

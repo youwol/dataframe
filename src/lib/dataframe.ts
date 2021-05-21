@@ -33,7 +33,7 @@ export const merge = (dfs: DataFrame[], index?:string): DataFrame => {
  * ```
  * @category DataFrame
  */
-export const append = ({series,index,metaData,userData}: DataFrame, news: {[key:string]: Serie}): DataFrame => {
+export const append = ({series, index, metaData, userData}: DataFrame, news: {[key:string]: Serie}): DataFrame => {
     //! need to check that rows count are compatible
     return DataFrame.create({ series: {...series, ...news}, index, metaData, userData})
 }
@@ -41,12 +41,40 @@ export const append = ({series,index,metaData,userData}: DataFrame, news: {[key:
 
 export class DataFrame {
 
+    /**
+     * Mapping between column id and serie
+     */
+    public readonly series: {[key:string]: Serie}
+
+    /**
+     * If provided, the column that acts as index
+     */
+    public readonly index : string | undefined = undefined
+
+    /**
+     * 
+     * Mutable dictionary to store consumer data (context information of the usage)
+     */
+    public userData: {[key:string]: any}
+
+    /**
+     * 
+     * Dictionary to store metadata (context information of the dataframe's creation)
+     */
+    public readonly metaData: {[key:string]: any}
+
     private constructor(
-        public readonly series: {[key:string]: Serie},
-        public readonly index: string,
-        public readonly userData: any,
-        public readonly metaData: any
-    ) {}
+        series: {[key:string]: Serie},
+        index: string,
+        userData: {[key:string]: any},
+        metaData: {[key:string]: any}
+    ) {
+        this.series = series
+        this.index = index
+        this.userData = userData
+        this.metaData = metaData
+    }
+
     /**
      * The dataframe class which contains a list of [[Serie]]
      * @example
@@ -66,12 +94,12 @@ export class DataFrame {
      */
     static create(
         {series, userData, metaData, index}:{
-            series: {[key:string]:Serie<IArray>},
+            series: {[key:string]:Serie},
             index?:string,
             userData?: {[key:string]:any},
             metaData?: {[key:string]:any}
         }){
-        return new DataFrame(series,index,userData,metaData)
+        return new DataFrame(series,index, userData || {}, metaData || {})
     }
 
     clone() {

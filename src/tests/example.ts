@@ -1,3 +1,4 @@
-import { createArray, createSerie } from '../lib/utils'
+import { Serie } from '../lib'
+import { createArray } from '../lib/utils'
 
-createSerie( {data: createArray(10, i=>i), itemSize: 3})
+Serie.create( {array: createArray(10, i=>i), itemSize: 3})

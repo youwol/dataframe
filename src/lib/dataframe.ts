@@ -45,7 +45,6 @@ export class DataFrame {
      * Mapping between column id and serie
      */
     public readonly series: {[key:string]: Serie}
-
     /**
      * If provided, the column that acts as index
      */

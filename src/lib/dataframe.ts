@@ -1,4 +1,4 @@
-import { IArray, Serie } from './serie'
+import { Serie } from './serie'
 
 /**
  * Merge two dataframe into one

@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Serie | @youwol/dataframe - v0.0.16</title>
-	<meta name="description" content="Documentation for @youwol/dataframe - v0.0.16">
+	<title>Serie | @youwol/dataframe - v0.0.16-next</title>
+	<meta name="description" content="Documentation for @youwol/dataframe - v0.0.16-next">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<link rel="stylesheet" href="../assets/css/pages.css">
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@youwol/dataframe - v0.0.16</a>
+					<a href="../index.html" class="title">@youwol/dataframe - v0.0.16-next</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -95,13 +95,19 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter tsd-is-private"><a href="serie.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="serie.html#array" class="tsd-kind-icon">array</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="serie.html#itemsize" class="tsd-kind-icon">item<wbr>Size</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="serie.html#name_" class="tsd-kind-icon">name_</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="serie.html#shared" class="tsd-kind-icon">shared</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="serie.html#userdata" class="tsd-kind-icon">user<wbr>Data</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -111,7 +117,6 @@
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="serie.html#isarray" class="tsd-kind-icon">is<wbr>Array</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="serie.html#isarraybuffer" class="tsd-kind-icon">is<wbr>Array<wbr>Buffer</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="serie.html#length" class="tsd-kind-icon">length</a></li>
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="serie.html#name" class="tsd-kind-icon">name</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -123,10 +128,53 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="serie.html#image" class="tsd-kind-icon">image</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="serie.html#itemat" class="tsd-kind-icon">item<wbr>At</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="serie.html#map" class="tsd-kind-icon">map</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="serie.html#setname" class="tsd-kind-icon">set<wbr>Name</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static"><a href="serie.html#create" class="tsd-kind-icon">create</a></li>
 							</ul>
 						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter tsd-is-private">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Serie&lt;T&gt;<span class="tsd-signature-symbol">(</span>array<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, itemSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, shared<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, userData<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><a href="../interfaces/iarray.html" class="tsd-signature-type">IArray</a></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>array: <span class="tsd-signature-type">T</span></h5>
+								</li>
+								<li>
+									<h5>itemSize: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>shared: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+								<li>
+									<h5>userData: <span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol"> = {}</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-index-signature">
+											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></h5>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -146,18 +194,26 @@
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="name_" class="tsd-anchor"></a>
-					<h3>name_</h3>
-					<div class="tsd-signature tsd-kind-icon">name_<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></div>
-					<aside class="tsd-sources">
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="shared" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> shared</h3>
 					<div class="tsd-signature tsd-kind-icon">shared<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="userdata" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> user<wbr>Data</h3>
+					<div class="tsd-signature tsd-kind-icon">user<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol"> = {}</span></div>
+					<aside class="tsd-sources">
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></h5>
+							</li>
+						</ul>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -225,32 +281,6 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> name<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> name<span class="tsd-signature-symbol">(</span>n<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>n: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -338,7 +368,7 @@
 					<a name="image" class="tsd-anchor"></a>
 					<h3>image</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">image<span class="tsd-signature-symbol">(</span>count<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, itemSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">image<span class="tsd-signature-symbol">(</span>count<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, itemSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -370,7 +400,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -398,7 +428,7 @@
 					<a name="map" class="tsd-anchor"></a>
 					<h3>map</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">map<span class="tsd-signature-symbol">(</span>callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">map<span class="tsd-signature-symbol">(</span>callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -415,27 +445,60 @@
 									<h5>callback: <span class="tsd-signature-type">Function</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setname" class="tsd-anchor"></a>
-					<h3>set<wbr>Name</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Name<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules.html#aserie" class="tsd-signature-type">ASerie</a></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+					<a name="create" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> create</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">create&lt;T&gt;<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>array<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">; </span>itemSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>userData<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><a href="../interfaces/iarray.html" class="tsd-signature-type">IArray</a></h4>
+								</li>
+							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>name: <span class="tsd-signature-type">string</span></h5>
+									<h5>__namedParameters: <span class="tsd-signature-symbol">{ </span>array<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">; </span>itemSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>userData<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol"> }</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5>array<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></h5>
+											<div class="tsd-comment tsd-typography">
+												<p>The array of values. Can be either an instance of Array or a TypedArray.
+													For TypeArray, the underlaying buffer can be either of type ArrayBuffer or
+												SharedArrayBuffer</p>
+											</div>
+										</li>
+										<li class="tsd-parameter">
+											<h5>item<wbr>Size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+											<div class="tsd-comment tsd-typography">
+												<p>The size of each item. <a href="serie.html#count">count</a> will be array.length / <a href="serie.html#itemsize">itemSize</a></p>
+											</div>
+										</li>
+										<li class="tsd-parameter">
+											<h5><span class="tsd-flag ts-flagOptional">Optional</span> user<wbr>Data<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{}</span></h5>
+											<div class="tsd-comment tsd-typography">
+												<p>user data</p>
+											</div>
+											<ul class="tsd-parameters">
+												<li class="tsd-parameter-index-signature">
+													<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></h5>
+												</li>
+											</ul>
+										</li>
+									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../modules.html#aserie" class="tsd-signature-type">ASerie</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -489,6 +552,9 @@
 					<li class="current tsd-kind-class tsd-has-type-parameter">
 						<a href="serie.html" class="tsd-kind-icon">Serie</a>
 						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter tsd-is-private">
+								<a href="serie.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="serie.html#array" class="tsd-kind-icon">array</a>
 							</li>
@@ -496,10 +562,10 @@
 								<a href="serie.html#itemsize" class="tsd-kind-icon">item<wbr>Size</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="serie.html#name_" class="tsd-kind-icon">name_</a>
+								<a href="serie.html#shared" class="tsd-kind-icon">shared</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="serie.html#shared" class="tsd-kind-icon">shared</a>
+								<a href="serie.html#userdata" class="tsd-kind-icon">user<wbr>Data</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="serie.html#count" class="tsd-kind-icon">count</a>
@@ -512,9 +578,6 @@
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="serie.html#length" class="tsd-kind-icon">length</a>
-							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
-								<a href="serie.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="serie.html#at" class="tsd-kind-icon">at</a>
@@ -534,8 +597,8 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="serie.html#map" class="tsd-kind-icon">map</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="serie.html#setname" class="tsd-kind-icon">set<wbr>Name</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+								<a href="serie.html#create" class="tsd-kind-icon">create</a>
 							</li>
 						</ul>
 					</li>
@@ -546,12 +609,6 @@
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/iarray.html" class="tsd-kind-icon">IArray</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#aserie" class="tsd-kind-icon">ASerie</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#serieinfo" class="tsd-kind-icon">Serie<wbr>Info</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../modules.html#append" class="tsd-kind-icon">append</a>
@@ -568,16 +625,13 @@
 					<li class=" tsd-kind-function">
 						<a href="../modules.html#createarray" class="tsd-kind-icon">create<wbr>Array</a>
 					</li>
-					<li class=" tsd-kind-function tsd-has-type-parameter">
+					<li class=" tsd-kind-function">
 						<a href="../modules.html#createemptyserie" class="tsd-kind-icon">create<wbr>Empty<wbr>Serie</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="../modules.html#createfrom" class="tsd-kind-icon">create<wbr>From</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="../modules.html#createserie" class="tsd-kind-icon">create<wbr>Serie</a>
-					</li>
-					<li class=" tsd-kind-function">
 						<a href="../modules.html#createtyped" class="tsd-kind-icon">create<wbr>Typed</a>
 					</li>
 					<li class=" tsd-kind-function">
@@ -632,7 +686,6 @@
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
@@ -642,7 +695,7 @@
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>

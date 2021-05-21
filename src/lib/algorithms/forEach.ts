@@ -1,4 +1,4 @@
-import { ASerie, Serie } from '../serie'
+import { Serie } from '../serie'
 
 /**
  * @note Operations are done using the items
@@ -13,7 +13,7 @@ import { ASerie, Serie } from '../serie'
  * ```
  * @category Algorithms
  */
-export const forEach = (series: ASerie | ASerie[], callback: Function) => {
+export const forEach = (series: Serie | Serie[], callback: Function) => {
     if (series===undefined) throw new Error ('serie is undefined')
 
     if (series instanceof Serie) {
@@ -29,7 +29,7 @@ export const forEach = (series: ASerie | ASerie[], callback: Function) => {
     }
 }
 
-// export const forEach = (s: ASerie, callback: Function) => {
+// export const forEach = (s: Serie, callback: Function) => {
 //     if (s===undefined) throw new Error ('serie is undefined')
 
 //     for (let i=0; i<s.count; ++i) {

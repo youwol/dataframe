@@ -1,9 +1,9 @@
-import { ASerie, Serie } from '../serie'
+import { Serie } from '../serie'
 import { createEmptySerie } from '../utils'
 
 
 /**
- * @returns a new [[ASerie]]
+ * @returns a new [[Serie]]
  * @example
  * ```ts
  * const A = df.get('A')
@@ -16,7 +16,7 @@ import { createEmptySerie } from '../utils'
  * ```
  * @category Algorithms
  */
-export const reduce = (series: ASerie | ASerie[], callback: Function) => {
+export const reduce = (series: Serie | Serie[], callback: Function) => {
     if (series instanceof Serie) {
         const count = series.count
         const r = series.image(count, 1)
@@ -37,7 +37,7 @@ export const reduce = (series: ASerie | ASerie[], callback: Function) => {
         if (s.count !== count) throw new Error('All series must have the same nbr of elements (count)')
     })
 
-    let R: ASerie = undefined
+    let R: Serie = undefined
     const args = new Array<number[]|number>(n)//.fill([])
     let isArray = true
     let id = 0

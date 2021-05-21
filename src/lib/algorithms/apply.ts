@@ -1,8 +1,8 @@
-import { ASerie } from "../serie";
+import { Serie } from "../serie";
 
 /**
  * Apply a function to a serie. The function signature is
- * `fn(item: number|number[], index: number, serie: ASerie)`
+ * `fn(item: number|number[], index: number, serie: Serie)`
  * @note Operations are done using the items
  * @example
  * ```ts
@@ -22,6 +22,6 @@ import { ASerie } from "../serie";
  * ```
  * @category Algorithms
  */
-export const apply = (serie: ASerie, fn: Function): ASerie => {
+export const apply = (serie: Serie, fn: Function): Serie => {
     return serie.map( (item, i) => fn(item, i, serie) )
 }

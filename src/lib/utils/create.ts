@@ -13,7 +13,7 @@ import { IArray, Serie } from "../serie"
  * ```
  * @category Creation
  */
- export function createArray(length: number, init: Function | number = undefined) {
+ export function createArray(length: number, init?: Function | number ) {
     if (init === undefined) return new Array(length).fill(undefined)
     if (init instanceof Function) {
         return new Array(length).fill(undefined).map( (_,i) => init(i) )
@@ -48,9 +48,10 @@ import { IArray, Serie } from "../serie"
  * ```
  * @category Creation
  */
-export function createTyped(Type: any, data: number|number[], shared: boolean) {
-    if (Array.isArray(data)) {
-        const length = data.length*Type.BYTES_PER_ELEMENT
+export function createTyped<T>(Type: any, array: number|number[], shared: boolean
+    ) : T {
+    if (Array.isArray(array)) {
+        const length = array.length*Type.BYTES_PER_ELEMENT
         let ta = undefined
         if (shared) {
             ta = new Type(new SharedArrayBuffer(length))
@@ -58,57 +59,16 @@ export function createTyped(Type: any, data: number|number[], shared: boolean) {
         else {
             ta = new Type(new ArrayBuffer(length))
         }
-        ta.set(data)
+        ta.set(array)
         return ta
     }
     else {
-        const l = data*Type.BYTES_PER_ELEMENT
+        const l = array*Type.BYTES_PER_ELEMENT
         if (shared) {
             return new Type(new SharedArrayBuffer(l))
         }
         return new Type(new ArrayBuffer(l))
     }
-}
-
-/**
- * Create a serie given an array (Array or TypedArray with ArrayBuffer or SharedArrayBuffer).
- * @param param0 An object with data and itemSize: `{data: T, itemSize: number = 1}`
- * @returns The newly created Serie
- * @example
- * ```ts
- * const coordinates = [0,3,2,7,4,8,6,5,2]
- * 
- * // s1 is a serie supporting a SharedArrayBuffer
- * const s1 = createSerie({
- *      data    : createTyped(Float32Array, coordinates, true),
- *      itemSize: 3
- * })
- * 
- * // s2 is a serie supporting an ArrayBuffer
- * const s2 = createSerie({
- *      data    : createTyped(Float64Array, coordinates, false),
- *      itemSize: 3
- * })
- * 
- * // s3 is an Array
- * const s3 = createSerie({
- *      data    : coordinates,
- *      itemSize: 3
- * })
- * ```
- * @category Creation
- */
- export function createSerie<T extends IArray>({data, itemSize=1}:{data: T, itemSize?: number}) {
-    if (itemSize<=0)      throw new Error('itemSize must be > 0')
-    if (data===undefined) throw new Error('either data or rowCount must be provided')
-
-    if (Array.isArray( data )) {
-        return new Serie(data, itemSize, false)
-    }
-
-    // Type is either a Int8Array, Uint8Array etc...
-    const shared = (data as any).buffer instanceof SharedArrayBuffer
-    return new Serie<T>(data, itemSize, shared)
 }
 
 /**
@@ -125,21 +85,26 @@ export function createTyped(Type: any, data: number|number[], shared: boolean) {
  * @returns The newly created Serie
  * @category Creation
  */
-export function createEmptySerie<T extends IArray>(
-    {Type, count, itemSize=1, shared=false}:
-    {Type?:any, count: number, itemSize?: number, shared?: boolean})
+export function createEmptySerie(
+    {Type, count, itemSize=1, shared=false, userData}:
+    {Type?:any, count: number, itemSize?: number, shared?: boolean, userData?:{[key:string]: any}}
+    ) : Serie
 {
     if (itemSize<=0)  throw new Error('itemSize must be > 0')
     if (count<=0) throw new Error('count must be > 0')
 
     if (Type===undefined || Array.isArray( new Type(1) )) {
-        return new Serie(new Array(count*itemSize).fill(0), itemSize, false)
+        return Serie.create({
+            array: new Array(count*itemSize).fill(0), 
+            itemSize
+        })
     }
 
     // Type is either a Int8Array, Uint8Array etc...
     const length = count*itemSize*Type.BYTES_PER_ELEMENT
     if (shared) {
-        return new Serie<T>(new Type(new SharedArrayBuffer(length)), itemSize, true)
+        return Serie.create({
+            array: new Type(new SharedArrayBuffer(length)), itemSize, userData})
     }
-    return new Serie<T>(new Type(new ArrayBuffer(length)), itemSize, false)
+    return Serie.create({ array:new Type(new ArrayBuffer(length)), itemSize, userData})
 }

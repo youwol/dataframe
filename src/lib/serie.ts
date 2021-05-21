@@ -1,7 +1,9 @@
-import { createEmptySerie, createTyped } from "./utils/create"
+import { createTyped } from "./utils/create"
 
-export type ASerie = Serie<IArray>
-
+/** Interface for supported array in [[Serie]]:
+ * -    Array
+ * -    TypedArray with either shared or not buffer
+ */
 export interface IArray {
     readonly length: number
     [i: number]: number
@@ -21,18 +23,66 @@ export interface IArray {
  * ArrayBuffer or SharedArrayBuffer
  * @category DataFrame
  */
-export class Serie<T extends IArray> {
-    name_: string = ''
+export class Serie<T extends IArray = IArray> {
+    
+    /**
+     * The underlying array of the serie
+     */
+    public readonly array: T
 
     /**
-     * @ignore
+     * The itemSize is the dimension of one 'cell' of the serie
+     */
+    public readonly itemSize: number
+
+    /**
+     * Whether or not [[array]] is a SharedArrayBuffer
+     */
+    public readonly shared: boolean
+
+    /**
+     * 
+     * Mutable dictionary to store consumer data (context information of the usage)
+     */
+    public userData: {[key:string]: any} = {}
+
+    private constructor(
+        array: T, 
+        itemSize: number, 
+        shared: boolean,
+        userData: {[key:string]: any} = {}
+        ) {
+
+        if (array.length%itemSize !== 0) 
+            throw new Error(`array length (${array.length}) is not a multiple of itemSize (${itemSize})`)
+        this.array = array
+        this.itemSize = itemSize
+        this.shared = shared
+        this.userData = userData
+    }
+
+    /**
+     * 
      * @param array The array of values. Can be either an instance of Array or a TypedArray.
      * For TypeArray, the underlaying buffer can be either of type ArrayBuffer or
      * SharedArrayBuffer
      * @param itemSize The size of each item. [[count]] will be array.length / [[itemSize]]
+     * @param userData user data
      */
-    constructor(public readonly array: T, public readonly itemSize: number, public readonly shared: boolean) {
-        if (array.length%itemSize !== 0) throw new Error(`array length (${array.length}) is not a multiple of itemSize (${itemSize})`)
+    static create<T extends IArray = IArray>({
+            array, itemSize, userData
+        }:
+        {
+            array: T, itemSize: number, userData?: {[key:string]: any}
+        }
+    ){
+        if (itemSize<=0)      throw new Error('itemSize must be > 0')
+        if (array===undefined) throw new Error('array must be provided')
+        
+        // Type is either a Int8Array, Uint8Array etc...
+        const shared = (array as any).buffer instanceof SharedArrayBuffer
+        
+        return new Serie(array, itemSize, shared, userData)
     }
     /**
      * Get the size of this serie, i.e., being [[count]] * [[itemSize]]
@@ -41,14 +91,6 @@ export class Serie<T extends IArray> {
         return this.array.length
     }
 
-    set name(n: string) {this.name_ = n}
-    get name() {return this.name_}
-
-    setName(name: string): ASerie {
-        this.name_ = name
-        return this
-    }
-    
     /**
      * Get the number of items (an item being of size [[itemCount]])
      */
@@ -93,7 +135,7 @@ export class Serie<T extends IArray> {
         
         const itemSize = (Array.isArray(tmp) ? tmp.length : 1)
         const R = this.image(this.count, itemSize)
-        //console.log(this.count, itemSize)
+        
         let id = 0
         for (let i=0; i<this.count; ++i) {
             const r = callback(this.itemAt(i), i, this)
@@ -138,7 +180,7 @@ export class Serie<T extends IArray> {
      * @param resetValues True if reset the values to 0, false otherwise (default)
      */
     clone(resetValues: boolean = false) {
-        const s = new Serie(this.array.slice(0, this.count*this.itemSize), this.itemSize, this.shared)
+        const s = new Serie(this.array.slice(0, this.count*this.itemSize), this.itemSize, this.shared, this.userData)
         if (resetValues) {
             s.array.forEach( (_,i) => s.array[i] = 0 ) // reset
         }
@@ -153,7 +195,7 @@ export class Serie<T extends IArray> {
      * @see [[createEmptySerie]]
      */
     image(count: number, itemSize: number) {
-        return new Serie( createFrom(this.array, count, itemSize), itemSize, this.shared )
+        return new Serie( createFrom({array:this.array, count, itemSize}), itemSize, this.shared, this.userData)
     }
 }
 
@@ -162,7 +204,10 @@ export class Serie<T extends IArray> {
 /**
  * @category Creation
  */
-export function createFrom<T extends IArray>(array: T, count: number, itemSize: number) {
+export function createFrom<T extends IArray>(
+    {array, count, itemSize}:
+    {array: T, count: number, itemSize: number}): IArray {
+
     if (Array.isArray(array)) {
         return new Array(count*itemSize)
     }

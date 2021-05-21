@@ -1,8 +1,10 @@
-import { createSerie } from '../lib/utils'
+
 import { apply } from '../lib/algorithms'
+import { Serie } from '../lib/serie'
 
 test('"apply" on serie with itemSize=1', () => {
-    const s1 = createSerie( {data: new Array(10).fill(0).map( (v,i) => i+1 ), itemSize: 1} )
+
+    const s1 = Serie.create( {array: new Array(10).fill(0).map( (v,i) => i+1 ), itemSize: 1} )
     const s2 = apply(s1, item => item**2)
 
     expect(s2.array).toEqual([
@@ -20,7 +22,7 @@ test('"apply" on serie with itemSize=1', () => {
 })
 
 test('"apply" on serie with itemSize=3', () => {
-    const s1 = createSerie( {data: new Array(30).fill(0).map( (v,i) => i+1 ), itemSize: 3} )
+    const s1 = Serie.create( {array: new Array(30).fill(0).map( (v,i) => i+1 ), itemSize: 3} )
     const s2 = apply(s1, (item,i) => item.map( v => v+i) )
 
     expect(s2.array).toEqual([

@@ -1,6 +1,6 @@
-import { symSquaredMatrix, squaredMatrix, vector, Matrix } from '../lib'
+import { symSquaredMatrix, squaredMatrix, vector, Matrix, Serie } from '../lib'
 import { reduce } from '../lib/algorithms'
-import { createSerie } from '../lib/utils'
+
 
 test('views test vector', () => {
     const v = vector([1,2,3])
@@ -123,8 +123,8 @@ test('views test symmetric squared matrix', () => {
 })
 
 test('views squared matrix * vector', () => {
-    const M = createSerie({data: new Array(27).fill(0).map( (_,i)=>i ), itemSize: 9})
-    const V = createSerie({data: new Array( 9).fill(0).map( (_,i)=>i ), itemSize: 3})
+    const M = Serie.create({array: new Array(27).fill(0).map( (_,i)=>i ), itemSize: 9})
+    const V = Serie.create({array: new Array( 9).fill(0).map( (_,i)=>i ), itemSize: 3})
     
     const reduced = reduce([M,V], ([m, v]) => {
         const A = squaredMatrix(m)
@@ -147,8 +147,8 @@ test('views squared matrix * vector', () => {
 })
 
 test('views symmetric squared smatrix * vector', () => {
-    const M = createSerie({data: new Array(18).fill(0).map( (_,i)=>i ), itemSize: 6}) // [0,1,2...17]
-    const V = createSerie({data: new Array( 9).fill(0).map( (_,i)=>i ), itemSize: 3}) // [0,1,2...8]
+    const M = Serie.create({array: new Array(18).fill(0).map( (_,i)=>i ), itemSize: 6}) // [0,1,2...17]
+    const V = Serie.create({array: new Array( 9).fill(0).map( (_,i)=>i ), itemSize: 3}) // [0,1,2...8]
     
     const reduced = reduce([M, V], ([m, v]) => {
         const A = symSquaredMatrix(m)
@@ -171,8 +171,8 @@ test('views symmetric squared smatrix * vector', () => {
 })
 
 test('views complex operation', () => {
-    const M = createSerie({data: new Array(27).fill(0).map( (_,i)=>i ), itemSize: 9}) // [0,1,2...17]
-    const V = createSerie({data: new Array( 9).fill(0).map( (_,i)=>i ), itemSize: 3}) // [0,1,2...8]
+    const M = Serie.create({array: new Array(27).fill(0).map( (_,i)=>i ), itemSize: 9}) // [0,1,2...17]
+    const V = Serie.create({array: new Array( 9).fill(0).map( (_,i)=>i ), itemSize: 3}) // [0,1,2...8]
     
     const reduced = reduce([M, V], ([m, v]) => {
         const A = squaredMatrix(m)
@@ -195,9 +195,9 @@ test('views complex operation', () => {
 
 // NOT using math views (matrix and vector)
 test('views superposition', () => {
-    const S1 = createSerie({data: new Array(18).fill(0).map( (_,i)=>i   ), itemSize: 6})
-    const S2 = createSerie({data: new Array(18).fill(0).map( (_,i)=>i+1 ), itemSize: 6})
-    const S3 = createSerie({data: new Array(18).fill(0).map( (_,i)=>i+2 ), itemSize: 6})
+    const S1 = Serie.create({array: new Array(18).fill(0).map( (_,i)=>i   ), itemSize: 6})
+    const S2 = Serie.create({array: new Array(18).fill(0).map( (_,i)=>i+1 ), itemSize: 6})
+    const S3 = Serie.create({array: new Array(18).fill(0).map( (_,i)=>i+2 ), itemSize: 6})
 
     const alpha = [1, 2, 3]
     const reduced = reduce( [S1, S2, S3], (stresses) => {

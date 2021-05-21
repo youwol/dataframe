@@ -15,7 +15,7 @@ test('test create array', () => {
 })
 
 test('test create shared array', () => {
-    const sharedArray = createTyped(Float32Array, 100, true)
+    const sharedArray = createTyped<Float32Array>(Float32Array, 100, true)
     expect(sharedArray.length).toEqual(100)
     expect(sharedArray.buffer instanceof SharedArrayBuffer).toBeTruthy()
     sharedArray.forEach( v => expect(v).toEqual(0))

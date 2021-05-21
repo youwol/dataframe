@@ -1,4 +1,4 @@
-import { ASerie, Serie } from '../serie'
+import { Serie } from '../serie'
 
 /**
  * map a [[Serie]] onto another one using a map function.
@@ -14,12 +14,12 @@ import { ASerie, Serie } from '../serie'
  * ```
  * @category Algorithms
  */
- export const map = (series: ASerie | ASerie[], cb: Function) => {
+ export const map = (series: Serie | Serie[], cb: Function) => {
     if (series instanceof Serie) {
         return series.map(cb)
     }
     
-    let R: ASerie = undefined
+    let R: Serie = undefined
     let isArray   = true
     let id        = 0
 
@@ -47,7 +47,7 @@ import { ASerie, Serie } from '../serie'
 
     return R
 }
-// export const map = (s: ASerie, callback: Function) => {
+// export const map = (s: Serie, callback: Function) => {
 //     if (s===undefined) throw new Error ('serie is undefined')
 
 //     const r  = s.array.slice(0, s.count)

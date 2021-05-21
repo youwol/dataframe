@@ -1,12 +1,11 @@
-import { ASerie } from '../serie'
-import { createSerie } from '../utils'
+import { Serie } from '../serie'
 
 /**
  * filter a [[Serie]] using a callback function.
  * @note Operations are done using the items
  * @category Algorithms
  */
-export const filter = (s: ASerie, callback: Function) => {
+export const filter = (s: Serie, callback: Function) => {
     if (s===undefined) throw new Error ('serie is undefined')
 
     const count = s.count
@@ -21,5 +20,5 @@ export const filter = (s: ASerie, callback: Function) => {
     const rr  = s.array.slice(0, r.length)
     r.forEach( (v,i) => rr[i] = v )
     
-    return createSerie({data: rr, itemSize: s.itemSize})
+    return Serie.create({array: rr, itemSize: s.itemSize})
 }

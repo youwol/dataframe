@@ -1,6 +1,4 @@
-import { createEmptySerie, createTyped } from "./utils/create"
-
-export type ASerie = Serie<IArray>
+import { createTyped } from "./utils/create"
 
 export interface IArray {
     readonly length: number
@@ -16,14 +14,16 @@ export interface IArray {
     filter(cb: Function): IArray
 }
 
+enum TransferPolicy{
+
+}
 /**
  * T is either an Array, or a TypedArray (Float32Array etc...) supported by an
  * ArrayBuffer or SharedArrayBuffer
  * @category DataFrame
  */
-export class Serie<T extends IArray> {
-    name_: string = ''
-
+export class Serie<T extends IArray = IArray> {
+    
     /**
      * @ignore
      * @param array The array of values. Can be either an instance of Array or a TypedArray.
@@ -31,14 +31,24 @@ export class Serie<T extends IArray> {
      * SharedArrayBuffer
      * @param itemSize The size of each item. [[count]] will be array.length / [[itemSize]]
      */
-    constructor(
+    private constructor(
         public readonly array: T, 
         public readonly itemSize: number, 
         public readonly shared: boolean,
         public readonly userData: {[key:string]: any} = {},
-        public readonly transferPolicy?: string ) {
+        public readonly transferPolicy?: TransferPolicy ) {
 
         if (array.length%itemSize !== 0) throw new Error(`array length (${array.length}) is not a multiple of itemSize (${itemSize})`)
+    }
+
+    static create<T extends IArray = IArray>({
+            array, itemSize, shared, userData, transferPolicy
+        }:
+        {
+            array: T, itemSize: number, shared: boolean, userData?: {[key:string]: any}, transferPolicy?: TransferPolicy
+        }
+    ){
+        return new Serie(array, itemSize, shared, userData, transferPolicy)
     }
     /**
      * Get the size of this serie, i.e., being [[count]] * [[itemSize]]
@@ -47,14 +57,6 @@ export class Serie<T extends IArray> {
         return this.array.length
     }
 
-    set name(n: string) {this.name_ = n}
-    get name() {return this.name_}
-
-    setName(name: string): ASerie {
-        this.name_ = name
-        return this
-    }
-    
     /**
      * Get the number of items (an item being of size [[itemCount]])
      */
@@ -99,7 +101,7 @@ export class Serie<T extends IArray> {
         
         const itemSize = (Array.isArray(tmp) ? tmp.length : 1)
         const R = this.image(this.count, itemSize)
-        //console.log(this.count, itemSize)
+        
         let id = 0
         for (let i=0; i<this.count; ++i) {
             const r = callback(this.itemAt(i), i, this)
@@ -144,7 +146,7 @@ export class Serie<T extends IArray> {
      * @param resetValues True if reset the values to 0, false otherwise (default)
      */
     clone(resetValues: boolean = false) {
-        const s = new Serie(this.array.slice(0, this.count*this.itemSize), this.itemSize, this.shared)
+        const s = new Serie(this.array.slice(0, this.count*this.itemSize), this.itemSize, this.shared, this.userData, this.transferPolicy)
         if (resetValues) {
             s.array.forEach( (_,i) => s.array[i] = 0 ) // reset
         }
@@ -159,7 +161,7 @@ export class Serie<T extends IArray> {
      * @see [[createEmptySerie]]
      */
     image(count: number, itemSize: number) {
-        return new Serie( createFrom(this.array, count, itemSize), itemSize, this.shared )
+        return new Serie( createFrom(this.array, count, itemSize), itemSize, this.shared, this.userData, this.transferPolicy)
     }
 }
 

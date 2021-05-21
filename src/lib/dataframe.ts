@@ -175,11 +175,3 @@ export class DataFrame {
     private userData_: any = undefined
     private series_  : Series = new Map
 }
-
-export type SerieInfo = {
-    serie: Serie<IArray>|undefined,
-    userData?: any,
-    transfertPolicy?: string
-}
-
-type Series = Map<string, SerieInfo>

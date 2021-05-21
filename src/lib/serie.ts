@@ -31,7 +31,13 @@ export class Serie<T extends IArray> {
      * SharedArrayBuffer
      * @param itemSize The size of each item. [[count]] will be array.length / [[itemSize]]
      */
-    constructor(public readonly array: T, public readonly itemSize: number, public readonly shared: boolean) {
+    constructor(
+        public readonly array: T, 
+        public readonly itemSize: number, 
+        public readonly shared: boolean,
+        public readonly userData: {[key:string]: any} = {},
+        public readonly transferPolicy?: string ) {
+
         if (array.length%itemSize !== 0) throw new Error(`array length (${array.length}) is not a multiple of itemSize (${itemSize})`)
     }
     /**

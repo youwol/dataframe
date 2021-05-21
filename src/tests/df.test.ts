@@ -1,5 +1,5 @@
 
-import { DataFrame, createEmptySerie, exists, info, createTyped, Serie }    from '../lib'
+import { DataFrame, createEmptySerie, exists, info, createTyped, Serie, append }    from '../lib'
 
 test('dataframe test 1', () => {
 
@@ -58,15 +58,20 @@ test('dataframe test 2', () => {
 
 test('dataframe test append', () => {
 
-    let df = new DataFrame({
-        'a': createSerie( {data: new Array(21).fill(2), itemSize: 3} )
-    })
-    expect(df.constains('a')).toBeTruthy()
-    expect(df.constains('b')).toBeFalsy()
+    let df = DataFrame.create(
+        {
+            series:{'a': Serie.create( {array: new Array(21).fill(2), itemSize: 3} )},
+            userData: {
+                info: "some info"
+            }
+        })
+
+    expect(df.series.a).toBeTruthy()
+    expect(df.series.b).toBeFalsy()
 
     df = append( df, {
-        b: createSerie({data: [1,2,3], itemSize: 1})
+        b:  Serie.create( {array: [1,2,3], itemSize: 1})
     })
-    expect(df.constains('a')).toBeTruthy()
-    expect(df.constains('b')).toBeTruthy()
+    expect(df.series.a).toBeTruthy()
+    expect(df.series.b).toBeTruthy()
 })

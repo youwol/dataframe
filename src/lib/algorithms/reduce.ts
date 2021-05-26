@@ -1,6 +1,4 @@
 import { Serie } from '../serie'
-import { createEmptySerie } from '../utils'
-
 
 /**
  * @returns a new [[Serie]]

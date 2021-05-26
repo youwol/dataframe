@@ -1,4 +1,4 @@
-import { Serie } from "../serie";
+import { Serie } from "../serie"
 
 /**
  * Apply a function to a serie. The function signature is

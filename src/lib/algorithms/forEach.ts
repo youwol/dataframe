@@ -28,11 +28,3 @@ export const forEach = (series: Serie | Serie[], callback: Function) => {
         callback( series.map( serie => serie.itemAt(i) ), i, series)
     }
 }
-
-// export const forEach = (s: Serie, callback: Function) => {
-//     if (s===undefined) throw new Error ('serie is undefined')
-
-//     for (let i=0; i<s.count; ++i) {
-//         callback( s.itemAt(i), i, s )
-//     }
-// }

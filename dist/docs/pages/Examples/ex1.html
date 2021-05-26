@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Using createSerie and reduce | @youwol/dataframe - v0.0.16-next</title>
+	<meta name="description" content="Documentation for @youwol/dataframe - v0.0.16-next">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../../assets/css/main.css">
 	<link rel="stylesheet" href="../../assets/css/pages.css">
@@ -21,7 +22,7 @@
 					<ul class="results">
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
-          </ul>
+					</ul>
 					<a href="../../index.html" class="title">@youwol/dataframe - v0.0.16-next</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
@@ -71,10 +72,10 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<p>Using <code>createSerie</code> and <code>reduce</code></p>
-				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">createSeries</span><span style="color: #000000">, </span><span style="color: #001080">createArray</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@youwol/dataframe/utils&#039;</span>
+				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Serie</span><span style="color: #000000">, </span><span style="color: #001080">createArray</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@youwol/dataframe/utils&#039;</span>
 <span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">reduce</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@youwol/dataframe/algorithms&#039;</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">a</span><span style="color: #000000">   = </span><span style="color: #795E26">createSerie</span><span style="color: #000000">( { </span><span style="color: #001080">data:</span><span style="color: #000000"> </span><span style="color: #795E26">createArray</span><span style="color: #000000">(</span><span style="color: #098658">9</span><span style="color: #000000">, </span><span style="color: #001080">i</span><span style="color: #0000FF">=&gt;</span><span style="color: #001080">i</span><span style="color: #000000">+</span><span style="color: #098658">1</span><span style="color: #000000">), </span><span style="color: #001080">itemSize:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000"> })</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">a</span><span style="color: #000000">   = </span><span style="color: #001080">Serie</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">( { </span><span style="color: #001080">array:</span><span style="color: #000000"> </span><span style="color: #795E26">createArray</span><span style="color: #000000">(</span><span style="color: #098658">9</span><span style="color: #000000">, </span><span style="color: #001080">i</span><span style="color: #0000FF">=&gt;</span><span style="color: #001080">i</span><span style="color: #000000">+</span><span style="color: #098658">1</span><span style="color: #000000">), </span><span style="color: #001080">itemSize:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000"> })</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">sol</span><span style="color: #000000"> = </span><span style="color: #795E26">reduce</span><span style="color: #000000">( </span><span style="color: #001080">a</span><span style="color: #000000">, </span><span style="color: #001080">v</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">v</span><span style="color: #000000">[</span><span style="color: #098658">0</span><span style="color: #000000">]+</span><span style="color: #001080">v</span><span style="color: #000000">[</span><span style="color: #098658">1</span><span style="color: #000000">]+</span><span style="color: #001080">v</span><span style="color: #000000">[</span><span style="color: #098658">2</span><span style="color: #000000">])</span>
 <span style="color: #008000">// sol.array = [6, 15, 24]</span>
 </code></pre>

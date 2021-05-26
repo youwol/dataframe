@@ -13,7 +13,7 @@ import { IArray, Serie } from "../serie"
  * ```
  * @category Creation
  */
- export function createArray(length: number, init?: Function | number ) {
+export function createArray(length: number, init?: Function | number ) {
     if (init === undefined) return new Array(length).fill(undefined)
     if (init instanceof Function) {
         return new Array(length).fill(undefined).map( (_,i) => init(i) )

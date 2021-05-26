@@ -4,9 +4,9 @@ import { Serie } from './serie'
  * Merge two dataframe into one
  * @example
  * ```ts
- * const df1 = new DataFrame(...)
- * const df2 = new DataFrame(...)
- * const df3 = new DataFrame(...)
+ * const df1 = DataFrame.create(...)
+ * const df2 = DataFrame.create(...)
+ * const df3 = DataFrame.create(...)
  * const df = merge( [df1, df2, df3] )
  * ```
  * @category DataFrame
@@ -25,7 +25,7 @@ export const merge = (dfs: DataFrame[], index?:string): DataFrame => {
  * Merge series in a dataframe and return a new dataframe
  * @example
  * ```ts
- * const df1 = new DataFrame(...)
+ * const df1 = DataFrame.create(...)
  * const df2 = append(df1, {
  *   a: createSerie(...),
  *   b: createSerie(...)
@@ -38,7 +38,9 @@ export const append = ({series, index, metaData, userData}: DataFrame, news: {[k
     return DataFrame.create({ series: {...series, ...news}, index, metaData, userData})
 }
 
-
+/**
+ * @category Base
+ */
 export class DataFrame {
 
     /**
@@ -78,14 +80,16 @@ export class DataFrame {
      * The dataframe class which contains a list of [[Serie]]
      * @example
      * ```ts
-     * const df = new DataFrame({
-     *     a: createEmptySerie({Type: Float32Array, count:2, itemSize:3, shared: true }),
-     *     b: createEmptySerie({Type: Float64Array, count:2, itemSize:3, shared: false}),
-     *     c: createSerie({data: [0,1,2,3,4,5,6,7,8,9], itemSize: 5}),
-     *     d: {
-     *         serie: createSerie({data: [0,1,2,3,4,5,6,7,8,9], itemSize: 5}),
-     *         transfertPolicy: 'transfert',
-     *         userData:{id:'tensor'}
+     * const df = DataFrame.create({
+     *     series: {
+     *          a: createEmptySerie({
+     *              Type: Float32Array, count:2, itemSize:3, shared: true
+     *          }),
+     *          b: createEmptySerie({
+     *              Type: Float64Array, count:2, itemSize:3, shared: false
+     *          }),
+     *          c: createSerie({data: [0,1,2,3,4,5,6,7,8,9], itemSize: 5}),
+     *          d: createSerie({data: [0,1,2,3,4,5,6,7,8,9], itemSize: 5}),
      *     }
      * })
      * ```

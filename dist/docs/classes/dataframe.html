@@ -171,7 +171,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="metadata" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> meta<wbr>Data</h3>
-					<div class="tsd-signature tsd-kind-icon">meta<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
+					<div class="tsd-signature tsd-kind-icon">meta<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol"> = {}</span></div>
 					<aside class="tsd-sources">
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -211,12 +211,12 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="userdata" class="tsd-anchor"></a>
 					<h3>user<wbr>Data</h3>
-					<div class="tsd-signature tsd-kind-icon">user<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
+					<div class="tsd-signature tsd-kind-icon">user<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol"> = {}</span></div>
 					<aside class="tsd-sources">
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Mutable dictionary to store consumer data (context information of the dataframe&#39;s utilization)</p>
+							<p>Mutable dictionary to store consumer data (context information of the usage)</p>
 						</div>
 					</div>
 					<div class="tsd-type-declaration">
@@ -236,71 +236,6 @@
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> create</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
 						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>index<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>metaData<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">; </span>series<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">; </span>userData<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="dataframe.html" class="tsd-signature-type">DataFrame</a></li>
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="clone" class="tsd-anchor"></a>
-					<h3>clone</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">clone<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="dataframe.html" class="tsd-signature-type">DataFrame</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="dataframe.html" class="tsd-signature-type">DataFrame</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="constains" class="tsd-anchor"></a>
-					<h3>constains</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">constains<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Check if a <a href="serie.html">Serie</a> given by its name is in the dataframe</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>name: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="delete" class="tsd-anchor"></a>
-					<h3>delete</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">delete<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="dataframe.html" class="tsd-signature-type">DataFrame</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>name: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="dataframe.html" class="tsd-signature-type">DataFrame</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="get" class="tsd-anchor"></a>
-					<h3>get</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -312,14 +247,16 @@
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">df</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">DataFrame</span><span style="color: #000000">({</span>
-<span style="color: #000000">    </span><span style="color: #001080">a:</span><span style="color: #000000"> </span><span style="color: #795E26">createEmptySerie</span><span style="color: #000000">({</span><span style="color: #001080">Type:</span><span style="color: #000000"> </span><span style="color: #267F99">Float32Array</span><span style="color: #000000">, </span><span style="color: #001080">count:</span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #001080">itemSize:</span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #001080">shared:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> }),</span>
-<span style="color: #000000">    </span><span style="color: #001080">b:</span><span style="color: #000000"> </span><span style="color: #795E26">createEmptySerie</span><span style="color: #000000">({</span><span style="color: #001080">Type:</span><span style="color: #000000"> </span><span style="color: #267F99">Float64Array</span><span style="color: #000000">, </span><span style="color: #001080">count:</span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #001080">itemSize:</span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #001080">shared:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000">}),</span>
-<span style="color: #000000">    </span><span style="color: #001080">c:</span><span style="color: #000000"> </span><span style="color: #795E26">createSerie</span><span style="color: #000000">({</span><span style="color: #001080">data:</span><span style="color: #000000"> [</span><span style="color: #098658">0</span><span style="color: #000000">,</span><span style="color: #098658">1</span><span style="color: #000000">,</span><span style="color: #098658">2</span><span style="color: #000000">,</span><span style="color: #098658">3</span><span style="color: #000000">,</span><span style="color: #098658">4</span><span style="color: #000000">,</span><span style="color: #098658">5</span><span style="color: #000000">,</span><span style="color: #098658">6</span><span style="color: #000000">,</span><span style="color: #098658">7</span><span style="color: #000000">,</span><span style="color: #098658">8</span><span style="color: #000000">,</span><span style="color: #098658">9</span><span style="color: #000000">], </span><span style="color: #001080">itemSize:</span><span style="color: #000000"> </span><span style="color: #098658">5</span><span style="color: #000000">}),</span>
-<span style="color: #000000">    </span><span style="color: #001080">d:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">serie:</span><span style="color: #000000"> </span><span style="color: #795E26">createSerie</span><span style="color: #000000">({</span><span style="color: #001080">data:</span><span style="color: #000000"> [</span><span style="color: #098658">0</span><span style="color: #000000">,</span><span style="color: #098658">1</span><span style="color: #000000">,</span><span style="color: #098658">2</span><span style="color: #000000">,</span><span style="color: #098658">3</span><span style="color: #000000">,</span><span style="color: #098658">4</span><span style="color: #000000">,</span><span style="color: #098658">5</span><span style="color: #000000">,</span><span style="color: #098658">6</span><span style="color: #000000">,</span><span style="color: #098658">7</span><span style="color: #000000">,</span><span style="color: #098658">8</span><span style="color: #000000">,</span><span style="color: #098658">9</span><span style="color: #000000">], </span><span style="color: #001080">itemSize:</span><span style="color: #000000"> </span><span style="color: #098658">5</span><span style="color: #000000">}),</span>
-<span style="color: #000000">        </span><span style="color: #001080">transfertPolicy:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;transfert&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">        </span><span style="color: #001080">userData:</span><span style="color: #000000">{</span><span style="color: #001080">id:</span><span style="color: #A31515">&#039;tensor&#039;</span><span style="color: #000000">}</span>
+									<dd><pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">df</span><span style="color: #000000"> = </span><span style="color: #001080">DataFrame</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">series:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">         </span><span style="color: #001080">a:</span><span style="color: #000000"> </span><span style="color: #795E26">createEmptySerie</span><span style="color: #000000">({</span>
+<span style="color: #000000">             </span><span style="color: #001080">Type:</span><span style="color: #000000"> </span><span style="color: #267F99">Float32Array</span><span style="color: #000000">, </span><span style="color: #001080">count:</span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #001080">itemSize:</span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #001080">shared:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span>
+<span style="color: #000000">         }),</span>
+<span style="color: #000000">         </span><span style="color: #001080">b:</span><span style="color: #000000"> </span><span style="color: #795E26">createEmptySerie</span><span style="color: #000000">({</span>
+<span style="color: #000000">             </span><span style="color: #001080">Type:</span><span style="color: #000000"> </span><span style="color: #267F99">Float64Array</span><span style="color: #000000">, </span><span style="color: #001080">count:</span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #001080">itemSize:</span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #001080">shared:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span>
+<span style="color: #000000">         }),</span>
+<span style="color: #000000">         </span><span style="color: #001080">c:</span><span style="color: #000000"> </span><span style="color: #795E26">createSerie</span><span style="color: #000000">({</span><span style="color: #001080">data:</span><span style="color: #000000"> [</span><span style="color: #098658">0</span><span style="color: #000000">,</span><span style="color: #098658">1</span><span style="color: #000000">,</span><span style="color: #098658">2</span><span style="color: #000000">,</span><span style="color: #098658">3</span><span style="color: #000000">,</span><span style="color: #098658">4</span><span style="color: #000000">,</span><span style="color: #098658">5</span><span style="color: #000000">,</span><span style="color: #098658">6</span><span style="color: #000000">,</span><span style="color: #098658">7</span><span style="color: #000000">,</span><span style="color: #098658">8</span><span style="color: #000000">,</span><span style="color: #098658">9</span><span style="color: #000000">], </span><span style="color: #001080">itemSize:</span><span style="color: #000000"> </span><span style="color: #098658">5</span><span style="color: #000000">}),</span>
+<span style="color: #000000">         </span><span style="color: #001080">d:</span><span style="color: #000000"> </span><span style="color: #795E26">createSerie</span><span style="color: #000000">({</span><span style="color: #001080">data:</span><span style="color: #000000"> [</span><span style="color: #098658">0</span><span style="color: #000000">,</span><span style="color: #098658">1</span><span style="color: #000000">,</span><span style="color: #098658">2</span><span style="color: #000000">,</span><span style="color: #098658">3</span><span style="color: #000000">,</span><span style="color: #098658">4</span><span style="color: #000000">,</span><span style="color: #098658">5</span><span style="color: #000000">,</span><span style="color: #098658">6</span><span style="color: #000000">,</span><span style="color: #098658">7</span><span style="color: #000000">,</span><span style="color: #098658">8</span><span style="color: #000000">,</span><span style="color: #098658">9</span><span style="color: #000000">], </span><span style="color: #001080">itemSize:</span><span style="color: #000000"> </span><span style="color: #098658">5</span><span style="color: #000000">}),</span>
 <span style="color: #000000">    }</span>
 <span style="color: #000000">})</span>
 </code></pre>
@@ -513,6 +450,9 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../modules.html#merge" class="tsd-kind-icon">merge</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#nameofserie" class="tsd-kind-icon">name<wbr>OfSerie</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../modules.html#reduce" class="tsd-kind-icon">reduce</a>

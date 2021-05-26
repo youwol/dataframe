@@ -75,13 +75,10 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
-							<h3>DataFrame Classes</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/serie.html" class="tsd-kind-icon">Serie</a></li>
-							</ul>
-							<h3>Other Classes</h3>
+							<h3>Base Classes</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-class"><a href="classes/dataframe.html" class="tsd-kind-icon">Data<wbr>Frame</a></li>
+								<li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/serie.html" class="tsd-kind-icon">Serie</a></li>
 							</ul>
 							<h3>Views Classes</h3>
 							<ul class="tsd-index-list">
@@ -127,6 +124,7 @@
 								<li class="tsd-kind-function"><a href="modules.html#duplicate" class="tsd-kind-icon">duplicate</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#exists" class="tsd-kind-icon">exists</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#info" class="tsd-kind-icon">info</a></li>
+								<li class="tsd-kind-function"><a href="modules.html#nameofserie" class="tsd-kind-icon">name<wbr>OfSerie</a></li>
 							</ul>
 							<h3>Views Functions</h3>
 							<ul class="tsd-index-list">
@@ -612,7 +610,7 @@
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">df1</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">DataFrame</span><span style="color: #000000">(...)</span>
+									<dd><pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">df1</span><span style="color: #000000"> = </span><span style="color: #001080">DataFrame</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(...)</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">df2</span><span style="color: #000000"> = </span><span style="color: #795E26">append</span><span style="color: #000000">(</span><span style="color: #001080">df1</span><span style="color: #000000">, {</span>
 <span style="color: #000000">  </span><span style="color: #001080">a:</span><span style="color: #000000"> </span><span style="color: #795E26">createSerie</span><span style="color: #000000">(...),</span>
 <span style="color: #000000">  </span><span style="color: #001080">b:</span><span style="color: #000000"> </span><span style="color: #795E26">createSerie</span><span style="color: #000000">(...)</span>
@@ -655,9 +653,9 @@
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">df1</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">DataFrame</span><span style="color: #000000">(...)</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">df2</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">DataFrame</span><span style="color: #000000">(...)</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">df3</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">DataFrame</span><span style="color: #000000">(...)</span>
+									<dd><pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">df1</span><span style="color: #000000"> = </span><span style="color: #001080">DataFrame</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(...)</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">df2</span><span style="color: #000000"> = </span><span style="color: #001080">DataFrame</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(...)</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">df3</span><span style="color: #000000"> = </span><span style="color: #001080">DataFrame</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(...)</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">df</span><span style="color: #000000"> = </span><span style="color: #795E26">merge</span><span style="color: #000000">( [</span><span style="color: #001080">df1</span><span style="color: #000000">, </span><span style="color: #001080">df2</span><span style="color: #000000">, </span><span style="color: #001080">df3</span><span style="color: #000000">] )</span>
 </code></pre>
 									</dd>
@@ -773,6 +771,35 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="nameofserie" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> name<wbr>OfSerie</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">name<wbr>OfSerie<span class="tsd-signature-symbol">(</span>df<span class="tsd-signature-symbol">: </span><a href="classes/dataframe.html" class="tsd-signature-type">DataFrame</a>, s<span class="tsd-signature-symbol">: </span><a href="classes/serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="classes/serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the name of a <a href="classes/serie.html">Serie</a> in a [[Dataframe]]. Returns undefined if the serie in not present
+									in the passed [[Dataframe]]</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>df: <a href="classes/dataframe.html" class="tsd-signature-type">DataFrame</a></h5>
+								</li>
+								<li>
+									<h5>s: <a href="classes/serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="classes/serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -995,6 +1022,9 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#merge" class="tsd-kind-icon">merge</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#nameofserie" class="tsd-kind-icon">name<wbr>OfSerie</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#reduce" class="tsd-kind-icon">reduce</a>

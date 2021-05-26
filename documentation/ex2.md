@@ -10,9 +10,9 @@ import { reduce } from '@youwol/dataframe/algorithms'
 const alpha = [1, 2, 3]
 
 const S = [
-    createSerie( {data: createArray(18, i => i  ), itemSize: 6})
-    createSerie( {data: createArray(18, i => i+1), itemSize: 6})
-    createSerie( {data: createArray(18, i => i+2), itemSize: 6})
+    Serie.create( {array: createArray(18, i => i  ), itemSize: 6})
+    Serie.create( {array: createArray(18, i => i+1), itemSize: 6})
+    Serie.create( {array: createArray(18, i => i+2), itemSize: 6})
 ]
 
 const solution = reduce( S, (stresses) =>
@@ -30,14 +30,14 @@ const solution = reduce( S, (stresses) =>
 
 The same example using math operations `add` and `mult`
 ```ts
-import { createSerie, createArray } from '@youwol/dataframe/utils'
+import { Serie, createArray } from '@youwol/dataframe/utils'
 import { add, mult } from '@youwol/dataframe/math'
 
 const alpha = [1, 2, 3]
 
-const S1 = createSerie( {data: createArray(18, i => i  ), itemSize: 6})
-const S2 = createSerie( {data: createArray(18, i => i+1), itemSize: 6})
-const S3 = createSerie( {data: createArray(18, i => i+2), itemSize: 6})
+const S1 = Serie.create( {array: createArray(18, i => i  ), itemSize: 6})
+const S2 = Serie.create( {array: createArray(18, i => i+1), itemSize: 6})
+const S3 = Serie.create( {array: createArray(18, i => i+2), itemSize: 6})
 
 const solution = add(
     mult( S1, alpha[0] ),

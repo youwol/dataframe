@@ -21,7 +21,7 @@ export interface IArray {
 /**
  * T is either an Array, or a TypedArray (Float32Array etc...) supported by an
  * ArrayBuffer or SharedArrayBuffer
- * @category DataFrame
+ * @category Base
  */
 export class Serie<T extends IArray = IArray> {
     

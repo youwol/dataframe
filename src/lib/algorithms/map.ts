@@ -47,16 +47,3 @@ import { Serie } from '../serie'
 
     return R
 }
-// export const map = (s: Serie, callback: Function) => {
-//     if (s===undefined) throw new Error ('serie is undefined')
-
-//     const r  = s.array.slice(0, s.count)
-//     const count = s.count
-
-//     let k = 0
-//     for (let i=0; i<count; ++i) {
-//         r[i] = callback( s.itemAt(i) )
-//     }
-
-//     return createSerie({data: r, itemSize: s.itemSize})
-// }

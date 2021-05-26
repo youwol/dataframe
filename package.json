@@ -16,7 +16,8 @@
     "build:prod": "webpack --mode production",
     "test": "jest -c ./jest.config.js --rootDir .",
     "test-coverage": "jest -c ./jest.config.js --rootDir . --collect-coverage --collectCoverageFrom=./src/lib/**/*.ts ",
-    "doc": "rm -fr  dist/docs && typedoc src/ --exclude src/lib --exclude src/tests --disableSources --out dist/docs --includeVersion --hideGenerator --theme pages-plugin --media ./media"
+    "doc": "rm -fr  dist/docs && typedoc src/ --exclude src/lib --exclude src/tests --disableSources --out dist/docs --includeVersion --hideGenerator --theme pages-plugin --media ./media",
+    "publish-npm-public": "yarn build:prod && yarn test-coverage && yarn publish --access public"
   },
   "peerDependencies": {
   },

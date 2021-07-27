@@ -11,9 +11,10 @@
   "main": "dist/@youwol/dataframe.js",
   "types": "src/index.ts",
   "scripts": {
+    "autogen": "node scripts/auto-gen.js",
     "build": "yarn build:dev",
-    "build:dev": "webpack --mode development",
-    "build:prod": "webpack --mode production",
+    "build:dev": "yarn autogen && webpack --mode development",
+    "build:prod": "yarn autogen && webpack --mode production",
     "test": "jest -c ./jest.config.js --rootDir .",
     "test-coverage": "jest -c ./jest.config.js --rootDir . --collect-coverage --collectCoverageFrom=./src/lib/**/*.ts ",
     "doc": "rm -fr  dist/docs && typedoc src/ --exclude src/lib --exclude src/tests --disableSources --out dist/docs --includeVersion --hideGenerator --theme pages-plugin --media ./media",

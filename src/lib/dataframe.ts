@@ -39,6 +39,22 @@ export const append = ({series, index, metaData, userData}: DataFrame, news: {[k
 }
 
 /**
+ * Remove a serie or a list of series (given by there name) from a dataframe.
+ * @param dataframe The dataframe
+ * @param serieName The serie of a list of series given by their names
+ * @returns A new [[Dataframe]] even if no modification
+ * @example
+ * ```ts
+ * let df = ...
+ * 
+ * df = df.remove(['a', 'toto'])
+ * ```
+ */
+export const remove = (dataframe: DataFrame, series: string|string[]): DataFrame => {
+    return dataframe.remove(series)
+}
+
+/**
  * @category Base
  */
 export class DataFrame {
@@ -96,13 +112,43 @@ export class DataFrame {
      * @category DataFrame
      */
     static create(
-        {series, userData, metaData, index}:{
+        {series, userData, metaData, index}: {
             series: {[key:string]:Serie},
             index?:string,
             userData?: {[key:string]:any},
             metaData?: {[key:string]:any}
-        }){
+        }): DataFrame
+    {
         return new DataFrame(series,index, userData || {}, metaData || {})
+    }
+
+    /**
+     * Remove a serie or a list of series (given by their name) from this dataframe.
+     * @param serieName 
+     * @returns A new [[Dataframe]] even if no modification
+     * @example
+     * ```ts
+     * let df = ...
+     * 
+     * df = df.remove(['a', 'toto'])
+     * ```
+     */
+    remove(serieName: string | string[]): DataFrame {
+        const df = this.clone()
+
+        if (Array.isArray(serieName)) {
+            serieName.forEach( name => {
+                if (df.series.hasOwnProperty(name)) {
+                    delete df.series[name]
+                }
+            })
+        }
+        else {
+            if (df.series.hasOwnProperty(serieName)) {
+                delete df.series[serieName]
+            }
+        }
+        return df
     }
 
     clone() {

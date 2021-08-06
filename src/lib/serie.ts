@@ -16,6 +16,7 @@ export interface IArray {
         firstState?: U
     ): U
     filter(cb: Function): IArray
+    sort(fn: Function): IArray
 }
 
 /**
@@ -76,12 +77,17 @@ export class Serie<T extends IArray = IArray> {
             array: T, itemSize: number, userData?: {[key:string]: any}
         }
     ){
+        // Type is either a Int8Array, Uint8Array etc...
+        
         if (itemSize<=0)      throw new Error('itemSize must be > 0')
         if (array===undefined) throw new Error('array must be provided')
-        
-        // Type is either a Int8Array, Uint8Array etc...
-        const shared = (array as any).buffer instanceof SharedArrayBuffer
-        
+
+        // Check that SharedArrayBuffer are supported...
+        if (typeof SharedArrayBuffer === "undefined") {
+            return new Serie(array, itemSize, false, userData)
+        }
+
+        const shared = (array as any).buffer instanceof SharedArrayBuffer        
         return new Serie(array, itemSize, shared, userData)
     }
     /**
@@ -212,8 +218,12 @@ export function createFrom<T extends IArray>(
         return new Array(count*itemSize)
     }
 
-    const isShared = (array as any).buffer instanceof SharedArrayBuffer
+    let isShared = false
+    if (typeof SharedArrayBuffer !== "undefined") {
+        isShared = (array as any).buffer instanceof SharedArrayBuffer
+    }
     const length = count*itemSize
+    
     if (array instanceof Int8Array)         return createTyped(Int8Array,         length, isShared)
     if (array instanceof Uint8Array)        return createTyped(Uint8Array,        length, isShared)
     if (array instanceof Uint8ClampedArray) return createTyped(Uint8ClampedArray, length, isShared)

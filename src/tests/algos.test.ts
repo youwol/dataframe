@@ -1,6 +1,6 @@
 import { DataFrame } from '../lib/dataframe'
 
-import { filter, forEach, map, reduce } from '../lib/algorithms'
+import { cut, filter, forEach, map, reduce, sort } from '../lib/algorithms'
 import { Serie } from '../lib'
 
 test('dataframe algo map', () => {
@@ -63,4 +63,36 @@ test('dataframe algo reduce', () => {
     expect(trace.array[0]).toEqual(6)
     expect(trace.array[1]).toEqual(15)
     expect(trace.array[2]).toEqual(24)
+})
+
+test('dataframe algo sort', () => {
+
+    const s = Serie.create( {array: [4,5,2,3,1], itemSize: 1})
+    
+    let a = sort(s)
+    expect(a.count).toEqual(5)
+    expect(a.array[0]).toEqual(1)
+    expect(a.array[1]).toEqual(2)
+    expect(a.array[2]).toEqual(3)
+    expect(a.array[3]).toEqual(4)
+    expect(a.array[4]).toEqual(5)
+
+    a = sort(s, (a,b) => b-a )
+    expect(a.count).toEqual(5)
+    expect(a.array[0]).toEqual(5)
+    expect(a.array[1]).toEqual(4)
+    expect(a.array[2]).toEqual(3)
+    expect(a.array[3]).toEqual(2)
+    expect(a.array[4]).toEqual(1)
+})
+
+test('dataframe algo cut', () => {
+
+    const s = Serie.create( {array: [1,2,3,4,5,6,7], itemSize: 1})
+    
+    let a = cut(s, v => v>=3 && v<6 )
+    expect(a.count).toEqual(3)
+    expect(a.array[0]).toEqual(3)
+    expect(a.array[1]).toEqual(4)
+    expect(a.array[2]).toEqual(5)
 })

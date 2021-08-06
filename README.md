@@ -1,4 +1,4 @@
-# dataframe
+# A Pandas like dataframe in TypeScript.
 
 <p>
     <a href="https://github.com/kefranabg/readme-md-generator/graphs/commit-activity" target="_blank">
@@ -11,6 +11,10 @@
 
 This library provides an immutable data structure for javascript and datascience using `Array` and `TypedArray` with `ArrayBuffer` or `SharedArrayBuffer`, and which allows to work on rows and columns using functional programming.
 
+## Extension
+A mathematical extension of this library is provided in [@youwol/math](https://github.com/youwol/math)
+
+## Documentation
 See the [online documentation](https://youwol.github.io/dataframe/dist/docs/index.html).
 
 ## Installation, Build & Test<a name="install"></a>

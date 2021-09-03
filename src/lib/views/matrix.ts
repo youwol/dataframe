@@ -54,13 +54,8 @@ export const squaredMatrix = (v: number[]) => {
  * @category Views
  */
 export class Matrix {
-    v: number[]
 
-    constructor(v: number[], readonly m: number) {
-        if (v.length !== m*m) {
-            // sym
-            
-        }
+    constructor(protected v: number[], readonly m: number) {
     }
 
     index(i: number, j: number) {

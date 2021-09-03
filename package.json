@@ -28,8 +28,8 @@
     "jest": "26.6.3",
     "jest-junit": "12.0.0",
     "ts-jest": "26.4.4",
-    "ts-lib": "0.0.5",
     "ts-loader": "8.1.0",
+    "tslib": "^2.3.0",
     "typedoc": "^0.20.34",
     "typedoc-plugin-pages": "^1.1.0",
     "typescript": "4.1.3",
@@ -40,6 +40,8 @@
     "pipeline": {
       "name": "yw_pipeline_webpack_ts",
       "version": "0.0.0"
+    },
+    "cdnDependencies": {
     }
   }
 }

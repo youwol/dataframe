@@ -1,6 +1,6 @@
 {
   "name": "@youwol/dataframe",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "license": "MIT",
   "description": "A Panda like dataframe in TypeScript",
   "author": "fmaerten@youwol.com",
@@ -41,7 +41,6 @@
       "name": "yw_pipeline_webpack_ts",
       "version": "0.0.0"
     },
-    "cdnDependencies": {
-    }
+    "cdnDependencies": {}
   }
 }

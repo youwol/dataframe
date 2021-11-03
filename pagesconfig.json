@@ -33,6 +33,10 @@
                     "source": "./documentation/ex3.md"
                 },
                 {
+                    "title": "Iterating over multiple series simultaneouly",
+                    "source": "./documentation/ex5.md"
+                },
+                {
                     "title": "Using DataFrame",
                     "source": "./documentation/ex4.md"
                 }

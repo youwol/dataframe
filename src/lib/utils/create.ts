@@ -48,7 +48,7 @@ export function createArray(length: number, init?: Function | number ) {
  * ```
  * @category Creation
  */
-export function createTyped<T>(Type: any, array: number|number[], shared: boolean
+export function createTyped<T extends IArray = IArray>(Type: any, array: number|number[], shared: boolean
     ) : T {
     if (Array.isArray(array)) {
         const length = array.length*Type.BYTES_PER_ELEMENT

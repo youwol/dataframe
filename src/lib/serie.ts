@@ -62,6 +62,10 @@ export class Serie<T extends IArray = IArray> {
         this.userData = userData
     }
 
+    static isSerie(s: any): boolean {
+        return 'array' in s && 'itemSize' in s
+    }
+
     /**
      * 
      * @param array The array of values. Can be either an instance of Array or a TypedArray.

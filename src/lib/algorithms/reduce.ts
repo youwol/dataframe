@@ -15,13 +15,14 @@ import { Serie } from '../serie'
  * @category Algorithms
  */
 export const reduce = (series: Serie | Serie[], callback: Function) => {
-    if (series instanceof Serie) {
-        const count = series.count
-        const r = series.image(count, 1)
+    if (Serie.isSerie(series)) {
+        const S = series as Serie
+        const count = S.count
+        const r = S.image(count, 1)
         
         for (let i=0; i<count; ++i) {
-            const v = series.itemAt(i)
-            r.array[i] = callback(series.itemAt(i), i, series)
+            const v = S.itemAt(i)
+            r.array[i] = callback(S.itemAt(i), i, series)
         }
 
         return r

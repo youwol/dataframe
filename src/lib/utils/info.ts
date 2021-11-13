@@ -4,9 +4,9 @@ import { IArray, Serie } from '../serie'
 /**
  * @category Utils
  */
-export const info = (df: DataFrame | Serie<IArray>): any => {
-    if (df instanceof Serie) {
-        const s = df as Serie<IArray>
+export const info = (df: DataFrame | Serie): any => {
+    if (Serie.isSerie(df)) {
+        const s = df as Serie
         return {
             isArray: s.isArray,
             isBuffer: s.isArrayBuffer,
@@ -17,10 +17,12 @@ export const info = (df: DataFrame | Serie<IArray>): any => {
             array: s.array
         }
     }
+
+    const DF = df as DataFrame
     
     return {
-        userData: df.userData,
-        series: Object.entries(df.series).map( ([name, serie]) =>  {
+        userData: DF.userData,
+        series: Object.entries(DF.series).map( ([name, serie]) =>  {
             return {
                 name,
                 userData: serie.userData,

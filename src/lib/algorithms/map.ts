@@ -14,36 +14,36 @@ import { Serie } from '../serie'
  * ```
  * @category Algorithms
  */
- export const map = (series: Serie | Serie[], cb: Function) => {
-    if (series instanceof Serie) {
-        return series.map(cb)
+export const map = (series: Serie | Serie[], cb: Function) => {
+    if (Array.isArray(series)) {
+        let R: Serie = undefined
+        let isArray   = true
+        let id        = 0
+
+        const count   = series[0].count
+        const args    = new Array<number[]|number>(series.length)
+
+        for (let i=0; i<count; ++i) {
+            for (let j=0; j<series.length; ++j) {
+                args[j] = series[j].itemAt(i)
+            }
+
+            const r = cb(args)
+            if (R === undefined) {
+                isArray = Array.isArray(r)
+                R = series[0].image(count, isArray ? r.length : 1 )
+            }
+
+            if (isArray) {
+                r.forEach( v => R.array[id++] = v)
+            }
+            else {
+                R.array[id++] = r
+            }
+        }
+
+        return R
     }
-    
-    let R: Serie = undefined
-    let isArray   = true
-    let id        = 0
 
-    const count   = series[0].count
-    const args    = new Array<number[]|number>(series.length)
-
-    for (let i=0; i<count; ++i) {
-        for (let j=0; j<series.length; ++j) {
-            args[j] = series[j].itemAt(i)
-        }
-
-        const r = cb(args)
-        if (R === undefined) {
-            isArray = Array.isArray(r)
-            R = series[0].image(count, isArray ? r.length : 1 )
-        }
-
-        if (isArray) {
-            r.forEach( v => R.array[id++] = v)
-        }
-        else {
-            R.array[id++] = r
-        }
-    }
-
-    return R
+    return series.map(cb)
 }

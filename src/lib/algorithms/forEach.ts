@@ -16,7 +16,7 @@ import { Serie } from '../serie'
 export const forEach = (series: Serie | Serie[], callback: Function) => {
     if (series===undefined) throw new Error ('serie is undefined')
 
-    if (series instanceof Serie) {
+    if (!Array.isArray(series)) {
         for (let i=0; i<series.count; ++i) {
             callback( series.itemAt(i), i, series )
         }

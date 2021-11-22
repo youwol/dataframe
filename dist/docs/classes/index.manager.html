@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Vector | @youwol/dataframe - v0.0.27</title>
+	<title>Manager | @youwol/dataframe - v0.0.27</title>
 	<meta name="description" content="Documentation for @youwol/dataframe - v0.0.27">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -60,21 +60,28 @@
 					<a href="../modules/index.html">index</a>
 				</li>
 				<li>
-					<a href="index.vector.html">Vector</a>
+					<a href="index.manager.html">Manager</a>
 				</li>
 			</ul>
-			<h1>Class Vector</h1>
+			<h1>Class Manager</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Manager of (virtual or not) series</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Vector</span>
+						<span class="target">Manager</span>
 					</li>
 				</ul>
 			</section>
@@ -85,25 +92,22 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="index.vector.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="index.manager.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section ">
-							<h3>Accessors</h3>
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="index.vector.html#array" class="tsd-kind-icon">array</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="index.vector.html#length" class="tsd-kind-icon">length</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="index.manager.html#ds_" class="tsd-kind-icon">ds_</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.vector.html#at" class="tsd-kind-icon">at</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.vector.html#dot" class="tsd-kind-icon">dot</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.vector.html#mult" class="tsd-kind-icon">mult</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.vector.html#norm" class="tsd-kind-icon">norm</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.vector.html#normalize" class="tsd-kind-icon">normalize</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.vector.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.manager.html#add" class="tsd-kind-icon">add</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.manager.html#clear" class="tsd-kind-icon">clear</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.manager.html#names" class="tsd-kind-icon">names</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="index.manager.html#serie" class="tsd-kind-icon">serie</a></li>
 							</ul>
 						</section>
 					</div>
@@ -115,7 +119,7 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Vector<span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.vector.html" class="tsd-signature-type">Vector</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Manager<span class="tsd-signature-symbol">(</span>df<span class="tsd-signature-symbol">: </span><a href="index.dataframe.html" class="tsd-signature-type">DataFrame</a>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Decomposer</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.manager.html" class="tsd-signature-type">Manager</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -124,130 +128,34 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>v: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>df: <a href="index.dataframe.html" class="tsd-signature-type">DataFrame</a></h5>
+								</li>
+								<li>
+									<h5>options: <span class="tsd-signature-type">Decomposer</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = ...</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="index.vector.html" class="tsd-signature-type">Vector</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="index.manager.html" class="tsd-signature-type">Manager</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Accessors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="array" class="tsd-anchor"></a>
-					<h3>array</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> array<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="length" class="tsd-anchor"></a>
-					<h3>length</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> length<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="ds_" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> ds_</h3>
+					<div class="tsd-signature tsd-kind-icon">ds_<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Decomposer</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+					<aside class="tsd-sources">
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="at" class="tsd-anchor"></a>
-					<h3>at</h3>
+					<a name="add" class="tsd-anchor"></a>
+					<h3>add</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">at<span class="tsd-signature-symbol">(</span>i<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>i: <span class="tsd-signature-type">number</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="dot" class="tsd-anchor"></a>
-					<h3>dot</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">dot<span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="index.vector.html" class="tsd-signature-type">Vector</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>v: <a href="index.vector.html" class="tsd-signature-type">Vector</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="mult" class="tsd-anchor"></a>
-					<h3>mult</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">mult<span class="tsd-signature-symbol">(</span>s<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.vector.html" class="tsd-signature-type">Vector</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>s: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>scaling parameter</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="index.vector.html" class="tsd-signature-type">Vector</a></h4>
-							<p>this vector</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="norm" class="tsd-anchor"></a>
-					<h3>norm</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">norm<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="normalize" class="tsd-anchor"></a>
-					<h3>normalize</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">normalize<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.vector.html" class="tsd-signature-type">Vector</a></li>
+						<li class="tsd-signature tsd-kind-icon">add<span class="tsd-signature-symbol">(</span>d<span class="tsd-signature-symbol">: </span><a href="../interfaces/index.decomposer.html" class="tsd-signature-type">Decomposer</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -255,25 +163,88 @@
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Normalize this vector</p>
+									<p>Add a new Decomposer in this <a href="index.manager.html">Manager</a></p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <a href="index.vector.html" class="tsd-signature-type">Vector</a></h4>
-							<p>this</p>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>d: <a href="../interfaces/index.decomposer.html" class="tsd-signature-type">Decomposer</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="tostring" class="tsd-anchor"></a>
-					<h3>to<wbr>String</h3>
+					<a name="clear" class="tsd-anchor"></a>
+					<h3>clear</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">to<wbr>String<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">clear<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Remove all registered decomposers from this manager</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="names" class="tsd-anchor"></a>
+					<h3>names</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">names<span class="tsd-signature-symbol">(</span>itemSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get all possible decomposed names for a given itemSize</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>itemSize: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="serie" class="tsd-anchor"></a>
+					<h3>serie</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">serie<span class="tsd-signature-symbol">(</span>itemSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="index.serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/index.iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>For a given itemSize and a decomposed&#39;s name, get the corresponding serie</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>itemSize: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>name: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="index.serie.html" class="tsd-signature-type">Serie</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/index.iarray.html" class="tsd-signature-type">IArray</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -340,51 +311,42 @@
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="index.functionaldecomposer.html" class="tsd-kind-icon">Functional<wbr>Decomposer</a>
 					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
 						<a href="index.manager.html" class="tsd-kind-icon">Manager</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="index.manager.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="index.manager.html#ds_" class="tsd-kind-icon">ds_</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="index.manager.html#add" class="tsd-kind-icon">add</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="index.manager.html#clear" class="tsd-kind-icon">clear</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="index.manager.html#names" class="tsd-kind-icon">names</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="index.manager.html#serie" class="tsd-kind-icon">serie</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="index.matrix.html" class="tsd-kind-icon">Matrix</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="index.serie.html" class="tsd-kind-icon">Serie</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-module">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="index.vector.html" class="tsd-kind-icon">Vector</a>
-						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="index.vector.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="index.vector.html#array" class="tsd-kind-icon">array</a>
-							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="index.vector.html#length" class="tsd-kind-icon">length</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="index.vector.html#at" class="tsd-kind-icon">at</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="index.vector.html#dot" class="tsd-kind-icon">dot</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="index.vector.html#mult" class="tsd-kind-icon">mult</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="index.vector.html#norm" class="tsd-kind-icon">norm</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="index.vector.html#normalize" class="tsd-kind-icon">normalize</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="index.vector.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/index.decomposer.html" class="tsd-kind-icon">Decomposer</a>
 					</li>
@@ -493,6 +455,9 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
 			</ul>
 		</div>
 	</div>

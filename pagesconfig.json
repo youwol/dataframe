@@ -39,6 +39,10 @@
                 {
                     "title": "Using DataFrame",
                     "source": "./documentation/ex4.md"
+                },
+                {
+                    "title": "Using Manager",
+                    "source": "./documentation/ex6.md"
                 }
             ]
         }

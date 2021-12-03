@@ -12,6 +12,10 @@ test('dataframe test 1', () => {
         }
     })
 
+    df.forEach( (name, serie, i) => {
+        console.log(name, i, serie.itemSize, serie.count)
+    })
+
     expect( exists(df, 'a') ).toBeTruthy()
     expect( exists(df, 'b') ).toBeTruthy()
     expect( exists(df, 'c') ).toBeTruthy()

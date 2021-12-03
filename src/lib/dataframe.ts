@@ -63,6 +63,31 @@ export class DataFrame {
      * Mapping between column id and serie
      */
     public readonly series: {[key:string]: Serie}
+
+    /**
+     * Convenient method to iterate over all series
+     * @example
+     * ```ts
+     * const df = DataFrame.create({
+     *      series: {
+     *          a: ...,
+     *          b: ...,
+     *      }
+     * })
+     * 
+     * df.forEach( (name, serie, i) => {
+     *      console.log('serie named', name, 
+     *                  'at index', i, 
+     *                  ', count=', serie.count, 
+     *                  ', itemSize=', serie.itemSize
+     *      )
+     * })
+     * ```
+     */
+    public forEach( cb: Function) {
+        Object.entries(this.series).forEach( ([name, serie], i) => cb(name, serie, i) )
+    }
+
     /**
      * If provided, the column that acts as index
      */

@@ -2,7 +2,14 @@ import { DataFrame, Serie } from '..'
 import { Decomposer } from './decomposer'
 
 /**
- * Manager of (virtual or not) series
+ * Manager of (virtual or not) series.
+ * 
+ * Allows to decompose series in other user-defined series.
+ * Let say that you have a serie `W` with `itemSize=6`, meaning that items
+ * are potentially components of symmetric rank 2 tensors of dimension 3.
+ * Then, using this library, it is possible to get names and underlaying
+ * series of decompositions. For instance, it is possible to get the components (`itemSize=1`),
+ * eigen values (`itemSize=1`), eigen vectors(`itemSize=3`)... from this original `W` serie.
  * @category Decomposition
  */
 export class Manager {

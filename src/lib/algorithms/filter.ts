@@ -3,6 +3,10 @@ import { Serie } from '../serie'
 /**
  * filter a [[Serie]] using a callback function.
  * @note Operations are done using the items
+ * @example
+ * ```js
+ * const a = filter( df.series.a, v => v < 10 )
+ * ```
  * @category Algorithms
  */
 export const filter = (s: Serie, callback: Function) => {

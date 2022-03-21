@@ -218,15 +218,17 @@ export function createFrom<T extends IArray>(
     {array, count, itemSize}:
     {array: T, count: number, itemSize: number}): IArray {
 
+    const length = count*itemSize
+
     if (Array.isArray(array)) {
-        return new Array(count*itemSize)
+        return new Array(length)
     }
 
     let isShared = false
     if (typeof SharedArrayBuffer !== "undefined") {
         isShared = (array as any).buffer instanceof SharedArrayBuffer
     }
-    const length = count*itemSize
+    
     
     if (array instanceof Int8Array)         return createTyped(Int8Array,         length, isShared)
     if (array instanceof Uint8Array)        return createTyped(Uint8Array,        length, isShared)

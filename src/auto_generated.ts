@@ -1,6 +1,6 @@
 export let AUTO_GENERATED = {
     name: "@youwol/dataframe",
     namespace: "youwol",
-    version: "0.0.28",
+    version: "0.0.30",
     description: "A Panda like dataframe in TypeScript"
 }

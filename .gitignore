@@ -9,3 +9,7 @@ dist/src
 dist/dataframe
 dist/math
 dist/tests
+
+cdn.zip
+**/.DS_Store
+__pycache__

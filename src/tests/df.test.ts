@@ -1,5 +1,5 @@
 
-import { DataFrame, createEmptySerie, exists, info, createTyped, Serie, append }    from '../lib'
+import { DataFrame, createEmptySerie, exists, info, createTyped, Serie, append, insertSerie }    from '../lib'
 
 test('dataframe test 1', () => {
 
@@ -78,4 +78,19 @@ test('dataframe test append', () => {
     })
     expect(df.series.a).toBeTruthy()
     expect(df.series.b).toBeTruthy()
+})
+
+test('dataframe test insertSerie', () => {
+
+    let df = DataFrame.create({
+        series: {
+            'a': Serie.create( {array: new Array(21).fill(2), itemSize: 3} )
+        }
+    })
+
+    // Same count
+    insertSerie({df: df, serie: Serie.create({array: new Array(21).fill(3), itemSize: 3}), name: ''})
+
+    // Different count
+    expect(() => {insertSerie({df: df, serie: Serie.create({array: new Array(24).fill(3), itemSize: 3}), name: ''})}).toThrow(Error);
 })

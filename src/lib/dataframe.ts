@@ -39,6 +39,26 @@ export const append = ({series, index, metaData, userData}: DataFrame, news: {[k
 }
 
 /**
+ * Mutating function which add a new (or an existing) serie into a dataframe
+ * @param {df: DataFrame, s: Serie, name: string} param0 The serie s into the dataframe df. If the serie
+ * already exist, it is replaced. Serie's count is checked against existing series in the dataframe, so that
+ * a dataframe will contain only series with same count.
+ * @returns The input dataframe (not a copy!)
+ */
+export const insertSerie = ({df, serie, name}:{df: DataFrame, serie: Serie, name: string}): DataFrame => {
+    //! need to check that rows count are compatible
+    const names = Object.entries(df.series).map( ([name, serie]) => name)
+    const count = names.length !== 0 ? df.series[names[0]].count: 0
+
+    if (count !== 0 && serie.count !== count) {
+        throw new Error('Provided serie count must be equal to existing series count')
+    }
+
+    df.series[name] = serie
+    return df
+}
+
+/**
  * Remove a serie or a list of series (given by there name) from a dataframe.
  * @param dataframe The dataframe
  * @param serieName The serie of a list of series given by their names

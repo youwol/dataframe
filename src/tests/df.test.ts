@@ -1,5 +1,5 @@
 
-import { DataFrame, createEmptySerie, exists, info, createTyped, Serie, append, insertSerie }    from '../lib'
+import { DataFrame, createEmptySerie, exists, info, createTyped, Serie, append, insertSerie, getNameSeries }    from '../lib'
 
 test('dataframe test 1', () => {
 
@@ -93,4 +93,19 @@ test('dataframe test insertSerie', () => {
 
     // Different count
     expect(() => {insertSerie({df: df, serie: Serie.create({array: new Array(24).fill(3), itemSize: 3}), name: ''})}).toThrow(Error);
+})
+
+test('dataframe test name of series', () => {
+
+    let df = DataFrame.create({
+        series: {
+            'a': Serie.create( {array: new Array(21).fill(2), itemSize: 3} ),
+            'b': Serie.create( {array: new Array(21).fill(2), itemSize: 3} )
+        }
+    })
+
+    const names = getNameSeries(df)
+    expect(names.length).toEqual(2)
+    expect(names[0]).toEqual('a')
+    expect(names[1]).toEqual('b')
 })

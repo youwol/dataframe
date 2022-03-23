@@ -1,6 +1,10 @@
 import { IArray } from "../serie"
 
+/**
+ * @hidden
+ */
 export namespace array {
+
     /**
      * @category Array
      */

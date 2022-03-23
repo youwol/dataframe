@@ -13,3 +13,5 @@ dist/tests
 cdn.zip
 **/.DS_Store
 __pycache__
+
+src/auto_generated.ts

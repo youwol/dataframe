@@ -6,4 +6,4 @@ export * from './views'
 export * from './conditional'
 export * from './decompose'
 
-export * from './extensions'
+// export * from './extensions'

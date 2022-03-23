@@ -1,8 +1,7 @@
 import { DataFrame } from '../dataframe'
-import { Serie } from '../serie'
 
 /**
- * Get name of all series in the passed [[Dataframe]]
+ * Get name of all series in the passed [[DataFrame]]
  * @category Utils
  */
 export const getNameSeries = (df: DataFrame) => {

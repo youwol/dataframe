@@ -5,6 +5,7 @@ import { Serie } from './serie'
 
 // Based on this doc: https://www.typescriptlang.org/docs/handbook/declaration-merging.html#disallowed-merges
 
+/*
 declare module "./serie" {
     interface Serie {
         apply(fn: Function)
@@ -31,3 +32,4 @@ Serie.prototype.isNaN = function () { return isNaN(this) }
 
 Serie.prototype.copy = function (to: Serie) { return copy(this, to) }
 Serie.prototype.duplicate = function () { return duplicate(this) }
+*/

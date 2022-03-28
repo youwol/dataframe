@@ -186,8 +186,10 @@ export class Serie<T extends IArray = IArray> {
     
     /**
      * Return a new serie similar to this (same type of array and buffer), and with
-     * the same values in the array.
+     * the same count and itemSize.
      * @param resetValues True if reset the values to 0, false otherwise (default)
+     * @see newInstance
+     * @see image
      */
     clone(resetValues: boolean = false) {
         const s = new Serie(this.array.slice(0, this.count*this.itemSize), this.itemSize, this.shared, this.userData)
@@ -198,13 +200,25 @@ export class Serie<T extends IArray = IArray> {
     }
 
     /**
+     * Same as [[image]]
+     * @see clone
+     * @see image
+     */
+    newInstance({count, itemSize}:{count: number, itemSize: number}) {
+        return new Serie(this.array.slice(0, count*itemSize), itemSize, this.shared, this.userData)
+    }
+
+    /**
      * Return a new serie similar to this (same type of array and buffer), but with
-     * different count and itemSize. All values are initialized to 0.
+     * different count and itemSize. All values are initialized to 0. We keep this
+     * mathod for compatibility reason.
      * @param count    The number of items 
      * @param itemSize The size of the items
-     * @see [[createEmptySerie]]
+     * @see clone
+     * @see newInstance
      */
     image(count: number, itemSize: number) {
+        console.warn('warning: deprecated function')
         return new Serie( createFrom({array:this.array, count, itemSize}), itemSize, this.shared, this.userData)
     }
 }

@@ -17,7 +17,6 @@ test('test serie newInstance (similar to image)', () => {
     }
 })
 
-
 test('test serie image (similar to newImage)', () => {
     {
         const s1 = Serie.create({ array: new Array(21).fill(0).map((_,i) => i-10), itemSize:3 })

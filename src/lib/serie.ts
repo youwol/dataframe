@@ -127,6 +127,24 @@ export class Serie<T extends IArray = IArray> {
         return r
     }
 
+    setItemAt(i: number, value: number | IArray): void {
+        if (i>= this.count) throw new Error('array index out of bounds')
+
+        const size = this.itemSize
+
+        if (size === 1) {
+            if (Array.isArray(value)) throw new Error('value must be a number')
+            this.array[i] = value as number
+            return
+        }
+
+        const v = value as number[]
+        if (v.length !== size) throw new Error(`array length (${v.length}) must equals itemSize (${size})`)
+        for (let j=0; j<size; ++j) {
+            this.array[i*size+j] = value[j]
+        }
+    }
+
     /**
      * Iterate over all items
      * @param callback The callback that will called for each item

@@ -33,3 +33,22 @@ test('test serie image (similar to newImage)', () => {
         expect(s2.array instanceof Float32Array).toBeTruthy()
     }
 })
+
+test('test serie setItemAt', () => {
+    // itemSize: 1
+    {
+        const s1 = Serie.create({ array: new Array(3).fill(0), itemSize:1 })
+        s1.setItemAt(0, 7)
+        expect(s1.itemAt(0)).toEqual(7)
+        s1.setItemAt(2, 17)
+        expect(s1.itemAt(2)).toEqual(17)
+    }
+    // itemSize: 3
+    {
+        const s1 = Serie.create({ array: new Float32Array(9).fill(0), itemSize:3 })
+        s1.setItemAt(0, [1,2,3])
+        expect(s1.itemAt(0)).toEqual([1,2,3])
+        s1.setItemAt(2, [10, 20, 30])
+        expect(s1.itemAt(2)).toEqual([10, 20, 30])
+    }
+})

@@ -53,7 +53,10 @@ export function createTyped<T extends IArray = IArray>(Type: any, array: number|
     if (Array.isArray(array)) {
         const length = array.length*Type.BYTES_PER_ELEMENT
         let ta = undefined
-        if (shared) {
+
+        let isSharedAvailable = (typeof SharedArrayBuffer !== "undefined")
+
+        if (shared && isSharedAvailable) {
             ta = new Type(new SharedArrayBuffer(length))
         }
         else {

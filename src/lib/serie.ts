@@ -107,11 +107,37 @@ export class Serie<T extends IArray = IArray> {
     get count() {
         return this.array.length / this.itemSize
     }
+
+    /**
+     * True if this serie is an Array<number
+     */
     get isArray() {
         return Array.isArray(this.array)
     }
+
+    /**
+     * True if this serie is a TypedArray
+     * @see isTypedArray
+     */
     get isArrayBuffer() {
+        return this.isTypedArray
+    }
+
+    /**
+     * True if this serie is a TypedArray
+     * @see isArrayBuffer
+     */
+    get isTypedArray() {
         return !this.isArray
+    }
+
+    /**
+     * True if this serie is the buffer of the TypedArray is
+     * a SharedArrayBuffer
+     */
+    get isShared() {
+        if (this.isArray) return false
+        return (this.array as any).buffer instanceof SharedArrayBuffer
     }
     
     at(i: number) {
@@ -190,7 +216,7 @@ export class Serie<T extends IArray = IArray> {
     //     //     accumulator = reduceFn(accumulator, i)
     //     // }
     //     // return accumulator
-        
+    //
     //     const R = this.image(this.count, this.itemSize)
     //     let id = 0
     //     for (let i=0; i<this.count; ++i) {
@@ -218,12 +244,19 @@ export class Serie<T extends IArray = IArray> {
     }
 
     /**
-     * Same as [[image]]
+     * Same as [[image]]. All values are set to 0 (i.e., 0, [0,0], [0,0,0]...)
      * @see clone
      * @see image
      */
-    newInstance({count, itemSize}:{count: number, itemSize: number}) {
-        return new Serie(this.array.slice(0, count*itemSize), itemSize, this.shared, this.userData)
+    newInstance({count, itemSize, initialize=true}:{count: number, itemSize: number, initialize?: boolean}) {
+        // const s = new Serie(this.array.slice(0, count*itemSize), itemSize, this.shared, this.userData)
+        // s.array.forEach( (_,i) => s.array[i] = 0 )
+        // return s
+        const s = new Serie( createFrom({array:this.array, count, itemSize}), itemSize, this.shared, this.userData)
+        if (initialize) {
+            for (let i=0; i<s.array.length; ++i) s.array[i] = 0
+        }
+        return s
     }
 
     /**
@@ -236,8 +269,8 @@ export class Serie<T extends IArray = IArray> {
      * @see newInstance
      */
     image(count: number, itemSize: number) {
-        console.warn('warning: deprecated function')
-        return new Serie( createFrom({array:this.array, count, itemSize}), itemSize, this.shared, this.userData)
+        // console.warn('warning: deprecated function')
+        return this.newInstance({count, itemSize})
     }
 }
 

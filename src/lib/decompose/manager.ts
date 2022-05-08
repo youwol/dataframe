@@ -57,6 +57,14 @@ export class Manager {
     }
 
     /**
+     * Check if the attribute named name with itemSize exists in the manager
+     */
+    contains(itemSize: number, name: string): boolean {
+        const n = this.names(itemSize)
+        return n.includes(name)
+    }
+
+    /**
      * For a given itemSize and a decomposed's name, get the corresponding serie
      */
     serie(itemSize: number, name: string): Serie {

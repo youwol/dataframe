@@ -138,6 +138,14 @@ export class DataFrame {
     }
 
     /**
+     * Check if the serie named name is in the dataframe
+     * @param name 
+     */
+    contains(name: string) {
+        return this.series[name] !== undefined
+    }
+
+    /**
      * The dataframe class which contains a list of [[Serie]]
      * @example
      * ```ts

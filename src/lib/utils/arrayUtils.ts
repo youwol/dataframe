@@ -5,6 +5,10 @@ import { IArray } from "../serie"
  */
 export namespace array {
 
+    // export function zip(a1: IArray, a2: IArray): any {
+
+    // }
+
     /**
      * @category Array
      */

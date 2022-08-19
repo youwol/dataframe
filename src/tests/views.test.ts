@@ -1,5 +1,5 @@
 import { symSquaredMatrix, squaredMatrix, vector, Matrix, Serie } from '../lib'
-import { reduce } from '../lib/algorithms'
+import { apply, filter, map, reduce } from '../lib/algorithms'
 
 
 test('views test vector', () => {
@@ -118,15 +118,13 @@ test('views test symmetric squared matrix', () => {
 
     const v = m.multVec([1,1,1])
     expect(v.array).toEqual([6,11,14])
-
-    //const w = m.multMat( symSquaredMatrix([6,5,4,3,2,1]) )
 })
 
 test('views squared matrix * vector', () => {
     const M = Serie.create({array: new Array(27).fill(0).map( (_,i)=>i ), itemSize: 9})
     const V = Serie.create({array: new Array( 9).fill(0).map( (_,i)=>i ), itemSize: 3})
-    
-    const reduced = reduce([M,V], ([m, v]) => {
+
+    const reduced = map([M,V], ([m,v]) => {
         const A = squaredMatrix(m)
         const x = vector(v)
         return A.multVec(x).array
@@ -150,7 +148,7 @@ test('views symmetric squared smatrix * vector', () => {
     const M = Serie.create({array: new Array(18).fill(0).map( (_,i)=>i ), itemSize: 6}) // [0,1,2...17]
     const V = Serie.create({array: new Array( 9).fill(0).map( (_,i)=>i ), itemSize: 3}) // [0,1,2...8]
     
-    const reduced = reduce([M, V], ([m, v]) => {
+    const reduced = map([M,V], ([m,v]) => {
         const A = symSquaredMatrix(m)
         const x = vector(v)
         return A.multVec(x).array
@@ -174,7 +172,7 @@ test('views complex operation', () => {
     const M = Serie.create({array: new Array(27).fill(0).map( (_,i)=>i ), itemSize: 9}) // [0,1,2...17]
     const V = Serie.create({array: new Array( 9).fill(0).map( (_,i)=>i ), itemSize: 3}) // [0,1,2...8]
     
-    const reduced = reduce([M, V], ([m, v]) => {
+    const reduced = map([M, V], ([m, v]) => {
         const A = squaredMatrix(m)
         return A.transpose().multVec( vector(v).normalize() ).array
     })
@@ -200,11 +198,10 @@ test('views superposition', () => {
     const S3 = Serie.create({array: new Array(18).fill(0).map( (_,i)=>i+2 ), itemSize: 6})
 
     const alpha = [1, 2, 3]
-    const reduced = reduce( [S1, S2, S3], (stresses) => {
-        // stresses is [[---6--], ..., [---6--]] with length = allStresses.length
-        return stresses
-            .map( (s, i) => s.map( v => v*alpha[i] ) )
-            .reduce( (acc, stress) => stress.map( (v,j) => v+acc[j] ), [0,0,0,0,0,0])
+
+    const reduced = map( [S1, S2, S3], (stresses) => {
+        const s = stresses.map( (stress,i) => stress.map( value => value*alpha[i]) )
+        return s.reduce( (cur,s) => cur.map( (v,j) => v+s[j] ), [0,0,0,0,0,0])
     })
 
     const sol = [

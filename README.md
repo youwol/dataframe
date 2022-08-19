@@ -26,6 +26,8 @@ ___
 In the following, we use itemSize = 3 as an example.
 ### From an Array
 ```ts
+import { Serie } from '@youwol/dataframe'
+
 const array = new Array(...)
 const serie = Serie.create({
     array: array as IArray,
@@ -35,6 +37,8 @@ const serie = Serie.create({
 
 ### From a TypedArray
 ```ts
+import { Serie } from '@youwol/dataframe'
+
 const typedArray = new Float32Array(...)
 const serie = Serie.create({
     array: typedArray as IArray,
@@ -44,9 +48,28 @@ const serie = Serie.create({
 
 ### From a BufferAttribute (Three.js)
 ```ts
-const bufferAttribute = new THREE.BufferAttribute(...)
+import { Serie } from '@youwol/dataframe'
+import { BufferAttribute } from 'three'
+
+const bufferAttribute = new BufferAttribute(...)
 const serie = Serie.create({
     array: bufferAttribute.array as IArray,
     itemSize: 3
 })
+```
+
+### How to iterate over multiple series
+```ts
+import { forEach, map, Serie } from '@youwol/dataframe'
+
+const S1 = Serie.create({ array, itemSize: 1 })
+const S2 = Serie.create({ array, itemSize: 1 })
+const S3 = Serie.create({ array, itemSize: 1 })
+
+forEach([S1, S2, S3], ([s1, s2, s3]) => {
+    console.log(s1, s2, s3)
+})
+
+// create a serie with itemSize = 3
+const s = map([S1, S2, S3], ([s1, s2, s3]) => [s1, s2, s3] )
 ```

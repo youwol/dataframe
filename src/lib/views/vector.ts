@@ -48,6 +48,16 @@ export class Vector {
         return this
     }
 
+    add(s: Vector) {
+        this.v = s.v.map( (w,i) => this.v[i] += w )
+        return this
+    }
+
+    sub(s: Vector) {
+        this.v = s.v.map( (w,i) => this.v[i] -= w )
+        return this
+    }
+
     dot(v: Vector) {
         return this.array.reduce( (acc, a, i) => acc + a*v.array[i], 0 )
     }

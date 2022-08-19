@@ -144,7 +144,7 @@ export class Serie<T extends IArray = IArray> {
         return this.array[i]
     }
 
-    itemAt(i: number) {
+    itemAt(i: number): number | number[] {
         const size = this.itemSize
         if (size===1) return this.at(i)
         const start = i*size

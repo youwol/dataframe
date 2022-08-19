@@ -48,21 +48,19 @@ test('dataframe algo filter', () => {
 
 test('dataframe algo reduce', () => {
 
-    let df = DataFrame.create({
-        series:{
-            a: Serie.create( {array: [1,2,3,4,5,6,7,8,9], itemSize:3})
-        }
-    })
+    let serie = Serie.create({array: [1,2,3, 4,5,6, 7,8,9], itemSize:3})
 
-    const traces = reduce( [df.series.a], ([v]) => v[0]+v[1]+v[2])
-    expect(traces.array[0]).toEqual(6)
-    expect(traces.array[1]).toEqual(15)
-    expect(traces.array[2]).toEqual(24)
+    // const traces = reduce( [df.series.a], ([v]) => v[0]+v[1]+v[2])
+    // expect(traces.array[0]).toEqual(6)
+    // expect(traces.array[1]).toEqual(15)
+    // expect(traces.array[2]).toEqual(24)
 
-    const trace = reduce( df.series.a, (v) => v[0]+v[1]+v[2])
-    expect(trace.array[0]).toEqual(6)
-    expect(trace.array[1]).toEqual(15)
-    expect(trace.array[2]).toEqual(24)
+    const trace = reduce( serie, (cur,v) => [cur[0]+v[0], cur[1]+v[1], cur[2]+v[2]], [0,0,0])
+    // console.log(serie.array)
+    // console.log(trace)
+    expect(trace[0]).toEqual(12)
+    expect(trace[1]).toEqual(15)
+    expect(trace[2]).toEqual(18)
 })
 
 test('dataframe algo sort', () => {

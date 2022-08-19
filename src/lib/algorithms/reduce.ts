@@ -1,5 +1,15 @@
 import { Serie } from '../serie'
 
+/*
+Our goal is to return a Serie or whatever:
+```js
+// sa and sb are Series with itemSize=3
+//
+const x = reduce([sa, sb], (cur, [sa, sb]) => cur + sa[0]*sb[0], 0)
+const y = reduce([sa, sb], (cur, [sa, sb]) => [cur[0]+sa[0]*sb[0], cur[1]+sa[1]*sb[1], cur[2]+sa[2]*sb[2]], [0,0,0])
+```
+*/
+
 /**
  * @returns a new [[Serie]]
  * @example
@@ -11,9 +21,31 @@ import { Serie } from '../serie'
  *     let mat = smatrix(m, 3, 3) // sym matrix rank 2
  *     return mat.transpose().multVec( vector(vec).normalize() ).array
  * })
+ * 
+ * const c = reduce([sa, sb], (cur, [sa, sb]) => cur + sa[0]*sb[0], 0)
+ * const d = reduce([sa, sb], (cur, [sa, sb]) => [cur[0]+sa[0]*sb[0], cur[1]+sa[1]*sb[1], cur[2]+sa[2]*sb[2]], [0,0,0])
  * ```
  * @category Algorithms
  */
+export const reduce = function(iterable: Serie | Serie[], reduceFn: Function, accumulator: any) {
+    if ( !Array.isArray(iterable) ) {
+        iterable.forEach( i => accumulator = reduceFn(accumulator, i) )
+        return accumulator
+    }
+    else {
+        const count = iterable[0].count
+        for (let i=0; i<count; ++i) {
+            accumulator = reduceFn( accumulator, iterable.map( serie => serie.itemAt(i) ) ) //, i, iterable)
+        }
+
+        // iterable.map( (serie, i) => serie.forEach( j => accumulator[i] = reduceFn(accumulator[i], j) ) )
+
+        return accumulator
+    }
+}
+  
+
+/*
 export const reduce = (series: Serie | Serie[], callback: Function) => {
     if (Serie.isSerie(series)) {
         const S = series as Serie
@@ -63,3 +95,4 @@ export const reduce = (series: Serie | Serie[], callback: Function) => {
 
     return R
 }
+*/

@@ -37,6 +37,14 @@ export class Serie<T extends IArray = IArray> {
     public readonly itemSize: number
 
     /**
+     * The dimension of the space. As an example, for a numerical code
+     * computing stresses and/or displacement fields, in 3D the dimension
+     * will be 3 and in 2D the dimension will be 2. It is the user
+     * responsability to properly set this value.
+     */
+    public readonly dimension: number = 3
+
+    /**
      * Whether or not [[array]] is a SharedArrayBuffer
      */
     public readonly shared: boolean
@@ -51,15 +59,17 @@ export class Serie<T extends IArray = IArray> {
         array: T, 
         itemSize: number, 
         shared: boolean,
-        userData: {[key:string]: any} = {}
+        userData: {[key:string]: any} = {},
+        dimension: number = 3
         ) {
 
         if (array.length%itemSize !== 0) 
             throw new Error(`array length (${array.length}) is not a multiple of itemSize (${itemSize})`)
-        this.array = array
-        this.itemSize = itemSize
-        this.shared = shared
-        this.userData = userData
+        this.array     = array
+        this.itemSize  = itemSize
+        this.shared    = shared
+        this.userData  = userData
+        this.dimension = dimension
     }
 
     static isSerie(s: any): boolean {
@@ -74,11 +84,12 @@ export class Serie<T extends IArray = IArray> {
      * @param itemSize The size of each item. [[count]] will be array.length / [[itemSize]]
      * @param userData user data
      */
-    static create<T extends IArray = IArray>({
-            array, itemSize, userData
+    static create<T extends IArray = IArray>(
+        {
+            array, itemSize, userData, dimension=3
         }:
         {
-            array: T, itemSize: number, userData?: {[key:string]: any}
+            array: T, itemSize: number, userData?: {[key:string]: any}, dimension?: number
         }
     ){
         // Type is either a Int8Array, Uint8Array etc...
@@ -88,11 +99,11 @@ export class Serie<T extends IArray = IArray> {
 
         // Check that SharedArrayBuffer are supported...
         if (typeof SharedArrayBuffer === "undefined") {
-            return new Serie(array, itemSize, false, userData)
+            return new Serie(array, itemSize, false, userData, dimension)
         }
 
         const shared = (array as any).buffer instanceof SharedArrayBuffer        
-        return new Serie(array, itemSize, shared, userData)
+        return new Serie(array, itemSize, shared, userData, dimension)
     }
     /**
      * Get the size of this serie, i.e., being [[count]] * [[itemSize]]
@@ -236,7 +247,7 @@ export class Serie<T extends IArray = IArray> {
      * @see image
      */
     clone(resetValues: boolean = false) {
-        const s = new Serie(this.array.slice(0, this.count*this.itemSize), this.itemSize, this.shared, this.userData)
+        const s = new Serie(this.array.slice(0, this.count*this.itemSize), this.itemSize, this.shared, this.userData, this.dimension)
         if (resetValues) {
             s.array.forEach( (_,i) => s.array[i] = 0 ) // reset
         }
@@ -249,10 +260,7 @@ export class Serie<T extends IArray = IArray> {
      * @see image
      */
     newInstance({count, itemSize, initialize=true}:{count: number, itemSize: number, initialize?: boolean}) {
-        // const s = new Serie(this.array.slice(0, count*itemSize), itemSize, this.shared, this.userData)
-        // s.array.forEach( (_,i) => s.array[i] = 0 )
-        // return s
-        const s = new Serie( createFrom({array:this.array, count, itemSize}), itemSize, this.shared, this.userData)
+        const s = new Serie( createFrom({array:this.array, count, itemSize}), itemSize, this.shared, this.userData, this.dimension)
         if (initialize) {
             for (let i=0; i<s.array.length; ++i) s.array[i] = 0
         }
@@ -269,7 +277,6 @@ export class Serie<T extends IArray = IArray> {
      * @see newInstance
      */
     image(count: number, itemSize: number) {
-        // console.warn('warning: deprecated function')
         return this.newInstance({count, itemSize})
     }
 }

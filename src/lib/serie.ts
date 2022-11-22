@@ -69,7 +69,7 @@ export class Serie<T extends IArray = IArray> {
         this.itemSize  = itemSize
         this.shared    = shared
         this.userData  = userData
-        this.dimension = dimension
+        this.dimension = dimension // ! use dimension
     }
 
     static isSerie(s: any): boolean {
@@ -86,7 +86,7 @@ export class Serie<T extends IArray = IArray> {
      */
     static create<T extends IArray = IArray>(
         {
-            array, itemSize, userData, dimension=3
+            array, itemSize, userData, dimension=3 // ! use dimension
         }:
         {
             array: T, itemSize: number, userData?: {[key:string]: any}, dimension?: number
@@ -99,11 +99,11 @@ export class Serie<T extends IArray = IArray> {
 
         // Check that SharedArrayBuffer are supported...
         if (typeof SharedArrayBuffer === "undefined") {
-            return new Serie(array, itemSize, false, userData, dimension)
+            return new Serie(array, itemSize, false, userData, dimension) // ! use dimension
         }
 
         const shared = (array as any).buffer instanceof SharedArrayBuffer        
-        return new Serie(array, itemSize, shared, userData, dimension)
+        return new Serie(array, itemSize, shared, userData, dimension) // ! use dimension
     }
     /**
      * Get the size of this serie, i.e., being [[count]] * [[itemSize]]
@@ -247,7 +247,7 @@ export class Serie<T extends IArray = IArray> {
      * @see image
      */
     clone(resetValues: boolean = false) {
-        const s = new Serie(this.array.slice(0, this.count*this.itemSize), this.itemSize, this.shared, this.userData, this.dimension)
+        const s = new Serie(this.array.slice(0, this.count*this.itemSize), this.itemSize, this.shared, this.userData, this.dimension) // ! use dimension
         if (resetValues) {
             s.array.forEach( (_,i) => s.array[i] = 0 ) // reset
         }
@@ -260,7 +260,7 @@ export class Serie<T extends IArray = IArray> {
      * @see image
      */
     newInstance({count, itemSize, initialize=true}:{count: number, itemSize: number, initialize?: boolean}) {
-        const s = new Serie( createFrom({array:this.array, count, itemSize}), itemSize, this.shared, this.userData, this.dimension)
+        const s = new Serie( createFrom({array:this.array, count, itemSize}), itemSize, this.shared, this.userData, this.dimension) // ! use dimension
         if (initialize) {
             for (let i=0; i<s.array.length; ++i) s.array[i] = 0
         }

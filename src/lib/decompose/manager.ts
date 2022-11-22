@@ -14,6 +14,7 @@ import { Decomposer } from './decomposer'
  */
 export class Manager {
     private ds_: Decomposer[] = []
+    private dimension: number = 3 // ! use dimension
 
     constructor(private readonly df: DataFrame, options: Decomposer[] = undefined) {
         if (options) this.ds_ = options
@@ -43,9 +44,11 @@ export class Manager {
 
         // add series with same itemSize
         Object.entries(this.df.series).forEach( ([name, serie]) => {
-            if (serie.itemSize === itemSize) {
+            // ! use dimension
+            if (serie.itemSize === itemSize && serie.dimension === this.dimension) {
                 // Avoid exposing directly 'positions' and 'indices'
-                if ( !(itemSize===3 && (name==='positions'||name==='indices')) ) {
+                // if ( !(itemSize===3 && (name==='positions'||name==='indices')) ) {
+                if ( name !== 'positions' && name !== 'indices' ) {
                     names.add(name)
                 }
             }

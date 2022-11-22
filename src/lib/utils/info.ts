@@ -14,6 +14,7 @@ export const info = (df: DataFrame | Serie): any => {
             length: s.length,
             count: s.count,
             itemSize: s.itemSize,
+            dimension: s.dimension,
             array: s.array
         }
     }
@@ -32,6 +33,7 @@ export const info = (df: DataFrame | Serie): any => {
                 length: serie.length,
                 count: serie.count,
                 itemSize: serie.itemSize,
+                dimension: serie.dimension,
                 array: serie.array
             }
         })

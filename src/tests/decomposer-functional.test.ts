@@ -7,13 +7,16 @@ test('test functional on AttributeManager', () => {
         }
     })
 
-    const mng = new Manager(df, [
-        new FunctionalDecomposer(1, 'f', (df: DataFrame) => {
-            const fct = (x,y,z) => x**2-y**3+Math.abs(z)
-            const positions = df.series['positions']
-            return positions.map( p => fct(p[0], p[1], p[2]) )
-        })
-    ])
+    const mng = new Manager(df, {
+        decomposers: [
+            new FunctionalDecomposer(1, 'f', (df: DataFrame) => {
+                const fct = (x,y,z) => x**2-y**3+Math.abs(z)
+                const positions = df.series['positions']
+                return positions.map( p => fct(p[0], p[1], p[2]) )
+            })
+        ],
+        dimension: 3
+    })
 
     expect(mng.names(1)).toEqual(['f'])
 

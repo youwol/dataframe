@@ -12,21 +12,27 @@ export type Functional = {
  * User define attribute based on a DataFrame
  * @example
  * ```ts
- * const mng = new Manager(df, [
- *     new FunctionalDecomposer(1, 'MyAttr', (df: DataFrame) => {
- *         const fct = p => p[0]**2 - p[1]***3 + Math.abs(p[2])
- *         df.get('positions').map( p => fct(p) )
- *     })
- * ])
+ * const mng = new Manager(df, {
+ *      decomposers: [
+ *          new FunctionalDecomposer(1, 'MyAttr', (df: DataFrame) => {
+ *              const fct = p => p[0]**2 - p[1]***3 + Math.abs(p[2])
+ *              df.get('positions').map( p => fct(p) )
+ *          })
+ *      ],
+ *      dimension: 3
+ * })
  * ```
  * @example
  * ```ts
- * const mng = new Manager(df, [
- *     new FunctionalDecomposer(3, 'zscaled', (df: DataFrame) => {
- *         const scale = 10
- *         df.get('positions').map( (p,i) => [p[0], p[1], p[2]*scale] )
- *     })
- * ])
+ * const mng = new Manager(df, {
+ *      decomposers: [
+ *          new FunctionalDecomposer(3, 'zscaled', (df: DataFrame) => {
+ *              const scale = 10
+ *              df.get('positions').map( (p,i) => [p[0], p[1], p[2]*scale] )
+ *          })
+ *      ],
+ *      dimension: 3
+ * })
  * ```
  * @category Decomposition
  */

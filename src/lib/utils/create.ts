@@ -89,8 +89,8 @@ export function createTyped<T extends IArray = IArray>(Type: any, array: number|
  * @category Creation
  */
 export function createEmptySerie(
-    {Type, count, itemSize=1, shared=false, userData}:
-    {Type?:any, count: number, itemSize?: number, shared?: boolean, userData?:{[key:string]: any}}
+    {Type, count, itemSize=1, dimension=3, shared=false, userData}:
+    {Type?:any, count: number, itemSize?: number, dimension?: number, shared?: boolean, userData?:{[key:string]: any}} // ! use dimension
     ) : Serie
 {
     if (itemSize<=0)  throw new Error('itemSize must be > 0')
@@ -107,7 +107,7 @@ export function createEmptySerie(
     const length = count*itemSize*Type.BYTES_PER_ELEMENT
     if (shared) {
         return Serie.create({
-            array: new Type(new SharedArrayBuffer(length)), itemSize, userData})
+            array: new Type(new SharedArrayBuffer(length)), itemSize, userData, dimension})
     }
-    return Serie.create({ array:new Type(new ArrayBuffer(length)), itemSize, userData})
+    return Serie.create({ array:new Type(new ArrayBuffer(length)), itemSize, userData, dimension})
 }

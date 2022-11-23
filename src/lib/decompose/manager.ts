@@ -10,13 +10,75 @@ import { Decomposer } from './decomposer'
  * Then, using this library, it is possible to get names and underlaying
  * series of decompositions. For instance, it is possible to get the components (`itemSize=1`),
  * eigen values (`itemSize=1`), eigen vectors(`itemSize=3`)... from this original `W` serie.
+ * @example
+ * ```ts
+ * const df = DataFrame.create({
+ *     series: {
+ *         positions: Serie.create( {array: [1,2,3, 4,5,6], itemSize: 3} ),
+ *         scalar   : Serie.create( {array: [4,9], itemSize: 1}),
+ *         U        : Serie.create( {array: [6,5,4, 3,2,1], itemSize: 3} ),
+ *         S        : Serie.create( {array: [10,11,12,13,14,15, 16,17,18,19,20,21], itemSize: 6} )
+ *     }
+ * })
+ * 
+ * const manager = new Manager(df, {
+ *      decomposers: [
+ *          new PositionDecomposer,
+ *          new ComponentDecomposer,
+ *          new EigenValuesDecomposer,
+ *          new EigenVectorsDecomposer
+ *      ],
+ *      dimension: 3
+ * })
+ * 
+ * const x   = manager.serie(1, 'x')   // x coordinate
+ * const S1  = manager.serie(1, 'S1')  // first eigen value
+ * const vS1 = manager.serie(3, 'S1')  // first eigen vector
+ * const Sxx = manager.serie(1, 'Sxx') // xx component of the stress tensor
+ * 
+ * console.log( manager.names(1) ) // display all names for itemSize = 1 // scalars
+ * console.log( manager.names(3) ) // display all names for itemSize = 3 // vectors
+ * ```
  * @category Decomposition
  */
 export class Manager {
     private ds_: Decomposer[] = []
+    public readonly dimension: number = 3
 
-    constructor(private readonly df: DataFrame, options: Decomposer[] = undefined) {
-        if (options) this.ds_ = options
+    /**
+     * Two usages of the constructor for compatibility reason:
+     * 
+     * - Old fashioned. By default the dimension is set to 3 and cannot be changed:
+     * ```ts
+     * const mng = new Manager(df, [
+     *     new PositionDecomposer, 
+     *     new ComponentDecomposer
+     * ])
+     * ```
+     * 
+     * - New way. You have to provide the dimension (no default value):
+     * ```ts
+     * const mng = new Manager(df, {
+     *     decomposers: [
+     *         new PositionDecomposer, 
+     *         new ComponentDecomposer
+     *     ],
+     *     dimension: 2
+     * })
+     * ```
+     */
+    constructor(private readonly df: DataFrame, options: Decomposer[] | {decomposers: Decomposer[], dimension: number}) {
+        if (options) {
+            // For compatibility reason
+            if (Array.isArray(options)) {
+                console.warn('Deprecated ctor for Manager')
+                this.ds_ = options
+            }
+            else {
+                if (options.decomposers) this.ds_ = options.decomposers
+                if (options.dimension) this.dimension = options.dimension
+            }
+        }
     }
 
     /**
@@ -43,9 +105,11 @@ export class Manager {
 
         // add series with same itemSize
         Object.entries(this.df.series).forEach( ([name, serie]) => {
-            if (serie.itemSize === itemSize) {
+            // ! use dimension
+            if (serie.itemSize === itemSize && serie.dimension === this.dimension) {
                 // Avoid exposing directly 'positions' and 'indices'
-                if ( !(itemSize===3 && (name==='positions'||name==='indices')) ) {
+                // if ( !(itemSize===3 && (name==='positions'||name==='indices')) ) {
+                if ( name !== 'positions' && name !== 'indices' ) {
                     names.add(name)
                 }
             }

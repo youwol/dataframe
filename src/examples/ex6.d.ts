@@ -18,12 +18,15 @@
 *   }
 * })
 * 
-* const mng = new Manager(df, [
-*   new PositionDecomposer,
-*   new ComponentDecomposer,
-*   new EigenValuesDecomposer,
-*   new EigenVectorsDecomposer
-* ])
+* const mng = new Manager(df, {
+*   decomposers: [
+*       new PositionDecomposer,
+*       new ComponentDecomposer,
+*       new EigenValuesDecomposer,
+*       new EigenVectorsDecomposer
+*   ],
+*   dimension: 3
+* })
 * 
 * // Gather possible scalar series name
 * console.log( mng.names(1) )
@@ -54,18 +57,21 @@
 *   S: createSerie( {data: [...], itemSize: 6} )
 * })
 * 
-* const mng = new AttributeManager(df, [
-*   new PositionDecomposer,
-*   new ComponentDecomposer,
-*   new EigenValuesDecomposer,
-*   new EigenVectorDecomposer,
-*   new NormalsDecomposer('n'),
-*   new FunctionalDecomposer(1, 'MyAttr', (df: DataFrame) => {
-*       const fct = (x,y,z) => x**2 - y***3 + Math.abs(z)
-*       const positions = df.get('positions')
-*       positions.map( p => fct(p[0], p[1], p[2]) )
-*   })
-* ])
+* const mng = new AttributeManager(df, {
+*   decomposers= [
+*       new PositionDecomposer,
+*       new ComponentDecomposer,
+*       new EigenValuesDecomposer,
+*       new EigenVectorDecomposer,
+*       new NormalsDecomposer('n'),
+*       new FunctionalDecomposer(1, 'MyAttr', (df: DataFrame) => {
+*           const fct = (x,y,z) => x**2 - y***3 + Math.abs(z)
+*           const positions = df.get('positions')
+*           positions.map( p => fct(p[0], p[1], p[2]) )
+*       })
+*   ],
+*   dimension: 3
+* })
 * 
 * // ['x','y','z',
 * //  'a',

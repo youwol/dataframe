@@ -1,7 +1,7 @@
 import { Serie } from '../serie'
 
 /**
- * filter a [[Serie]] using a callback function.
+ * filter a [[Serie]] using a predicate function.
  * @note Operations are done using the items
  * @example
  * ```js
@@ -9,7 +9,7 @@ import { Serie } from '../serie'
  * ```
  * @category Algorithms
  */
-export const filter = (s: Serie, callback: Function) => {
+export const filter = (s: Serie, predicate: Function) => {
     if (s===undefined) throw new Error ('serie is undefined')
 
     const count = s.count
@@ -17,7 +17,7 @@ export const filter = (s: Serie, callback: Function) => {
 
     for (let i=0; i<count; ++i) {
         const v = s.itemAt(i)
-        if (callback( v, i, s )) r.push(v)
+        if (predicate( v, i, s )) r.push(v)
     }
 
     // const rr = createFrom(s.array, r.length/s.itemSize, s.itemSize)

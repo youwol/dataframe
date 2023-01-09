@@ -2,7 +2,8 @@ import { Serie } from '../serie'
 import { filter } from './filter'
 
 /**
- * cut a [[Serie]] using a callback function.
+ * Cut a [[Serie]] using a predicate function. It is essentially the same as [[filter]]
+ * @see filter
  * @category Algorithms
  */
 export const cut = (s: Serie, callback: Function) => {

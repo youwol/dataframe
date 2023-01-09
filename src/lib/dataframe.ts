@@ -44,6 +44,7 @@ export const append = ({series, index, metaData, userData}: DataFrame, news: {[k
  * already exist, it is replaced. Serie's count is checked against existing series in the dataframe, so that
  * a dataframe will contain only series with same count.
  * @returns The input dataframe (not a copy!)
+ * @category DataFrame
  */
 export const insertSerie = ({df, serie, name}:{df: DataFrame, serie: Serie, name: string}): DataFrame => {
     //! need to check that rows count are compatible
@@ -69,6 +70,7 @@ export const insertSerie = ({df, serie, name}:{df: DataFrame, serie: Serie, name
  * 
  * df = df.remove(['a', 'toto'])
  * ```
+ * @category DataFrame
  */
 export const remove = (dataframe: DataFrame, series: string|string[]): DataFrame => {
     return dataframe.remove(series)

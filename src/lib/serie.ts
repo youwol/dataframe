@@ -1,6 +1,6 @@
 import { createTyped } from "./utils/create"
 
-/** Interface for supported array in [[Serie]]:
+/** Interface for supported array in {@link Serie}:
  * -    Array
  * -    TypedArray with either shared or not buffer
  */
@@ -25,7 +25,7 @@ export interface IArray {
  * @category Base
  */
 export class Serie<T extends IArray = IArray> {
-    
+
     /**
      * The underlying array of the serie
      */
@@ -45,7 +45,7 @@ export class Serie<T extends IArray = IArray> {
     public readonly dimension: number = 3
 
     /**
-     * Whether or not [[array]] is a SharedArrayBuffer
+     * Whether or not {@link array} is a SharedArrayBuffer
      */
     public readonly shared: boolean
 
@@ -53,22 +53,22 @@ export class Serie<T extends IArray = IArray> {
      * 
      * Mutable dictionary to store consumer data (context information of the usage)
      */
-    public userData: {[key:string]: any} = {}
+    public userData: { [key: string]: any } = {}
 
     private constructor(
-        array: T, 
-        itemSize: number, 
+        array: T,
+        itemSize: number,
         shared: boolean,
-        userData: {[key:string]: any} = {},
+        userData: { [key: string]: any } = {},
         dimension: number = 3
-        ) {
+    ) {
 
-        if (array.length%itemSize !== 0) 
+        if (array.length % itemSize !== 0)
             throw new Error(`array length (${array.length}) is not a multiple of itemSize (${itemSize})`)
-        this.array     = array
-        this.itemSize  = itemSize
-        this.shared    = shared
-        this.userData  = userData
+        this.array = array
+        this.itemSize = itemSize
+        this.shared = shared
+        this.userData = userData
         this.dimension = dimension // ! use dimension
     }
 
@@ -81,39 +81,39 @@ export class Serie<T extends IArray = IArray> {
      * @param array The array of values. Can be either an instance of Array or a TypedArray.
      * For TypeArray, the underlaying buffer can be either of type ArrayBuffer or
      * SharedArrayBuffer
-     * @param itemSize The size of each item. [[count]] will be array.length / [[itemSize]]
+     * @param itemSize The size of each item. {@link count} will be array.length / {@link itemSize}
      * @param userData user data
      */
     static create<T extends IArray = IArray>(
         {
-            array, itemSize, userData, dimension=3 // ! use dimension
+            array, itemSize, userData, dimension = 3 // ! use dimension
         }:
-        {
-            array: T, itemSize: number, userData?: {[key:string]: any}, dimension?: number
-        }
-    ){
+            {
+                array: T, itemSize: number, userData?: { [key: string]: any }, dimension?: number
+            }
+    ) {
         // Type is either a Int8Array, Uint8Array etc...
-        
-        if (itemSize<=0)      throw new Error('itemSize must be > 0')
-        if (array===undefined) throw new Error('array must be provided')
+
+        if (itemSize <= 0) throw new Error('itemSize must be > 0')
+        if (array === undefined) throw new Error('array must be provided')
 
         // Check that SharedArrayBuffer are supported...
         if (typeof SharedArrayBuffer === "undefined") {
             return new Serie(array, itemSize, false, userData, dimension) // ! use dimension
         }
 
-        const shared = (array as any).buffer instanceof SharedArrayBuffer        
+        const shared = (array as any).buffer instanceof SharedArrayBuffer
         return new Serie(array, itemSize, shared, userData, dimension) // ! use dimension
     }
     /**
-     * Get the size of this serie, i.e., being [[count]] * [[itemSize]]
+     * Get the size of this serie, i.e., being {@link count} * {@link itemSize}
      */
     get length() {
         return this.array.length
     }
 
     /**
-     * Get the number of items (an item being of size [[itemCount]])
+     * Get the number of items (an item being of size {@link itemCount})
      */
     get count() {
         return this.array.length / this.itemSize
@@ -150,22 +150,22 @@ export class Serie<T extends IArray = IArray> {
         if (this.isArray) return false
         return (this.array as any).buffer instanceof SharedArrayBuffer
     }
-    
+
     at(i: number) {
         return this.array[i]
     }
 
     itemAt(i: number): number | number[] {
         const size = this.itemSize
-        if (size===1) return this.at(i)
-        const start = i*size
+        if (size === 1) return this.at(i)
+        const start = i * size
         const r = new Array(size).fill(0)
-        for (let j=0; j<size; ++j) r[j] = this.array[start+j]
+        for (let j = 0; j < size; ++j) r[j] = this.array[start + j]
         return r
     }
 
     setItemAt(i: number, value: number | IArray): void {
-        if (i>= this.count) throw new Error('array index out of bounds')
+        if (i >= this.count) throw new Error('array index out of bounds')
 
         const size = this.itemSize
 
@@ -177,8 +177,8 @@ export class Serie<T extends IArray = IArray> {
 
         const v = value as number[]
         if (v.length !== size) throw new Error(`array length (${v.length}) must equals itemSize (${size})`)
-        for (let j=0; j<size; ++j) {
-            this.array[i*size+j] = value[j]
+        for (let j = 0; j < size; ++j) {
+            this.array[i * size + j] = value[j]
         }
     }
 
@@ -186,8 +186,8 @@ export class Serie<T extends IArray = IArray> {
      * Iterate over all items
      * @param callback The callback that will called for each item
      */
-    forEach( callback: Function) {
-        for (let i=0; i<this.count; ++i) {
+    forEach(callback: Function) {
+        for (let i = 0; i < this.count; ++i) {
             callback(this.itemAt(i), i, this)
         }
     }
@@ -197,18 +197,18 @@ export class Serie<T extends IArray = IArray> {
      */
     map(callback: Function) {
         const tmp = callback(this.itemAt(0), 0, this)
-        
+
         const itemSize = (Array.isArray(tmp) ? tmp.length : 1)
         const R = this.image(this.count, itemSize)
-        
+
         let id = 0
-        for (let i=0; i<this.count; ++i) {
+        for (let i = 0; i < this.count; ++i) {
             const r = callback(this.itemAt(i), i, this)
-            if (itemSize===1) {
+            if (itemSize === 1) {
                 R.array[id++] = r
             }
             else {
-                for (let j=0; j<itemSize; ++j) {
+                for (let j = 0; j < itemSize; ++j) {
                     R.array[id++] = r[j]
                 }
             }
@@ -238,7 +238,7 @@ export class Serie<T extends IArray = IArray> {
     //     }
     //     return R
     // }
-    
+
     /**
      * Return a new serie similar to this (same type of array and buffer), and with
      * the same count and itemSize.
@@ -247,22 +247,22 @@ export class Serie<T extends IArray = IArray> {
      * @see image
      */
     clone(resetValues: boolean = false) {
-        const s = new Serie(this.array.slice(0, this.count*this.itemSize), this.itemSize, this.shared, this.userData, this.dimension) // ! use dimension
+        const s = new Serie(this.array.slice(0, this.count * this.itemSize), this.itemSize, this.shared, this.userData, this.dimension) // ! use dimension
         if (resetValues) {
-            s.array.forEach( (_,i) => s.array[i] = 0 ) // reset
+            s.array.forEach((_, i) => s.array[i] = 0) // reset
         }
         return s
     }
 
     /**
-     * Same as [[image]]. All values are set to 0 (i.e., 0, [0,0], [0,0,0]...)
+     * Same as {@link image}. All values are set to 0 (i.e., 0, [0,0], [0,0,0]...)
      * @see clone
      * @see image
      */
-    newInstance({count, itemSize, initialize=true}:{count: number, itemSize: number, initialize?: boolean}) {
-        const s = new Serie( createFrom({array:this.array, count, itemSize}), itemSize, this.shared, this.userData, this.dimension) // ! use dimension
+    newInstance({ count, itemSize, initialize = true }: { count: number, itemSize: number, initialize?: boolean }) {
+        const s = new Serie(createFrom({ array: this.array, count, itemSize }), itemSize, this.shared, this.userData, this.dimension) // ! use dimension
         if (initialize) {
-            for (let i=0; i<s.array.length; ++i) s.array[i] = 0
+            for (let i = 0; i < s.array.length; ++i) s.array[i] = 0
         }
         return s
     }
@@ -277,7 +277,7 @@ export class Serie<T extends IArray = IArray> {
      * @see newInstance
      */
     image(count: number, itemSize: number) {
-        return this.newInstance({count, itemSize})
+        return this.newInstance({ count, itemSize })
     }
 }
 
@@ -287,10 +287,10 @@ export class Serie<T extends IArray = IArray> {
  * @category Creation
  */
 export function createFrom<T extends IArray>(
-    {array, count, itemSize}:
-    {array: T, count: number, itemSize: number}): IArray {
+    { array, count, itemSize }:
+        { array: T, count: number, itemSize: number }): IArray {
 
-    const length = count*itemSize
+    const length = count * itemSize
 
     if (Array.isArray(array)) {
         return new Array(length)
@@ -300,17 +300,17 @@ export function createFrom<T extends IArray>(
     if (typeof SharedArrayBuffer !== "undefined") {
         isShared = (array as any).buffer instanceof SharedArrayBuffer
     }
-    
-    
-    if (array instanceof Int8Array)         return createTyped(Int8Array,         length, isShared)
-    if (array instanceof Uint8Array)        return createTyped(Uint8Array,        length, isShared)
+
+
+    if (array instanceof Int8Array) return createTyped(Int8Array, length, isShared)
+    if (array instanceof Uint8Array) return createTyped(Uint8Array, length, isShared)
     if (array instanceof Uint8ClampedArray) return createTyped(Uint8ClampedArray, length, isShared)
-    if (array instanceof Int16Array)        return createTyped(Int16Array,        length, isShared)
-    if (array instanceof Uint16Array)       return createTyped(Uint16Array,       length, isShared)
-    if (array instanceof Int32Array)        return createTyped(Int32Array,        length, isShared)
-    if (array instanceof Uint32Array)       return createTyped(Uint32Array,       length, isShared)
-    if (array instanceof Float32Array)      return createTyped(Float32Array,      length, isShared)
-    if (array instanceof Float64Array)      return createTyped(Float64Array,      length, isShared)
-    if (array instanceof BigInt64Array)     return createTyped(BigInt64Array,     length, isShared)
-    if (array instanceof BigUint64Array)    return createTyped(BigUint64Array,    length, isShared)
+    if (array instanceof Int16Array) return createTyped(Int16Array, length, isShared)
+    if (array instanceof Uint16Array) return createTyped(Uint16Array, length, isShared)
+    if (array instanceof Int32Array) return createTyped(Int32Array, length, isShared)
+    if (array instanceof Uint32Array) return createTyped(Uint32Array, length, isShared)
+    if (array instanceof Float32Array) return createTyped(Float32Array, length, isShared)
+    if (array instanceof Float64Array) return createTyped(Float64Array, length, isShared)
+    if (array instanceof BigInt64Array) return createTyped(BigInt64Array, length, isShared)
+    if (array instanceof BigUint64Array) return createTyped(BigUint64Array, length, isShared)
 }

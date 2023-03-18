@@ -5,5 +5,5 @@ import { DataFrame } from '../dataframe'
  * @category Utils
  */
 export const getNameSeries = (df: DataFrame) => {
-    return Object.entries(df.series).map( ([name, serie]) => name )
+    return Object.entries(df.series).map(([name, serie]) => name)
 }

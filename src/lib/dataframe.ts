@@ -11,14 +11,14 @@ import { Serie } from './serie'
  * ```
  * @category DataFrame
  */
-export const merge = (dfs: DataFrame[], index?:string): DataFrame => {
+export const merge = (dfs: DataFrame[], index?: string): DataFrame => {
     // What if multiple column with same name
     // What about userData, metaData
-    let series = dfs.reduce( (acc, e) => ({...acc, ...e.series}) , {})
-    let userData =  dfs.reduce( (acc, e) => ({...acc, ...e.userData}) , {})
-    let metaData =  dfs.reduce( (acc, e) => ({...acc, ...e.metaData}) , {})
-    
-    return DataFrame.create({series, userData, metaData, index})
+    let series = dfs.reduce((acc, e) => ({ ...acc, ...e.series }), {})
+    let userData = dfs.reduce((acc, e) => ({ ...acc, ...e.userData }), {})
+    let metaData = dfs.reduce((acc, e) => ({ ...acc, ...e.metaData }), {})
+
+    return DataFrame.create({ series, userData, metaData, index })
 }
 
 /**
@@ -33,9 +33,9 @@ export const merge = (dfs: DataFrame[], index?:string): DataFrame => {
  * ```
  * @category DataFrame
  */
-export const append = ({series, index, metaData, userData}: DataFrame, news: {[key:string]: Serie}): DataFrame => {
+export const append = ({ series, index, metaData, userData }: DataFrame, news: { [key: string]: Serie }): DataFrame => {
     //! need to check that rows count are compatible
-    return DataFrame.create({ series: {...series, ...news}, index, metaData, userData})
+    return DataFrame.create({ series: { ...series, ...news }, index, metaData, userData })
 }
 
 /**
@@ -46,10 +46,10 @@ export const append = ({series, index, metaData, userData}: DataFrame, news: {[k
  * @returns The input dataframe (not a copy!)
  * @category DataFrame
  */
-export const insertSerie = ({df, serie, name}:{df: DataFrame, serie: Serie, name: string}): DataFrame => {
+export const insertSerie = ({ df, serie, name }: { df: DataFrame, serie: Serie, name: string }): DataFrame => {
     //! need to check that rows count are compatible
-    const names = Object.entries(df.series).map( ([name, serie]) => name)
-    const count = names.length !== 0 ? df.series[names[0]].count: 0
+    const names = Object.entries(df.series).map(([name, serie]) => name)
+    const count = names.length !== 0 ? df.series[names[0]].count : 0
 
     if (count !== 0 && serie.count !== count) {
         throw new Error('Provided serie count must be equal to existing series count')
@@ -63,7 +63,7 @@ export const insertSerie = ({df, serie, name}:{df: DataFrame, serie: Serie, name
  * Remove a serie or a list of series (given by there name) from a dataframe.
  * @param dataframe The dataframe
  * @param serieName The serie of a list of series given by their names
- * @returns A new [[Dataframe]] even if no modification
+ * @returns A new {@link Dataframe} even if no modification
  * @example
  * ```ts
  * let df = ...
@@ -72,7 +72,7 @@ export const insertSerie = ({df, serie, name}:{df: DataFrame, serie: Serie, name
  * ```
  * @category DataFrame
  */
-export const remove = (dataframe: DataFrame, series: string|string[]): DataFrame => {
+export const remove = (dataframe: DataFrame, series: string | string[]): DataFrame => {
     return dataframe.remove(series)
 }
 
@@ -84,7 +84,7 @@ export class DataFrame {
     /**
      * Mapping between column id and serie
      */
-    public readonly series: {[key:string]: Serie}
+    public readonly series: { [key: string]: Serie }
 
     /**
      * Convenient method to iterate over all series
@@ -106,32 +106,32 @@ export class DataFrame {
      * })
      * ```
      */
-    public forEach( cb: Function) {
-        Object.entries(this.series).forEach( ([name, serie], i) => cb(name, serie, i) )
+    public forEach(cb: Function) {
+        Object.entries(this.series).forEach(([name, serie], i) => cb(name, serie, i))
     }
 
     /**
      * If provided, the column that acts as index
      */
-    public readonly index : string | undefined = undefined
+    public readonly index: string | undefined = undefined
 
     /**
      * 
      * Mutable dictionary to store consumer data (context information of the usage)
      */
-    public userData: {[key:string]: any} = {}
+    public userData: { [key: string]: any } = {}
 
     /**
      * 
      * Dictionary to store metadata (context information of the dataframe's creation)
      */
-    public readonly metaData: {[key:string]: any} = {}
+    public readonly metaData: { [key: string]: any } = {}
 
     private constructor(
-        series: {[key:string]: Serie},
+        series: { [key: string]: Serie },
         index: string,
-        userData: {[key:string]: any},
-        metaData: {[key:string]: any}
+        userData: { [key: string]: any },
+        metaData: { [key: string]: any }
     ) {
         this.series = series
         this.index = index
@@ -148,7 +148,7 @@ export class DataFrame {
     }
 
     /**
-     * The dataframe class which contains a list of [[Serie]]
+     * The dataframe class which contains a list of {@link Serie}
      * @example
      * ```ts
      * const df = DataFrame.create({
@@ -167,20 +167,19 @@ export class DataFrame {
      * @category DataFrame
      */
     static create(
-        {series, userData, metaData, index}: {
-            series: {[key:string]:Serie},
-            index?:string,
-            userData?: {[key:string]:any},
-            metaData?: {[key:string]:any}
-        }): DataFrame
-    {
-        return new DataFrame(series,index, userData || {}, metaData || {})
+        { series, userData, metaData, index }: {
+            series: { [key: string]: Serie },
+            index?: string,
+            userData?: { [key: string]: any },
+            metaData?: { [key: string]: any }
+        }): DataFrame {
+        return new DataFrame(series, index, userData || {}, metaData || {})
     }
 
     /**
      * Remove a serie or a list of series (given by their name) from this dataframe.
      * @param serieName 
-     * @returns A new [[Dataframe]] even if no modification
+     * @returns A new {@link Dataframe} even if no modification
      * @example
      * ```ts
      * let df = ...
@@ -192,7 +191,7 @@ export class DataFrame {
         const df = this.clone()
 
         if (Array.isArray(serieName)) {
-            serieName.forEach( name => {
+            serieName.forEach(name => {
                 if (df.series.hasOwnProperty(name)) {
                     delete df.series[name]
                 }

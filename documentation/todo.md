@@ -1,3 +1,4 @@
+- `zip` as in https://gist.github.com/xaliphostes/140b69b2262451be9f2cab75984441b7
 - `check`
 - `_if`
 - `checkNaN`

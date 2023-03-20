@@ -1,75 +1,60 @@
-# A Pandas like dataframe in TypeScript.
+# @youwol/dataframe
 
-<p>
-    <a href="https://github.com/kefranabg/readme-md-generator/graphs/commit-activity" target="_blank">
-        <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
-    </a>
-    <a href="https://github.com/youwol/dataframe/blob/main/LICENSE.md" target="_blank">
-        <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
-    </a>
-</p>
+A Panda like dataframe in TypeScript
 
-This library provides an immutable data structure for javascript and datascience using `Array` and `TypedArray` with `ArrayBuffer` or `SharedArrayBuffer`, and which allows to work on rows and columns using functional programming.
+This library is part of the hybrid cloud/local ecosystem
+[YouWol](https://platform.youwol.com/applications/@youwol/platform/latest).
 
-## Extension
-A mathematical extension of this library is provided in [@youwol/math](https://github.com/youwol/math)
+## Links
 
-## Documentation
-See the [online documentation](https://youwol.github.io/dataframe/dist/docs/index.html).
+[Online user-guide](https://l.youwol.com/doc/@youwol/dataframe)
 
-## License <a name="license"></a>
-[MIT license](https://github.com/youwol/dataframe/blob/main/LICENSE.md)
+[Developers documentation](https://platform.youwol.com/applications/@youwol/cdn-explorer/latest?package=@youwol/dataframe)
 
-___
+[Package on npm](https://www.npmjs.com/package/@youwol/dataframe)
 
-## Examples of how to create Series
-In the following, we use itemSize = 3 as an example.
-### From an Array
-```ts
-import { Serie } from '@youwol/dataframe'
+[Source on GitHub](https://github.com/youwol/dataframe)
 
-const array = new Array(...)
-const serie = Serie.create({
-    array: array as IArray,
-    itemSize: 3
-})
+# Installation, Build, Test
+
+To install the required dependencies:
+
+```shell
+yarn
 ```
 
-### From a TypedArray
-```ts
-import { Serie } from '@youwol/dataframe'
+---
 
-const typedArray = new Float32Array(...)
-const serie = Serie.create({
-    array: typedArray as IArray,
-    itemSize: 3
-})
+To build for development:
+
+```shell
+yarn build:dev
 ```
 
-### From a BufferAttribute (Three.js)
-```ts
-import { Serie } from '@youwol/dataframe'
-import { BufferAttribute } from 'three'
+To build for production:
 
-const bufferAttribute = new BufferAttribute(...)
-const serie = Serie.create({
-    array: bufferAttribute.array as IArray,
-    itemSize: 3
-})
+```shell
+yarn build:prod
 ```
 
-### How to iterate over multiple series
-```ts
-import { forEach, map, Serie } from '@youwol/dataframe'
+---
 
-const S1 = Serie.create({ array, itemSize: 1 })
-const S2 = Serie.create({ array, itemSize: 1 })
-const S3 = Serie.create({ array, itemSize: 1 })
+To run tests:
 
-forEach([S1, S2, S3], ([s1, s2, s3]) => {
-    console.log(s1, s2, s3)
-})
+```shell
+yarn test
+```
 
-// create a serie with itemSize = 3
-const s = map([S1, S2, S3], ([s1, s2, s3]) => [s1, s2, s3] )
+Coverage can be evaluated using:
+
+```shell
+yarn test-coverage
+```
+
+---
+
+To generate code's documentation:
+
+```shell
+yarn doc
 ```

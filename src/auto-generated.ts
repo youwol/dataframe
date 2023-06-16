@@ -22,7 +22,7 @@ export const setup = {
         assetId:'QHlvdXdvbC9kYXRhZnJhbWU=',
     version:'0.1.0-wip',
     shortDescription:"A Panda like dataframe in TypeScript",
-    developerDocumentation:'https://platform.youwol.com/applications/@youwol/cdn-explorer/latest?package=@youwol/dataframe',
+    developerDocumentation:'https://platform.youwol.com/applications/@youwol/cdn-explorer/latest?package=@youwol/dataframe&tab=doc',
     npmPackage:'https://www.npmjs.com/package/@youwol/dataframe',
     sourceGithub:'https://github.com/youwol/dataframe',
     userGuide:'https://l.youwol.com/doc/@youwol/dataframe',
@@ -37,7 +37,7 @@ export const setup = {
     },
 
     installMainModule: ({cdnClient, installParameters}:{
-        cdnClient:{install:(unknown) => Promise<Window>},
+        cdnClient:{install:(unknown) => Promise<WindowOrWorkerGlobalScope>},
         installParameters?
     }) => {
         const parameters = installParameters || {}
@@ -56,7 +56,7 @@ export const setup = {
     },
     installAuxiliaryModule: ({name, cdnClient, installParameters}:{
         name: string,
-        cdnClient:{install:(unknown) => Promise<Window>},
+        cdnClient:{install:(unknown) => Promise<WindowOrWorkerGlobalScope>},
         installParameters?
     }) => {
         const entry = secondaryEntries[name]

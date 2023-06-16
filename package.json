@@ -1,46 +1,53 @@
 {
-  "name": "@youwol/dataframe",
-  "version": "0.0.38",
-  "license": "MIT",
-  "description": "A Panda like dataframe in TypeScript",
-  "author": "fmaerten@youwol.com",
-  "keywords": [
-    "youwol",
-    "dataframe"
-  ],
-  "main": "dist/@youwol/dataframe.js",
-  "types": "src/index.ts",
-  "scripts": {
-    "autogen": "node scripts/auto-gen.js",
-    "build": "yarn build:dev",
-    "build:dev": "webpack --mode development",
-    "build:prod": "webpack --mode production",
-    "test": "jest -c ./jest.config.js --rootDir .",
-    "test-coverage": "jest -c ./jest.config.js --rootDir . --collect-coverage --collectCoverageFrom=./src/lib/**/*.ts ",
-    "_doc": "rm -fr dist/docs && typedoc src/ src/examples --exclude src/lib --exclude src/tests --media ./media --excludePrivate --disableSources --out dist/docs --includeVersion --hideGenerator",
-    "doc": "typedoc src/ src/examples --excludePrivate --disableSources -name 'DataFrame' --media ./media --out dist/docs --includeVersion --hideGenerator",
-    "publish-npm-public": "yarn build:prod && yarn test-coverage && yarn publish --access public"
-  },
-  "peerDependencies": {},
-  "devDependencies": {
-    "@types/node": "14.14.16",
-    "eslint": "7.16.0",
-    "eslint-loader": "4.0.2",
-    "jest": "26.6.3",
-    "jest-junit": "12.0.0",
-    "ts-jest": "26.4.4",
-    "ts-loader": "8.1.0",
-    "tslib": "^2.3.0",
-    "typedoc": "^0.22.11",
-    "typescript": "4.2.3",
-    "webpack": "^5.75.0",
-    "webpack-cli": "5.0.0"
-  },
-  "youwol": {
-    "pipeline": {
-      "name": "yw_pipeline_webpack_ts",
-      "version": "0.0.0"
+    "name": "@youwol/dataframe",
+    "description": "A Panda like dataframe in TypeScript",
+    "version": "0.1.0-wip",
+    "author": "fmaerten@youwol.com",
+    "homepage": "https://github.com/youwol/dataframe#README.md",
+    "main": "dist/@youwol/dataframe.js",
+    "types": "src/index.ts",
+    "scripts": {
+        "clean": "del-cli dist",
+        "auto-gen": "python template.py",
+        "build": "yarn build:dev",
+        "pre-build": "yarn clean",
+        "build:dev": "yarn pre-build && webpack --mode development",
+        "build:prod": "yarn pre-build && webpack --mode production",
+        "lint-check": "yarn lint-prettier-check && yarn lint-eslint-check",
+        "lint-prettier-check": "prettier --check ./src",
+        "lint-eslint-check": "eslint ./src",
+        "test": "jest -i",
+        "test-coverage": "jest -i --collect-coverage",
+        "doc": "typedoc",
+        "publish-npm-public": "yarn build:prod && yarn test-coverage && yarn publish --access public"
     },
-    "cdnDependencies": {}
-  }
+    "devDependencies": {
+        "@types/node": "^18.14.2",
+        "typescript": "^4.7.4",
+        "ts-lib": "^0.0.5",
+        "ts-node": "^10.9.1",
+        "ts-loader": "^9.3.1",
+        "@types/jest": "^29.2.4",
+        "isomorphic-fetch": "^3.0.0",
+        "typedoc": "^0.23.8",
+        "webpack": "^5.73.0",
+        "webpack-cli": "4.9.2",
+        "webpack-bundle-analyzer": "4.5.0",
+        "@types/webpack": "^5.28.0",
+        "del-cli": "^5.0.0",
+        "@youwol/prettier-config": "^0.1.0",
+        "@youwol/eslint-config": "^0.1.0",
+        "@youwol/tsconfig": "^0.1.0",
+        "@youwol/jest-preset": "0.1.0"
+    },
+    "prettier": "@youwol/prettier-config",
+    "eslintConfig": {
+        "extends": [
+            "@youwol"
+        ]
+    },
+    "dependencies": {},
+    "youwol": {
+        "cdnDependencies": {}
+    }
 }

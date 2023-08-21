@@ -111,7 +111,7 @@ export class Matrix {
 
     /**
      * Return a copy of the underlaying array (flatten components). If the matrix
-     * is symmetric, a compress array is returned.
+     * is symmetric, a compressed array is returned.
      */
     get array() {
         if (this.isSymmetric) {

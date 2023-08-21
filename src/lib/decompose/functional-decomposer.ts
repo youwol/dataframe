@@ -9,7 +9,7 @@ export type Functional = {
 }
 
 /**
- * User define attribute based on a DataFrame
+ * User defined attribute based on a DataFrame
  * @example
  * ```ts
  * const mng = new Manager(df, {

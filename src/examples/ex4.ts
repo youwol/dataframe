@@ -1,23 +1,23 @@
 /**
  * Using DataFrame and others
- * 
+ *
  * ```ts
  * import { DataFrame } from '@youwol/dataframe'
  * import { createEmptySeries, createSerie, createArray } from '@youwol/dataframe/utils'
  * import { trace, add, mult } from '@youwol/dataframe/math'
- * 
+ *
  * let df = new DataFrame({
  *     series: {
  *         a: createEmptySerie({ // length = 2*3
- *             Type     : Float32Array, 
- *             count    : 2, 
- *             itemSize : 3, 
- *             shared   : true
- *             }), 
- *         b: createEmptySerie({ // length = 2*3
- *             Type     : Float64Array, 
+ *             Type     : Float32Array,
  *             count    : 2,
- *             itemSize : 3, 
+ *             itemSize : 3,
+ *             shared   : true
+ *             }),
+ *         b: createEmptySerie({ // length = 2*3
+ *             Type     : Float64Array,
+ *             count    : 2,
+ *             itemSize : 3,
  *             shared   : false
  *             }),
  *         c: Serie.create( {array: createArray(10, i => i), itemSize: 5}), // length = 10
@@ -33,31 +33,31 @@
  *         id: 'dataframe-1'
  *     }
  * })
- * 
+ *
  * console.log( trace( df.get('c') ) )
- * 
+ *
  * console.log('add =', add(
  *     df.get('c'),
  *     100
  * ))
- * 
+ *
  * console.log('mult =', mult(
  *     df.get('c'),
  *     100
  * ))
- * 
+ *
  * // Performs a weighted sum of 2 series
  * const a = add(
  *     mult( df.get('a'), 0.1 ),
  *     mult( df.get('b'), 0.2 )
  * )
  * console.log(a)
- * 
+ *
  * df = append(df, {'d': a})
  * ```
- * 
+ *
  * will display
- * 
+ *
  * ```sh
  * [ 10, 35 ]
  * add = Serie {

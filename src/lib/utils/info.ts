@@ -15,15 +15,15 @@ export const info = (df: DataFrame | Serie): any => {
             count: s.count,
             itemSize: s.itemSize,
             dimension: s.dimension,
-            array: s.array
+            array: s.array,
         }
     }
 
     const DF = df as DataFrame
-    
+
     return {
         userData: DF.userData,
-        series: Object.entries(DF.series).map( ([name, serie]) =>  {
+        series: Object.entries(DF.series).map(([name, serie]) => {
             return {
                 name,
                 userData: serie.userData,
@@ -34,8 +34,8 @@ export const info = (df: DataFrame | Serie): any => {
                 count: serie.count,
                 itemSize: serie.itemSize,
                 dimension: serie.dimension,
-                array: serie.array
+                array: serie.array,
             }
-        })
+        }),
     }
 }

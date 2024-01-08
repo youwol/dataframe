@@ -1,5 +1,5 @@
 import { Serie, DataFrame } from '..'
-import { Decomposer } from "./decomposer"
+import { Decomposer } from './decomposer'
 
 /**
  * @category Decomposition
@@ -38,30 +38,33 @@ export type Functional = {
  */
 export class FunctionalDecomposer implements Decomposer {
     /**
-     * 
+     *
      * @param itemSize The item size of the attribute
      * @param name The name of the atribute
      * @param fct The fonctional
      * @see [[Functional]]
      */
-    constructor(private readonly itemSize: number, private readonly name: string, private readonly fct: Functional) {
-    }
+    constructor(
+        private readonly itemSize: number,
+        private readonly name: string,
+        private readonly fct: Functional,
+    ) {}
     /**
-     * @hidden 
+     * @hidden
      */
     names(df: DataFrame, itemSize: number, serie: Serie, name: string) {
         if (itemSize !== this.itemSize) return []
-        
+
         const s = this.fct(df)
         if (!s) return []
 
         return [this.name]
     }
     /**
-     * @hidden 
+     * @hidden
      */
     serie(df: DataFrame, itemSize: number, name: string): Serie {
-        if (itemSize!==this.itemSize || this.name!==name) return undefined
-        return this.fct(df)//.setName(this.name)
+        if (itemSize !== this.itemSize || this.name !== name) return undefined
+        return this.fct(df) //.setName(this.name)
     }
 }

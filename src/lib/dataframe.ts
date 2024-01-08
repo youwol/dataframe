@@ -33,9 +33,17 @@ export const merge = (dfs: DataFrame[], index?: string): DataFrame => {
  * ```
  * @category DataFrame
  */
-export const append = ({ series, index, metaData, userData }: DataFrame, news: { [key: string]: Serie }): DataFrame => {
+export const append = (
+    { series, index, metaData, userData }: DataFrame,
+    news: { [key: string]: Serie },
+): DataFrame => {
     //! need to check that rows count are compatible
-    return DataFrame.create({ series: { ...series, ...news }, index, metaData, userData })
+    return DataFrame.create({
+        series: { ...series, ...news },
+        index,
+        metaData,
+        userData,
+    })
 }
 
 /**
@@ -46,13 +54,23 @@ export const append = ({ series, index, metaData, userData }: DataFrame, news: {
  * @returns The input dataframe (not a copy!)
  * @category DataFrame
  */
-export const insertSerie = ({ df, serie, name }: { df: DataFrame, serie: Serie, name: string }): DataFrame => {
+export const insertSerie = ({
+    df,
+    serie,
+    name,
+}: {
+    df: DataFrame
+    serie: Serie
+    name: string
+}): DataFrame => {
     //! need to check that rows count are compatible
     const names = Object.entries(df.series).map(([name, serie]) => name)
     const count = names.length !== 0 ? df.series[names[0]].count : 0
 
     if (count !== 0 && serie.count !== count) {
-        throw new Error('Provided serie count must be equal to existing series count')
+        throw new Error(
+            'Provided serie count must be equal to existing series count',
+        )
     }
 
     df.series[name] = serie
@@ -67,12 +85,15 @@ export const insertSerie = ({ df, serie, name }: { df: DataFrame, serie: Serie, 
  * @example
  * ```ts
  * let df = ...
- * 
+ *
  * df = df.remove(['a', 'toto'])
  * ```
  * @category DataFrame
  */
-export const remove = (dataframe: DataFrame, series: string | string[]): DataFrame => {
+export const remove = (
+    dataframe: DataFrame,
+    series: string | string[],
+): DataFrame => {
     return dataframe.remove(series)
 }
 
@@ -80,7 +101,6 @@ export const remove = (dataframe: DataFrame, series: string | string[]): DataFra
  * @category Base
  */
 export class DataFrame {
-
     /**
      * Mapping between column id and serie
      */
@@ -96,18 +116,20 @@ export class DataFrame {
      *          b: ...,
      *      }
      * })
-     * 
+     *
      * df.forEach( (name, serie, i) => {
-     *      console.log('serie named', name, 
-     *                  'at index', i, 
-     *                  ', count=', serie.count, 
+     *      console.log('serie named', name,
+     *                  'at index', i,
+     *                  ', count=', serie.count,
      *                  ', itemSize=', serie.itemSize
      *      )
      * })
      * ```
      */
     public forEach(cb: Function) {
-        Object.entries(this.series).forEach(([name, serie], i) => cb(name, serie, i))
+        Object.entries(this.series).forEach(([name, serie], i) =>
+            cb(name, serie, i),
+        )
     }
 
     /**
@@ -116,13 +138,13 @@ export class DataFrame {
     public readonly index: string | undefined = undefined
 
     /**
-     * 
+     *
      * Mutable dictionary to store consumer data (context information of the usage)
      */
     public userData: { [key: string]: any } = {}
 
     /**
-     * 
+     *
      * Dictionary to store metadata (context information of the dataframe's creation)
      */
     public readonly metaData: { [key: string]: any } = {}
@@ -131,7 +153,7 @@ export class DataFrame {
         series: { [key: string]: Serie },
         index: string,
         userData: { [key: string]: any },
-        metaData: { [key: string]: any }
+        metaData: { [key: string]: any },
     ) {
         this.series = series
         this.index = index
@@ -141,7 +163,7 @@ export class DataFrame {
 
     /**
      * Check if the serie named name is in the dataframe
-     * @param name 
+     * @param name
      */
     contains(name: string) {
         return this.series[name] !== undefined
@@ -166,24 +188,28 @@ export class DataFrame {
      * ```
      * @category DataFrame
      */
-    static create(
-        { series, userData, metaData, index }: {
-            series: { [key: string]: Serie },
-            index?: string,
-            userData?: { [key: string]: any },
-            metaData?: { [key: string]: any }
-        }): DataFrame {
+    static create({
+        series,
+        userData,
+        metaData,
+        index,
+    }: {
+        series: { [key: string]: Serie }
+        index?: string
+        userData?: { [key: string]: any }
+        metaData?: { [key: string]: any }
+    }): DataFrame {
         return new DataFrame(series, index, userData || {}, metaData || {})
     }
 
     /**
      * Remove a serie or a list of series (given by their name) from this dataframe.
-     * @param serieName 
+     * @param serieName
      * @returns A new {@link Dataframe} even if no modification
      * @example
      * ```ts
      * let df = ...
-     * 
+     *
      * df = df.remove(['a', 'toto'])
      * ```
      */
@@ -191,13 +217,12 @@ export class DataFrame {
         const df = this.clone()
 
         if (Array.isArray(serieName)) {
-            serieName.forEach(name => {
+            serieName.forEach((name) => {
                 if (df.series.hasOwnProperty(name)) {
                     delete df.series[name]
                 }
             })
-        }
-        else {
+        } else {
             if (df.series.hasOwnProperty(serieName)) {
                 delete df.series[serieName]
             }
@@ -206,6 +231,11 @@ export class DataFrame {
     }
 
     clone() {
-        return new DataFrame(this.series, this.index, this.userData, this.metaData)
+        return new DataFrame(
+            this.series,
+            this.index,
+            this.userData,
+            this.metaData,
+        )
     }
 }

@@ -5,7 +5,6 @@ import { DataFrame, Serie } from '..'
  * @category Decomposition
  */
 export interface Decomposer {
-     
     /**
      * Get the potential names decomposition
      * @param df The dataframe supporting the series

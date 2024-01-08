@@ -1,45 +1,69 @@
-
-import { DataFrame, createEmptySerie, exists, info, createTyped, Serie, append, insertSerie, getNameSeries }    from '../lib'
+import {
+    DataFrame,
+    createEmptySerie,
+    exists,
+    info,
+    createTyped,
+    Serie,
+    append,
+    insertSerie,
+    getNameSeries,
+} from '../lib'
 
 test('dataframe test 1', () => {
-
     const df = DataFrame.create({
-        series:{
-            a: createEmptySerie({Type: Float32Array, count:2, itemSize:3, shared: true }),
-            b: createEmptySerie({Type: Float64Array, count:2, itemSize:3, shared: false}),
-            c: Serie.create({array: [0,1,2,3,4,5,6,7,8,9], itemSize: 5}),
-            d: Serie.create({array: createTyped(Float32Array, [1, 2, 3, 4, 5, 6], true), itemSize: 3})
-        }
+        series: {
+            a: createEmptySerie({
+                Type: Float32Array,
+                count: 2,
+                itemSize: 3,
+                shared: true,
+            }),
+            b: createEmptySerie({
+                Type: Float64Array,
+                count: 2,
+                itemSize: 3,
+                shared: false,
+            }),
+            c: Serie.create({
+                array: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                itemSize: 5,
+            }),
+            d: Serie.create({
+                array: createTyped(Float32Array, [1, 2, 3, 4, 5, 6], true),
+                itemSize: 3,
+            }),
+        },
     })
 
     // df.forEach( (name, serie, i) => {
     //     console.log(name, i, serie.itemSize, serie.count)
     // })
 
-    expect( exists(df, 'a') ).toBeTruthy()
-    expect( exists(df, 'b') ).toBeTruthy()
-    expect( exists(df, 'c') ).toBeTruthy()
-    expect( exists(df, 'd') ).toBeTruthy()
+    expect(exists(df, 'a')).toBeTruthy()
+    expect(exists(df, 'b')).toBeTruthy()
+    expect(exists(df, 'c')).toBeTruthy()
+    expect(exists(df, 'd')).toBeTruthy()
 
-    expect( df.series.a.isArray ).toBeFalsy()
-    expect( df.series.b.isArray ).toBeFalsy()
-    expect( df.series.c.isArray ).toBeTruthy()
-    expect( df.series.d.isArray ).toBeFalsy()
+    expect(df.series.a.isArray).toBeFalsy()
+    expect(df.series.b.isArray).toBeFalsy()
+    expect(df.series.c.isArray).toBeTruthy()
+    expect(df.series.d.isArray).toBeFalsy()
 })
 
 test('dataframe test 2', () => {
+    const df = DataFrame.create({
+        series: {
+            a: Serie.create({ array: new Array(21).fill(2), itemSize: 3 }),
+        },
+        userData: {
+            info: 'some info',
+        },
+    })
 
-    const df = DataFrame.create(
-        {
-            series:{'a': Serie.create( {array: new Array(21).fill(2), itemSize: 3} )},
-            userData: {
-                info: "some info"
-            }
-        })
-
-    expect( exists(df, 'a') ).toBeTruthy()
+    expect(exists(df, 'a')).toBeTruthy()
     expect(df.userData).toBeDefined()
-    expect(df.userData).toStrictEqual({'info': 'some info'})
+    expect(df.userData).toStrictEqual({ info: 'some info' })
 
     const i = info(df)
     expect(i.series.length).toEqual(1)
@@ -61,47 +85,55 @@ test('dataframe test 2', () => {
 })
 
 test('dataframe test append', () => {
-
-    let df = DataFrame.create(
-        {
-            series:{'a': Serie.create( {array: new Array(21).fill(2), itemSize: 3} )},
-            userData: {
-                info: "some info"
-            }
-        })
+    let df = DataFrame.create({
+        series: {
+            a: Serie.create({ array: new Array(21).fill(2), itemSize: 3 }),
+        },
+        userData: {
+            info: 'some info',
+        },
+    })
 
     expect(df.series.a).toBeTruthy()
     expect(df.series.b).toBeFalsy()
 
-    df = append( df, {
-        b:  Serie.create( {array: [1,2,3], itemSize: 1})
+    df = append(df, {
+        b: Serie.create({ array: [1, 2, 3], itemSize: 1 }),
     })
     expect(df.series.a).toBeTruthy()
     expect(df.series.b).toBeTruthy()
 })
 
 test('dataframe test insertSerie', () => {
-
     let df = DataFrame.create({
         series: {
-            'a': Serie.create( {array: new Array(21).fill(2), itemSize: 3} )
-        }
+            a: Serie.create({ array: new Array(21).fill(2), itemSize: 3 }),
+        },
     })
 
     // Same count
-    insertSerie({df: df, serie: Serie.create({array: new Array(21).fill(3), itemSize: 3}), name: ''})
+    insertSerie({
+        df: df,
+        serie: Serie.create({ array: new Array(21).fill(3), itemSize: 3 }),
+        name: '',
+    })
 
     // Different count
-    expect(() => {insertSerie({df: df, serie: Serie.create({array: new Array(24).fill(3), itemSize: 3}), name: ''})}).toThrow(Error);
+    expect(() => {
+        insertSerie({
+            df: df,
+            serie: Serie.create({ array: new Array(24).fill(3), itemSize: 3 }),
+            name: '',
+        })
+    }).toThrow(Error)
 })
 
 test('dataframe test name of series', () => {
-
     let df = DataFrame.create({
         series: {
-            'a': Serie.create( {array: new Array(21).fill(2), itemSize: 3} ),
-            'b': Serie.create( {array: new Array(21).fill(2), itemSize: 3} )
-        }
+            a: Serie.create({ array: new Array(21).fill(2), itemSize: 3 }),
+            b: Serie.create({ array: new Array(21).fill(2), itemSize: 3 }),
+        },
     })
 
     const names = getNameSeries(df)

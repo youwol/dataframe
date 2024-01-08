@@ -1,4 +1,4 @@
-import { Serie } from "../serie";
+import { Serie } from '../serie'
 
 /**
  * Return a duplicate of the passed serie (same type, same count, same itemSize and same values)

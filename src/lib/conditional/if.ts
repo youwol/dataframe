@@ -1,8 +1,7 @@
-
-import { Serie } from "../serie"
+import { Serie } from '../serie'
 
 /**
- * 
+ *
  * @param a The input serie
  * @param check The check function
  * @param True The function called when check returns true for a given item
@@ -14,5 +13,12 @@ import { Serie } from "../serie"
  * ```
  * @category Conditional
  */
-export const _if = (a: Serie, check: Function, True: Function, False: Function) => 
-    a.map( (value,i) => check(value)===true ? True(value, i, a) : False(value, i, a) )
+export const _if = (
+    a: Serie,
+    check: Function,
+    True: Function,
+    False: Function,
+) =>
+    a.map((value, i) =>
+        check(value) === true ? True(value, i, a) : False(value, i, a),
+    )

@@ -1,4 +1,4 @@
-import { IArray, Serie } from "../serie"
+import { IArray, Serie } from '../serie'
 
 /**
  * Create an Array of a given length and with an initial value set
@@ -13,10 +13,10 @@ import { IArray, Serie } from "../serie"
  * ```
  * @category Creation
  */
-export function createArray(length: number, init?: Function | number ) {
+export function createArray(length: number, init?: Function | number) {
     if (init === undefined) return new Array(length).fill(undefined)
     if (init instanceof Function) {
-        return new Array(length).fill(undefined).map( (_,i) => init(i) )
+        return new Array(length).fill(undefined).map((_, i) => init(i))
     }
     return new Array(length).fill(init)
 }
@@ -48,25 +48,26 @@ export function createArray(length: number, init?: Function | number ) {
  * ```
  * @category Creation
  */
-export function createTyped<T extends IArray = IArray>(Type: any, array: number|number[], shared: boolean
-    ) : T {
+export function createTyped<T extends IArray = IArray>(
+    Type: any,
+    array: number | number[],
+    shared: boolean,
+): T {
     if (Array.isArray(array)) {
-        const length = array.length*Type.BYTES_PER_ELEMENT
+        const length = array.length * Type.BYTES_PER_ELEMENT
         let ta = undefined
 
-        let isSharedAvailable = (typeof SharedArrayBuffer !== "undefined")
+        let isSharedAvailable = typeof SharedArrayBuffer !== 'undefined'
 
         if (shared && isSharedAvailable) {
             ta = new Type(new SharedArrayBuffer(length))
-        }
-        else {
+        } else {
             ta = new Type(new ArrayBuffer(length))
         }
         ta.set(array)
         return ta
-    }
-    else {
-        const l = array*Type.BYTES_PER_ELEMENT
+    } else {
+        const l = array * Type.BYTES_PER_ELEMENT
         if (shared) {
             return new Type(new SharedArrayBuffer(l))
         }
@@ -89,25 +90,46 @@ export function createTyped<T extends IArray = IArray>(Type: any, array: number|
  * @category Creation
  */
 export function createEmptySerie(
-    {Type, count, itemSize=1, dimension=3, shared=false, userData}:
-    {Type?:any, count: number, itemSize?: number, dimension?: number, shared?: boolean, userData?:{[key:string]: any}} // ! use dimension
-    ) : Serie
-{
-    if (itemSize<=0)  throw new Error('itemSize must be > 0')
-    if (count<=0) throw new Error('count must be > 0')
+    {
+        Type,
+        count,
+        itemSize = 1,
+        dimension = 3,
+        shared = false,
+        userData,
+    }: {
+        Type?: any
+        count: number
+        itemSize?: number
+        dimension?: number
+        shared?: boolean
+        userData?: { [key: string]: any }
+    }, // ! use dimension
+): Serie {
+    if (itemSize <= 0) throw new Error('itemSize must be > 0')
+    if (count <= 0) throw new Error('count must be > 0')
 
-    if (Type===undefined || Array.isArray( new Type(1) )) {
+    if (Type === undefined || Array.isArray(new Type(1))) {
         return Serie.create({
-            array: new Array(count*itemSize).fill(0), 
-            itemSize
+            array: new Array(count * itemSize).fill(0),
+            itemSize,
         })
     }
 
     // Type is either a Int8Array, Uint8Array etc...
-    const length = count*itemSize*Type.BYTES_PER_ELEMENT
+    const length = count * itemSize * Type.BYTES_PER_ELEMENT
     if (shared) {
         return Serie.create({
-            array: new Type(new SharedArrayBuffer(length)), itemSize, userData, dimension})
+            array: new Type(new SharedArrayBuffer(length)),
+            itemSize,
+            userData,
+            dimension,
+        })
     }
-    return Serie.create({ array:new Type(new ArrayBuffer(length)), itemSize, userData, dimension})
+    return Serie.create({
+        array: new Type(new ArrayBuffer(length)),
+        itemSize,
+        userData,
+        dimension,
+    })
 }

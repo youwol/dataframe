@@ -7,5 +7,8 @@ import { Serie } from '../serie'
  * @category Utils
  */
 export const nameOfSerie = (df: DataFrame, s: Serie) => {
-    return Object.entries(df.series).reduce( (acc, [name, serie]) => s === serie ? name : acc, undefined)
+    return Object.entries(df.series).reduce(
+        (acc, [name, serie]) => (s === serie ? name : acc),
+        undefined,
+    )
 }

@@ -1,10 +1,9 @@
-import { IArray } from "../serie"
+import { IArray } from '../serie'
 
 /**
  * @hidden
  */
 export namespace array {
-
     // export function zip(a1: IArray, a2: IArray): any {
 
     // }
@@ -15,7 +14,7 @@ export namespace array {
     export function min(array: IArray): number {
         let m = Number.POSITIVE_INFINITY
         const n = array.length
-        for (let i=0; i<n; ++i) {
+        for (let i = 0; i < n; ++i) {
             const a = array[i]
             if (a < m) m = a
         }
@@ -28,7 +27,7 @@ export namespace array {
     export function max(array: IArray): number {
         let m = Number.NEGATIVE_INFINITY
         const n = array.length
-        for (let i=0; i<n; ++i) {
+        for (let i = 0; i < n; ++i) {
             const a = array[i]
             if (a > m) m = a
         }
@@ -42,7 +41,7 @@ export namespace array {
         let m = Number.POSITIVE_INFINITY
         let M = Number.NEGATIVE_INFINITY
         const n = array.length
-        for (let i=0; i<n; ++i) {
+        for (let i = 0; i < n; ++i) {
             const a = array[i]
             if (a < m) m = a
             if (a > M) M = a
@@ -55,14 +54,14 @@ export namespace array {
      */
     export function normalize(array: IArray): IArray {
         const m = minMax(array)
-        return array.map( v => (v-m[0])/(m[1]-m[0]) )
+        return array.map((v) => (v - m[0]) / (m[1] - m[0]))
     }
 
     /**
      * @category Array
      */
     export function scale(array: IArray, s: number): IArray {
-        return array.map( v => v*s )
+        return array.map((v) => v * s)
     }
 
     /**
@@ -71,9 +70,11 @@ export namespace array {
      * @category Array
      */
     export function dectectNan(array: IArray): IArray {
-        const values = array.map( (value,i) => {return {value, i}})
-        const idx = values.filter( a => Number.isNaN(a.value))
-        return idx.map( v => v.i)
+        const values = array.map((value, i) => {
+            return { value, i }
+        })
+        const idx = values.filter((a) => Number.isNaN(a.value))
+        return idx.map((v) => v.i)
     }
 
     /**
@@ -81,7 +82,7 @@ export namespace array {
      */
     export function flatten(array: Array<Array<number>>): Array<number> {
         const r: Array<number> = []
-        array.forEach( a => r.push(...a) )
+        array.forEach((a) => r.push(...a))
         return r
     }
 }

@@ -19,7 +19,7 @@ pkg_json = parse_json(folder_path / "package.json")
 
 template = Template(
     path=folder_path,
-    type=PackageType.LIBRARY
+    type=PackageType.LIBRARY,
     name=pkg_json["name"],
     version=pkg_json["version"],
     shortDescription=pkg_json["description"],

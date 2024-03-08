@@ -1281,7 +1281,7 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.22.tgz#38b6c4b9b2f3ed9f2e376cce42a298fb2375251e"
   integrity sha512-8FwbVoG4fy+ykY86XCAclKZDORttqE5/s7dyWZKLXTdv3vRy5HozBEinG5IqhvPXXzIZEcTVbuHlQEI6iuwcmw==
 
-"@types/node@^20.11.10":
+"@types/node@^20.11.19":
   version "20.11.25"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.25.tgz#0f50d62f274e54dd7a49f7704cc16bfbcccaf49f"
   integrity sha512-TBHyJxk2b7HceLVGFcpAUjsa5zIdsPWlR6XHfyGzd0SFu+/NFgQgMAl96MSDZgQDvJAvV6BKsFOrt6zIL09JDw==
@@ -1740,7 +1740,7 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"@youwol/eslint-config@^1.2.0":
+"@youwol/eslint-config@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@youwol/eslint-config/-/eslint-config-1.2.1.tgz#a17fca268b70abf6bfaf48688d7793e9fe2ed5cb"
   integrity sha512-InJilSQ2DRFewgZID4/qeEUPyXFPCB6G5LcoihuJEK8V6POEeYVLb4Y2xxeQbgfA+sEDCavMTww1Tlj03TINUA==
@@ -1755,7 +1755,7 @@
     eslint-plugin-tsdoc "^0.2.17"
     eslint-plugin-unused-imports "^3.1.0"
 
-"@youwol/jest-preset@^1.2.0":
+"@youwol/jest-preset@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@youwol/jest-preset/-/jest-preset-1.2.1.tgz#2c55cf5afdddcdd0d700a23322c37be59b0a50ea"
   integrity sha512-/D6TzNjxSxzGNyG4KwXOq+b6atNGgpE85E1Sc2jpy+k7qHAdB+ZLtiOHN1vcMbj4UoR7Pl9tp+oI1i8D1gF3yg==
@@ -1767,7 +1767,7 @@
     jest-junit "^16.0.0"
     ts-jest "^29.1.2"
 
-"@youwol/prettier-config@^1.2.0":
+"@youwol/prettier-config@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@youwol/prettier-config/-/prettier-config-1.2.1.tgz#51abbb5a19860169718be749accfd3c32f5e5f3d"
   integrity sha512-u4ET6lVPRH0936hBTuya75i9s9iwpoMOYZvPV0xN2GYGJayL3Jt3TE2QVIKN23h7SxV2X3NkAgqFMLb1gX7wSw==
@@ -1775,7 +1775,7 @@
     prettier "^3.2.5"
     prettier-plugin-properties "^0.3.0"
 
-"@youwol/tsconfig@^1.2.0":
+"@youwol/tsconfig@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@youwol/tsconfig/-/tsconfig-1.2.1.tgz#3de3218e398a099e2e5ae6996ed959713238b091"
   integrity sha512-SBxGDiXsoEwsuvRv6sSfJx/JjLgdXbXGNpRuRzlitI83kGfCjLmVtS6c3R2+q6HfXfuJRE6kgkRHppr0UFrWlQ==
@@ -5538,10 +5538,10 @@ tsutils@^3.21.0:
   dependencies:
     tslib "^1.8.1"
 
-tsx@4.7.0:
-  version "4.7.0"
-  resolved "https://registry.yarnpkg.com/tsx/-/tsx-4.7.0.tgz#1689cfe7dda495ca1f9a66d4cad79cb57b9f6f4a"
-  integrity sha512-I+t79RYPlEYlHn9a+KzwrvEwhJg35h/1zHsLC2JXvhC2mdynMv6Zxzvhv5EMV6VF5qJlLlkSnMVvdZV3PSIGcg==
+tsx@4.7.1:
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/tsx/-/tsx-4.7.1.tgz#27af6cbf4e1cdfcb9b5425b1c61bb7e668eb5e84"
+  integrity sha512-8d6VuibXHtlN5E3zFkgY8u4DX7Y3Z27zvvPKVmLon/D4AjuKzarkUBTLDBgj9iTQ0hg5xM7c/mYiRVM+HETf0g==
   dependencies:
     esbuild "~0.19.10"
     get-tsconfig "^4.7.2"

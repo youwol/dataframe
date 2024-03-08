@@ -14,7 +14,9 @@ import { Serie } from '../serie'
  * @category Algorithms
  */
 export const forEach = (series: Serie | Serie[], callback: Function) => {
-    if (series === undefined) throw new Error('serie is undefined')
+    if (series === undefined) {
+        throw new Error('serie is undefined')
+    }
 
     if (!Array.isArray(series)) {
         for (let i = 0; i < series.count; ++i) {
@@ -23,7 +25,7 @@ export const forEach = (series: Serie | Serie[], callback: Function) => {
         return
     }
 
-    let count = series[0].count
+    const count = series[0].count
     for (let i = 0; i < count; ++i) {
         callback(
             series.map((serie) => serie.itemAt(i)),

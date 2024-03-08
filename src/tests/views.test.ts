@@ -1,12 +1,12 @@
-import { symSquaredMatrix, squaredMatrix, vector, Matrix, Serie } from '../lib'
-import { apply, filter, map, reduce } from '../lib/algorithms'
+import { symSquaredMatrix, squaredMatrix, vector, Serie } from '../lib'
+import { map } from '../lib/algorithms'
 
 test('views test vector', () => {
     const v = vector([1, 2, 3])
-    expect(v.at(0)).toEqual(1)
-    expect(v.at(1)).toEqual(2)
-    expect(v.at(2)).toEqual(3)
-    expect(v.length).toEqual(3)
+    expect(v.at(0)).toBe(1)
+    expect(v.at(1)).toBe(2)
+    expect(v.at(2)).toBe(3)
+    expect(v.length).toBe(3)
     const n = Math.sqrt(1 + 4 + 9)
     expect(v.norm()).toBeCloseTo(n)
 
@@ -41,27 +41,27 @@ test('views test isSymmetric', () => {
 
 test('views test squared matrix', () => {
     const m = squaredMatrix([1, 2, 3, 4, 5, 6, 7, 8, 9])
-    expect(m.at(0, 0)).toEqual(1)
-    expect(m.at(0, 1)).toEqual(2)
-    expect(m.at(0, 2)).toEqual(3)
-    expect(m.at(1, 0)).toEqual(4)
-    expect(m.at(1, 1)).toEqual(5)
-    expect(m.at(1, 2)).toEqual(6)
-    expect(m.at(2, 0)).toEqual(7)
-    expect(m.at(2, 1)).toEqual(8)
-    expect(m.at(2, 2)).toEqual(9)
+    expect(m.at(0, 0)).toBe(1)
+    expect(m.at(0, 1)).toBe(2)
+    expect(m.at(0, 2)).toBe(3)
+    expect(m.at(1, 0)).toBe(4)
+    expect(m.at(1, 1)).toBe(5)
+    expect(m.at(1, 2)).toBe(6)
+    expect(m.at(2, 0)).toBe(7)
+    expect(m.at(2, 1)).toBe(8)
+    expect(m.at(2, 2)).toBe(9)
 
-    expect(m.trace()).toEqual(15)
+    expect(m.trace()).toBe(15)
 
     const v = m.multVec([1, 1, 1])
     expect(v.array).toEqual([6, 15, 24])
 
-    expect(() => m.multVec([1, 1, 1, 1])).toThrowError(Error) // bad dim vector
+    expect(() => m.multVec([1, 1, 1, 1])).toThrow(Error) // bad dim vector
 
     const w = m.multMat(squaredMatrix([9, 8, 7, 6, 5, 4, 3, 2, 1]))
     expect(w.array).toEqual([30, 24, 18, 84, 69, 54, 138, 114, 90])
 
-    expect(() => m.multMat(squaredMatrix([9, 8, 7, 6]))).toThrowError(Error) // bad dim matrix
+    expect(() => m.multMat(squaredMatrix([9, 8, 7, 6]))).toThrow(Error) // bad dim matrix
 
     const t = m.transpose()
     expect(t.array).toEqual([1, 4, 7, 2, 5, 8, 3, 6, 9])
@@ -74,13 +74,13 @@ test('views test squared matrix', () => {
     m1.addMat(m2)
     expect(m1.array).toEqual([10, 10, 10, 10, 10, 10]) // because symmetric
 
-    expect(() => m.addMat(squaredMatrix([9, 8, 7, 6]))).toThrowError(Error) // bad dim matrix
+    expect(() => m.addMat(squaredMatrix([9, 8, 7, 6]))).toThrow(Error) // bad dim matrix
 
     m1.add(2, 2, 10)
-    expect(m1.at(2, 2)).toEqual(20)
+    expect(m1.at(2, 2)).toBe(20)
 
     m1.set(2, 2, 10)
-    expect(m1.at(2, 2)).toEqual(10)
+    expect(m1.at(2, 2)).toBe(10)
 
     m1.scale(2)
     expect(m1.array).toEqual([20, 20, 20, 20, 20, 20]) // because symmetric
@@ -107,17 +107,17 @@ test('views test squared matrix', () => {
 test('views test symmetric squared matrix', () => {
     const m = symSquaredMatrix([1, 2, 3, 4, 5, 6])
 
-    expect(m.at(0, 0)).toEqual(1)
-    expect(m.at(0, 1)).toEqual(2)
-    expect(m.at(0, 2)).toEqual(3)
-    expect(m.at(1, 0)).toEqual(m.at(0, 1))
-    expect(m.at(1, 1)).toEqual(4)
-    expect(m.at(1, 2)).toEqual(5)
-    expect(m.at(2, 0)).toEqual(m.at(0, 2))
-    expect(m.at(2, 1)).toEqual(m.at(1, 2))
-    expect(m.at(2, 2)).toEqual(6)
+    expect(m.at(0, 0)).toBe(1)
+    expect(m.at(0, 1)).toBe(2)
+    expect(m.at(0, 2)).toBe(3)
+    expect(m.at(1, 0)).toBe(m.at(0, 1))
+    expect(m.at(1, 1)).toBe(4)
+    expect(m.at(1, 2)).toBe(5)
+    expect(m.at(2, 0)).toBe(m.at(0, 2))
+    expect(m.at(2, 1)).toBe(m.at(1, 2))
+    expect(m.at(2, 2)).toBe(6)
 
-    expect(m.trace()).toEqual(11)
+    expect(m.trace()).toBe(11)
 
     const v = m.multVec([1, 1, 1])
     expect(v.array).toEqual([6, 11, 14])
@@ -139,8 +139,8 @@ test('views squared matrix * vector', () => {
         return A.multVec(x).array
     })
 
-    expect(reduced.count).toEqual(3)
-    expect(reduced.itemSize).toEqual(3)
+    expect(reduced.count).toBe(3)
+    expect(reduced.itemSize).toBe(3)
 
     const sol = [
         [5, 14, 23],
@@ -169,8 +169,8 @@ test('views symmetric squared smatrix * vector', () => {
         return A.multVec(x).array
     })
 
-    expect(reduced.count).toEqual(3)
-    expect(reduced.itemSize).toEqual(3)
+    expect(reduced.count).toBe(3)
+    expect(reduced.itemSize).toBe(3)
 
     const sol = [
         [5, 11, 14],
@@ -198,8 +198,8 @@ test('views complex operation', () => {
         return A.transpose().multVec(vector(v).normalize()).array
     })
 
-    expect(reduced.count).toEqual(3)
-    expect(reduced.itemSize).toEqual(3)
+    expect(reduced.count).toBe(3)
+    expect(reduced.itemSize).toBe(3)
 
     const sol = [
         6.7082037925720215, 8.049844741821289, 9.391485214233398,

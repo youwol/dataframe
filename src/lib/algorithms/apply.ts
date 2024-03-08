@@ -22,6 +22,8 @@ import { Serie } from '../serie'
  * ```
  * @category Algorithms
  */
-export const apply = (serie: Serie, fn: Function): Serie => {
+type Functor = (a: number | any, index: number, serie: Serie) => number | any
+
+export const apply = (serie: Serie, fn: Functor): Serie => {
     return serie.map((item, i) => fn(item, i, serie))
 }

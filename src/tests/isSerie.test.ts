@@ -1,4 +1,3 @@
-import { DataFrame } from '../lib/dataframe'
 import { Serie } from '../lib'
 
 class A {

@@ -10,14 +10,18 @@ import { Serie } from '../serie'
  * @category Algorithms
  */
 export const filter = (s: Serie, predicate: Function) => {
-    if (s === undefined) throw new Error('serie is undefined')
+    if (s === undefined) {
+        throw new Error('serie is undefined')
+    }
 
     const count = s.count
     const r = []
 
     for (let i = 0; i < count; ++i) {
         const v = s.itemAt(i)
-        if (predicate(v, i, s)) r.push(v)
+        if (predicate(v, i, s)) {
+            r.push(v)
+        }
     }
 
     // const rr = createFrom(s.array, r.length/s.itemSize, s.itemSize)

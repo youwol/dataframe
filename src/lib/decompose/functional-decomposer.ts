@@ -52,11 +52,15 @@ export class FunctionalDecomposer implements Decomposer {
     /**
      * @hidden
      */
-    names(df: DataFrame, itemSize: number, serie: Serie, name: string) {
-        if (itemSize !== this.itemSize) return []
+    names(df: DataFrame, itemSize: number, _serie: Serie, _name: string) {
+        if (itemSize !== this.itemSize) {
+            return []
+        }
 
         const s = this.fct(df)
-        if (!s) return []
+        if (!s) {
+            return []
+        }
 
         return [this.name]
     }
@@ -64,7 +68,9 @@ export class FunctionalDecomposer implements Decomposer {
      * @hidden
      */
     serie(df: DataFrame, itemSize: number, name: string): Serie {
-        if (itemSize !== this.itemSize || this.name !== name) return undefined
+        if (itemSize !== this.itemSize || this.name !== name) {
+            return undefined
+        }
         return this.fct(df) //.setName(this.name)
     }
 }

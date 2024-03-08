@@ -14,9 +14,9 @@ import { Serie } from './serie'
 export const merge = (dfs: DataFrame[], index?: string): DataFrame => {
     // What if multiple column with same name
     // What about userData, metaData
-    let series = dfs.reduce((acc, e) => ({ ...acc, ...e.series }), {})
-    let userData = dfs.reduce((acc, e) => ({ ...acc, ...e.userData }), {})
-    let metaData = dfs.reduce((acc, e) => ({ ...acc, ...e.metaData }), {})
+    const series = dfs.reduce((acc, e) => ({ ...acc, ...e.series }), {})
+    const userData = dfs.reduce((acc, e) => ({ ...acc, ...e.userData }), {})
+    const metaData = dfs.reduce((acc, e) => ({ ...acc, ...e.metaData }), {})
 
     return DataFrame.create({ series, userData, metaData, index })
 }

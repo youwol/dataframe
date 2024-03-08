@@ -1,14 +1,14 @@
 import { Serie } from '../lib'
 
-test('test serie newInstance (similar to image)', () => {
+test('serie newInstance (similar to image)', () => {
     {
         const s1 = Serie.create({
             array: new Array(21).fill(0).map((_, i) => i - 10),
             itemSize: 3,
         })
         const s2 = s1.newInstance({ count: 10, itemSize: 1 })
-        expect(s2.count).toEqual(10)
-        expect(s2.itemSize).toEqual(1)
+        expect(s2.count).toBe(10)
+        expect(s2.itemSize).toBe(1)
         expect(s2.array instanceof Array).toBeTruthy()
     }
     {
@@ -17,21 +17,21 @@ test('test serie newInstance (similar to image)', () => {
             itemSize: 3,
         })
         const s2 = s1.newInstance({ count: 10, itemSize: 1 })
-        expect(s2.count).toEqual(10)
-        expect(s2.itemSize).toEqual(1)
+        expect(s2.count).toBe(10)
+        expect(s2.itemSize).toBe(1)
         expect(s2.array instanceof Float32Array).toBeTruthy()
     }
 })
 
-test('test serie image (similar to newImage)', () => {
+test('serie image (similar to newImage)', () => {
     {
         const s1 = Serie.create({
             array: new Array(21).fill(0).map((_, i) => i - 10),
             itemSize: 3,
         })
         const s2 = s1.image(10, 1)
-        expect(s2.count).toEqual(10)
-        expect(s2.itemSize).toEqual(1)
+        expect(s2.count).toBe(10)
+        expect(s2.itemSize).toBe(1)
         expect(s2.array instanceof Array).toBeTruthy()
     }
     {
@@ -40,13 +40,13 @@ test('test serie image (similar to newImage)', () => {
             itemSize: 3,
         })
         const s2 = s1.image(10, 1)
-        expect(s2.count).toEqual(10)
-        expect(s2.itemSize).toEqual(1)
+        expect(s2.count).toBe(10)
+        expect(s2.itemSize).toBe(1)
         expect(s2.array instanceof Float32Array).toBeTruthy()
     }
 })
 
-test('test serie newInstance', () => {
+test('serie newInstance', () => {
     // itemSize: 1
     {
         const s1 = Serie.create({
@@ -97,7 +97,7 @@ test('test serie newInstance', () => {
     }
 })
 
-test('test newInstance initialize', () => {
+test('newInstance initialize', () => {
     const s1 = Serie.create({
         array: new Array(9).fill(0).map((_, i) => i + 1),
         itemSize: 3,
@@ -107,5 +107,5 @@ test('test newInstance initialize', () => {
     s2.array.forEach((v) => expect(v).toBeUndefined())
 
     const s3 = s1.newInstance({ count: 6, itemSize: 2, initialize: true })
-    s2.array.forEach((v) => expect(v).toEqual(0))
+    s3.array.forEach((v) => expect(v).toBe(0))
 })

@@ -1,22 +1,22 @@
--   `zip` as in https://gist.github.com/xaliphostes/140b69b2262451be9f2cab75984441b7
--   `check`
--   `_if`
--   `checkNaN`
--   `tagNaN`
--   `nan`
--   `notNan`
--   `ge`
--   `gt`
--   `le`
--   `lt`
--   `ne`
--   `interpolate`
--   `rand`
--   `median`
--   `pipe`
--   `pow`
--   `round`
--   `trunc`
--   `std`
--   `view` (transform a Serie from a given type to another)
--   `where`
+- `zip` as in https://gist.github.com/xaliphostes/140b69b2262451be9f2cab75984441b7
+- `check`
+- `_if`
+- `checkNaN`
+- `tagNaN`
+- `nan`
+- `notNan`
+- `ge`
+- `gt`
+- `le`
+- `lt`
+- `ne`
+- `interpolate`
+- `rand`
+- `median`
+- `pipe`
+- `pow`
+- `round`
+- `trunc`
+- `std`
+- `view` (transform a Serie from a given type to another)
+- `where`

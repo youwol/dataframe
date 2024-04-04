@@ -11,15 +11,15 @@ export interface IArray {
     forEach(cb: Function): void
     slice(start: number, end: number): IArray
     fill(n: number): IArray
-    // reduce<U>(
-    //     callback: (
-    //         previousValue: number,
-    //         currentValue: number,
-    //         currentIndex: number,
-    //         array: IArray,
-    //     ) => number,
-    //     firstState?: U,
-    // ): U
+    reduce<U>(
+        callback: (
+            previousValue: U,
+            currentValue: any, // TODO -> change any to something else!
+            currentIndex: number,
+            array: IArray,
+        ) => U,
+        firstState?: U,
+    ): U
     filter(cb: Function): IArray
     sort(fn: Function): IArray
 }

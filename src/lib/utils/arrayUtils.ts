@@ -85,4 +85,32 @@ export namespace array {
         array.forEach((a) => r.push(...a))
         return r
     }
+
+    /**
+     * @example
+     * // Simple iteration
+        zip(array1, array2, array3).forEach(([a, b, c]) => {
+            console.log(a, b, c);
+        });
+
+        // Creating new objects
+        const combined = zip(array1, array2, array3).map(([letter, num, char]) => ({
+            letter,
+            num,
+            char
+        }));
+
+        // Doing calculations
+        const calculations = zip(array1, array2, array3).map(([a, b, c]) => {
+            return `${a}${b}${c}`;
+        });
+     *
+     * @category Array
+     */
+    export const zip = (...arrays: Array<Array<number>>) => {
+        const maxLength = Math.min(...arrays.map(x => x.length));
+        return Array.from({ length: maxLength }).map((_, i) => {
+            return arrays.map(array => array[i]);
+        });
+    };
 }

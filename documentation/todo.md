@@ -1,6 +1,9 @@
-- `zip` as in https://gist.github.com/xaliphostes/140b69b2262451be9f2cab75984441b7
+
 - `check`
-- `_if`
+- `view` (transform a Serie from a given type to another)
+- `where`
+
+## In `@youwol/math/dataframe`
 - `checkNaN`
 - `tagNaN`
 - `nan`
@@ -13,10 +16,8 @@
 - `interpolate`
 - `rand`
 - `median`
-- `pipe`
 - `pow`
 - `round`
 - `trunc`
 - `std`
-- `view` (transform a Serie from a given type to another)
-- `where`
+

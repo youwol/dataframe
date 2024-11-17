@@ -5,3 +5,7 @@ export * from './reduce'
 export * from './apply'
 export * from './sort'
 export * from './cut'
+
+export * from './zip'
+export * from './pipe'
+export * from './compose'

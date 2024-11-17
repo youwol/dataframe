@@ -2,7 +2,7 @@ const df = require('../dist/@youwol/dataframe')
 
 const array = [1, 2, 3, 4]
 
-const S1 = df.Serie.create({ array, itemSize: 1 })
+const S1 = df.Serie.create({ array, itemSize: 1 }) // this is a list of scalars
 const S2 = df.Serie.create({ array, itemSize: 1 })
 const S3 = df.Serie.create({ array, itemSize: 1 })
 
